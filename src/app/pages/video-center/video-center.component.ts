@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-video-center',
@@ -10,7 +10,11 @@ export class VideoCenterComponent implements OnInit {
   public video: any;
   public player: any;
   public reframed: Boolean = false;
-  constructor() { }
+  public totalDuration:number;
+  public pixelPerSecond = 105;
+  public notes = []
+  
+  constructor( public cdr: ChangeDetectorRef ) {}
   init() {
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -26,12 +30,16 @@ export class VideoCenterComponent implements OnInit {
       this.YT = window['YT'];
       this.reframed = false;
       this.player = new window['YT'].Player('player', {
+        height: '390',
+        width: '840',
         videoId: this.video,
-        playerVars: { 'autoplay': 1, 'controls': 0 },
+        playerVars: { 'autoplay': 0, 'controls': 0 },
         events: {
           'onStateChange': this.onPlayerStateChange.bind(this),
           'onError': this.onPlayerError.bind(this),
           'onReady': (e) => {
+            this.totalDuration = this.player.getDuration()
+            //this.calculateSpot()
             if (!this.reframed) {
               this.reframed = true;
               //reframe(e.target.a);
@@ -39,6 +47,8 @@ export class VideoCenterComponent implements OnInit {
           }
         }
       });
+      this.totalDuration = this.player.getDuration()
+      console.log('tot', this.totalDuration)
     };
   }
 
@@ -80,4 +90,23 @@ export class VideoCenterComponent implements OnInit {
   changeVolume(){
     this.player.setVolume(100);
   }
+
+  // calculateSpot(){
+  //  const pixelPerSecond = 840 / this.totalDuration
+  //  console.log(pixelPerSecond)
+  //  this.pixelPerSecond = pixelPerSecond
+  // }
+
+  createNote(){
+    // get the pixel placement of where the note is taken
+    // then place a marker on this spot with ngstyle?
+    const currentTimeOfNote = this.player.getCurrentTime()
+    const timeSp = (currentTimeOfNote *  this.pixelPerSecond) + 'px'
+    this.notes.push({timeSpot:timeSp})
+
+  }
+
+  // take the width of the screen divide it by the seconds in the video
+  // divide the seconds by pixels to see how many pixels for each second 
+  // then put the video at 
 }
