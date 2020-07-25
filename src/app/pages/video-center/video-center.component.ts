@@ -324,8 +324,10 @@ export class VideoCenterComponent implements OnInit {
     }else{
       const minutes = seconds / 60
       const onlyMinutes = parseInt(String(minutes))
-      const onlySeconds = seconds - (onlyMinutes * 60)
-
+      let onlySeconds: any = seconds - (onlyMinutes * 60)
+      if(onlySeconds < 10){
+        onlySeconds = '0' + onlySeconds.toString()
+      }
       console.log(`${onlyMinutes}:${onlySeconds}`)
       return `${onlyMinutes}:${onlySeconds}`
     }
