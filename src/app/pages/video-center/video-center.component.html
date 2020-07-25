@@ -1,33 +1,55 @@
 <div class="video-center-page-container">
   <app-video-header></app-video-header>
   <div class="video-player">
-    <!-- <iframe width="420" height="315"
-        src="https://www.youtube.com/embed/Nx-S7kjWZpg"> 
-        </iframe> -->
     <div class="embed-responsive" id="player"></div>
-    <div class='video-player__time-bar'>
-        <!-- *ngFor='let note of notes' -->
-        <!-- <div > 
-            <p class='note' [ngStyle]="{'left': 'note.timeSpot'}">{{note.timeSpot}}</p>
-        </div> -->
-        <div class='notez' *ngFor='let note of notes' [ngStyle]="{'left': note.timeSpot}" >
-            <p  >{{note.timeSpot}}</p>
-        </div>
-        <!-- <div >
-            <p class='note' [ngStyle]="{'left': '500px'}">bye</p>
-        </div> -->
+    <!--  -->
+    <div class="video-player__time-bar">
+        <div
+        class="notez"
+        *ngFor="let note of notes"
+        [ngStyle]="{ left: note.timeSpot }"
+      >
+        <p>{{ note.timeSpot }}</p>
+      </div>
     </div>
-    <div class='video-player__note-bar'>
-        <button>View All Notes</button>
-    </div>
-    <div class='note-center'>
+    
+  </div>
 
+  <div class="video-player__note-bar">
+    <button (click)="toggleNoteCenter()">Note Center</button>
+  </div>
+  <div *ngIf="isNoteCenterOpen" class="note-center">
+    <div class="create-note-area">
+      <div class="create-note-area__currentTime-bubble">
+        {{ displayMinuteBasedTime(videoProg) }}
+      </div>
+      <textarea
+        [(ngModel)]="currentNote"
+        type="text"
+        class="create-note-area__note-textbox"
+      ></textarea>
+      <div class="create-note-area__buttons">
+        <app-form-button (click)="createNote()" [buttonText]="'Save note'">
+        </app-form-button>
+        <app-form-button (click)="discardNote()" [buttonText]="'Discard note'">
+        </app-form-button>
+      </div>
     </div>
-    <button (click)="changeVolume()">
-      turn volume up
-    </button>
-    <button (click)='createNote()'>
-        create note
-    </button>
+    <div class="line-seperator"></div>
+    <div>
+      show notes
+      <div class="display-note" *ngFor="let note of notes">
+        <p>{{ note.noteText }} at {{ note.timeNoteCreated }}</p>
+      </div>
+    </div>
   </div>
 </div>
+
+<!--         <div class="card">
+          <button class="btn btn-dark mb-3" (click)="onMute()">Mute</button>
+
+          <button class="btn btn-dark mb-3" (click)="onUnmute()">Unmute</button>
+          <button class="btn btn-dark mb-3" (click)="onPause()">Pause</button>
+
+          <button class="btn btn-dark mb-3" (click)="onPlay()">Play</button>
+        </div> -->

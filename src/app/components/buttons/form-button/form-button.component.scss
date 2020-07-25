@@ -1,0 +1,19 @@
+.form-button {
+    width: 200px;
+    height:50px;
+    border-radius: 10px;
+    font-size: large;
+    box-shadow: 5px 5px 5px 5px rgb(70, 69, 69);
+    
+
+    &:hover {
+        transform: scale(1.02);
+    }
+
+    &:active {
+        transform: scale(.99);
+
+    }
+
+    
+}
