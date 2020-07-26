@@ -4,15 +4,17 @@
     <div class="embed-responsive" id="player"></div>
     <!--  -->
     <div class="video-player__time-bar">
-        <div
-        class="notez"
+      <div
+        class="time-bar-note"
         *ngFor="let note of notes"
+        (click)='gotoNoteTimeSpot(note)'
         [ngStyle]="{ left: note.timeSpot }"
       >
-        <p>{{ note.timeSpot }}</p>
+        <div class="time-bar-note__details">
+          {{ note.noteTitle }}
+        </div>
       </div>
     </div>
-    
   </div>
 
   <div class="video-player__note-bar">
@@ -23,7 +25,9 @@
       <div class="create-note-area__currentTime-bubble">
         {{ displayMinuteBasedTime(videoProg) }}
       </div>
+      <input [(ngModel)]="noteTitle" placeholder="Title" class='create-note-area__note-title'/>
       <textarea
+      placeholder="Note text"
         [(ngModel)]="currentNote"
         type="text"
         class="create-note-area__note-textbox"
@@ -39,6 +43,8 @@
     <div>
       show notes
       <div class="display-note" *ngFor="let note of notes">
+        <p>{{ note.noteTitle }}</p>
+
         <p>{{ note.noteText }} at {{ note.timeNoteCreated }}</p>
       </div>
     </div>

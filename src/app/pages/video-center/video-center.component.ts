@@ -114,6 +114,7 @@ export class VideoCenterComponent implements OnInit {
   public pixelPerSecond = 105;
   public notes = []
   public currentNote:string = '';
+  public noteTitle:string;
   public isNoteCenterOpen:boolean = false;
 
 
@@ -158,10 +159,10 @@ export class VideoCenterComponent implements OnInit {
   startVideo() {
     this.reframed = false;
     this.player = new window['YT'].Player('player', {
+      height: '390',
+      width: '840',
       videoId: this.video,
       playerVars: {
-        height: '390',
-         width: '840',
         autoplay: 0,
         modestbranding: 1,
         controls: 1,
@@ -301,7 +302,7 @@ export class VideoCenterComponent implements OnInit {
      // then place a marker on this spot with ngstyle?
      const currentTimeOfNote = this.player.getCurrentTime()
      const timeSp = (currentTimeOfNote *  this.pixelPerSecond) + 'px'
-     this.notes.push({timeSpot:timeSp, noteText:this.currentNote, timeNoteCreated:this.displayMinuteBasedTime(this.videoProg)})
+     this.notes.push({timeSpot:timeSp, timeOfNote:currentTimeOfNote, noteText:this.currentNote, noteTitle:this.noteTitle, timeNoteCreated:this.displayMinuteBasedTime(this.videoProg)})
      this.clearNotePad()
    }
    discardNote(){
@@ -311,6 +312,7 @@ export class VideoCenterComponent implements OnInit {
 
    clearNotePad(){
      this.currentNote = '';
+     this.noteTitle = ''
    }
 
    toggleNoteCenter(){
@@ -328,9 +330,13 @@ export class VideoCenterComponent implements OnInit {
       if(onlySeconds < 10){
         onlySeconds = '0' + onlySeconds.toString()
       }
-      console.log(`${onlyMinutes}:${onlySeconds}`)
       return `${onlyMinutes}:${onlySeconds}`
     }
+   }
+
+   gotoNoteTimeSpot(note){
+
+    this.player.seekTo(note.timeOfNote)
    }
 
 }
