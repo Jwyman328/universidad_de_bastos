@@ -335,8 +335,9 @@ export class VideoCenterComponent implements OnInit {
    }
 
    gotoNoteTimeSpot(note){
-
     this.player.seekTo(note.timeOfNote)
    }
+
+
 
 }

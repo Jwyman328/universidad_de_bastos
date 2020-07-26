@@ -40,13 +40,14 @@
       </div>
     </div>
     <div class="line-seperator"></div>
-    <div>
-      show notes
-      <div class="display-note" *ngFor="let note of notes">
-        <p>{{ note.noteTitle }}</p>
 
-        <p>{{ note.noteText }} at {{ note.timeNoteCreated }}</p>
-      </div>
+  </div>
+  <div *ngIf="isNoteCenterOpen">
+    show notes
+    <div class="display-note" *ngFor="let note of notes">
+      <p>{{ note.noteTitle }}</p>
+
+      <p>{{ note.noteText }} at {{ note.timeNoteCreated }}</p>
     </div>
   </div>
 </div>
