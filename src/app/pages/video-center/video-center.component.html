@@ -6,12 +6,16 @@
     <div class="video-player__time-bar">
       <div
         class="time-bar-note"
-        *ngFor="let note of notes"
-        (click)='gotoNoteTimeSpot(note)'
+        *ngFor="let note of notes; let indexOfelement=index;"
         [ngStyle]="{ left: note.timeSpot }"
+        (click)='gotoNoteTimeSpot($event,note)'
       >
-        <div class="time-bar-note__details">
+      <!--          this foes in the time-bar-note
+ -->
+        <div (click)='travelToNote(indexOfelement)' class="time-bar-note__details">
           {{ note.noteTitle }}
+          <div class='travel-to-note-button'><img  (click)='travelToNote(indexOfelement)' class='travel-to-note-button__img' src="https://img.icons8.com/ios-filled/50/000000/low-priority.png"/></div>
+
         </div>
       </div>
     </div>
@@ -44,7 +48,7 @@
   </div>
   <div *ngIf="isNoteCenterOpen">
     show notes
-    <div class="display-note" *ngFor="let note of notes">
+    <div class="display-note" *ngFor="let note of notes" #allNotes>
       <p>{{ note.noteTitle }}</p>
 
       <p>{{ note.noteText }} at {{ note.timeNoteCreated }}</p>

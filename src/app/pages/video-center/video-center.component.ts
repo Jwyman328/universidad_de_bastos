@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { interval } from 'rxjs';
 
 @Component({
@@ -302,8 +302,10 @@ export class VideoCenterComponent implements OnInit {
      // then place a marker on this spot with ngstyle?
      const currentTimeOfNote = this.player.getCurrentTime()
      const timeSp = (currentTimeOfNote *  this.pixelPerSecond) + 'px'
-     this.notes.push({timeSpot:timeSp, timeOfNote:currentTimeOfNote, noteText:this.currentNote, noteTitle:this.noteTitle, timeNoteCreated:this.displayMinuteBasedTime(this.videoProg)})
+     console.log('what is this should display nice', this.displayMinuteBasedTime(currentTimeOfNote))
+     this.notes.push({timeSpot:timeSp, timeOfNote:currentTimeOfNote, noteText:this.currentNote, noteTitle:this.noteTitle, timeNoteCreated:this.displayMinuteBasedTime(currentTimeOfNote)})
      this.clearNotePad()
+     this.orderNotesBasedOffOfTime()
    }
    discardNote(){
     this.isNoteCenterOpen = false;
@@ -320,6 +322,7 @@ export class VideoCenterComponent implements OnInit {
    }
 
    displayMinuteBasedTime(seconds){
+     console.log(seconds, 'here da secs')
     if (seconds < 60){
       //do nothing
       return seconds
@@ -330,14 +333,29 @@ export class VideoCenterComponent implements OnInit {
       if(onlySeconds < 10){
         onlySeconds = '0' + onlySeconds.toString()
       }
-      return `${onlyMinutes}:${onlySeconds}`
+      const onlySecondsNoDecimal = String(onlySeconds).split('.')
+      return `${onlyMinutes}:${onlySecondsNoDecimal[0]}`
     }
    }
 
-   gotoNoteTimeSpot(note){
+   gotoNoteTimeSpot(event, note){
+    event.stopPropagation()
     this.player.seekTo(note.timeOfNote)
+    console.log(this.components)
    }
 
+   orderNotesBasedOffOfTime(){
+   this.notes.sort((a,b) => a.timeOfNote-b.timeOfNote)
+   }
+
+   @ViewChildren('allNotes') components:any;
+
+   travelToNote(indexOfelement:number){
+    const arr = this.components._results
+  const thisEle =  arr[indexOfelement]
+  thisEle.nativeElement.scrollIntoView({ behavior: 'smooth' })
+    console.log('clicked cl',thisEle.nativeElement) //
+   }
 
 
 }
