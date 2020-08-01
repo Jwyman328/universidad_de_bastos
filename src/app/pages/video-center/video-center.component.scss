@@ -21,6 +21,15 @@
     position: relative;
     //z-index: 10;
 
+    &__time-line{
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 0px;
+        height: 4px;
+        background-color: red;
+    }
+
     &__time-bar{
         position: relative;
         // bottom: 100px;
@@ -37,7 +46,6 @@
         align-items: center;
          width: 840px;
          height: 30px;
-         background-color: blue;
         // z-index: 100;
     }
 }

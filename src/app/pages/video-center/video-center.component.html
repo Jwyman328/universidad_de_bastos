@@ -4,6 +4,9 @@
     <div class="embed-responsive" id="player"></div>
     <!--  -->
     <div class="video-player__time-bar">
+        <div class="video-player__time-line">
+
+        </div>
       <div
         class="time-bar-note"
         *ngFor="let note of notes; let indexOfelement=index;"
@@ -42,7 +45,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="line-seperator"></div>
 
   <div *ngIf="isNoteCenterOpen">
