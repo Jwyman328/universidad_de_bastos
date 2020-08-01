@@ -18,6 +18,7 @@ import { FormButtonComponent2 } from './components/buttons/form-button2/form-but
 import { SignupFormComponent2 } from './components/forms/signup-form/signup-form.component';
 import { LoginFormComponent } from './components/forms/login-form/login-form.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
+import { LoginInPageComponent } from './pages/login-in-page/login-in-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +34,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
     SpinnerComponent,
     SignupFormComponent2,
     LoginFormComponent,
+    LoginInPageComponent,
     //
 
     SignUpPageComponent
