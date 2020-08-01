@@ -7,7 +7,7 @@
     width: 70vw;
     min-height: 60vh;
     height: auto;
-    background: linear-gradient(to bottom, #373B44,#4286f4 );
+    background: linear-gradient(to bottom, gold,#373B44, );
     opacity: .8;
     border-color: black;
     border-style: solid;
@@ -21,4 +21,10 @@
         transform: scale(1.02);
         box-shadow: 7px 7px 7px black;
     }
+}
+
+.header__title {
+    font-family: cursive;
+    font-size: 55px;
+    margin-bottom: 0px;
 }

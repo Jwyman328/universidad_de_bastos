@@ -19,6 +19,7 @@ import { SignupFormComponent2 } from './components/forms/signup-form/signup-form
 import { LoginFormComponent } from './components/forms/login-form/login-form.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { LoginInPageComponent } from './pages/login-in-page/login-in-page.component';
+import { AuthCardTitleComponent } from './components/titles/auth-card-title/auth-card-title.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { LoginInPageComponent } from './pages/login-in-page/login-in-page.compon
     LoginInPageComponent,
     //
 
-    SignUpPageComponent
+    SignUpPageComponent,
+    AuthCardTitleComponent
     //AuthCardComponent,
     //SignupFormComponent2
     //FormButtonComponent,
