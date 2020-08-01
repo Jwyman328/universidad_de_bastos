@@ -1,0 +1,23 @@
+
+.form__navigation-button {
+    width: 30vw;
+    min-width: 150px;
+    min-height: 100px;
+    height: auto;
+    border-radius: 200px;
+    margin-top: 20px;
+    font-size: x-large;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.639);
+    box-shadow: 5px 5px 5px black;
+    transition: all .2s;
+
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 7px 7px 7px black;
+    }
+    &:active {
+        transform: scale(1.01);
+        box-shadow: 4px 4px 4px black;
+    }
+}

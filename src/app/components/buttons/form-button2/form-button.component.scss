@@ -1,0 +1,27 @@
+.form__button {
+    display: block;
+    width: 30vw;
+    min-width: 200px;
+    height: 50px;
+    border-radius: 200px;
+    margin-top: 15px;
+    font-size: x-large;
+    text-transform: uppercase;
+    background-color: white;
+    box-shadow: 5px 5px 5px black;
+    transition: all .2s;
+
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 7px 7px 7px black;
+    }
+    &:active {
+        transform: scale(1.01);
+        box-shadow: 4px 4px 4px black;
+    }
+
+    &--size--small {
+        width: 20vw;
+        min-width: 150px;
+    }
+}

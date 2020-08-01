@@ -1,0 +1,54 @@
+<form *ngIf="!signupUser.isLoading" [formGroup]="signUpForm" class="auth-form">
+  <input
+    formControlName="firstName"
+    class="auth-form__input"
+    placeholder="First Name"
+  />
+  <input
+    formControlName="lastName"
+    class="auth-form__input"
+    placeholder="Last Name"
+  />
+  <input formControlName="email" class="auth-form__input" placeholder="Email" />
+  <input
+    formControlName="password"
+    class="auth-form__input"
+    placeholder="Password"
+    type="password"
+  />
+  <input
+    formControlName="repeatPassword"
+    class="auth-form__input"
+    placeholder="Repeat Password"
+    type="password"
+  />
+  <div>
+    <app-error-message
+      *ngIf="signUpForm.invalid && signUpForm.touched"
+      [errorMsgText]="'Form is currently invalid'"
+    ></app-error-message>
+
+    <app-error-message
+      *ngIf="
+        signUpForm.get('password').invalid && signUpForm.get('password').touched
+      "
+      [errorMsgText]="'password must be greater than 7 characters'"
+    ></app-error-message>
+
+    <app-error-message
+      *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched"
+      [errorMsgText]="' Please Input a valid email'"
+    ></app-error-message>
+
+    <app-error-message
+      *ngIf="signupUser.isError"
+      [errorMsgText]="
+        'Username is invalid or already taken, please try again. '
+      "
+    ></app-error-message>
+    
+  </div>
+  <app-form-button-2 [handleSubmit]="onSubmitForm"></app-form-button-2>
+</form>
+
+<app-spinner [isSpinning]="signupUser.isLoading"></app-spinner>

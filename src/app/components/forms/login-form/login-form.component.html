@@ -1,0 +1,18 @@
+<form  *ngIf='!loginUser.isLoading' class="auth-form" [formGroup]="loginForm">
+  <input
+    class="auth-form__input"
+    placeholder="email"
+    type="text"
+    formControlName="email"
+  />
+  <input
+    class="auth-form__input"
+    placeholder="password"
+    type="password"
+    formControlName="password"
+  />
+  <app-form-button-2 [handleSubmit]="handleLoginSubmit"></app-form-button-2>
+  <app-error-message  *ngIf="loginForm.invalid && loginForm.touched" [errorMsgText]='"Username or password is invalid"' ></app-error-message>
+  <app-error-message  *ngIf='loginUser.isError' [errorMsgText]='"Username and password are not registered"' ></app-error-message>
+</form>
+ <app-spinner [isSpinning]='loginUser.isLoading'></app-spinner>
