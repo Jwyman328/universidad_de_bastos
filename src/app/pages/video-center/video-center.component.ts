@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { interval } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-video-center',
@@ -36,7 +37,11 @@ export class VideoCenterComponent implements OnInit {
 
   isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone,    private activatedRouter: ActivatedRoute,
+    ) {
+    this.video = this.activatedRouter.snapshot.paramMap.get('videoUrl');
+
+  }
 
   /* 2. Initialize method for YT IFrame API */
   init() {
@@ -57,7 +62,7 @@ export class VideoCenterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.video = 'BsL7pjxko7Q'; //'nRiOw3qGYq4';
+    //this.video = 'BsL7pjxko7Q'; //'nRiOw3qGYq4';
     this.init();
   }
 
@@ -233,7 +238,6 @@ export class VideoCenterComponent implements OnInit {
    }
 
    displayMinuteBasedTime(seconds){
-     console.log(seconds, 'here da secs')
     if (seconds < 60){
       //do nothing
       return seconds

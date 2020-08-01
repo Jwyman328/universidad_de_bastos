@@ -1,0 +1,11 @@
+<div class="home-page-container">
+    <app-header></app-header>
+    <div *ngFor="let videoData of allVideos" class='all-videos-container'>
+        <!-- <div class="video">
+            <img class='video__image' [src]='videoData.image'/>
+            <p class='video__title'>{{videoData.title}}</p>
+            <div class='video__note-count'>Notes Take: {{videoData.noteCount}}</div>
+        </div> -->
+        <app-video-card [videoData]="videoData"></app-video-card>
+    </div>
+</div>
