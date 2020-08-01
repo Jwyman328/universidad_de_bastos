@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { NotesService } from 'src/app/services/http-requests/notes.service';
 
 @Component({
   selector: 'app-video-center',
@@ -37,7 +38,7 @@ export class VideoCenterComponent implements OnInit {
 
   isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  constructor(private ngZone: NgZone,    private activatedRouter: ActivatedRoute,
+  constructor(private ngZone: NgZone,    private activatedRouter: ActivatedRoute, private notesService:NotesService
     ) {
     this.video = this.activatedRouter.snapshot.paramMap.get('videoUrl');
 
@@ -222,7 +223,17 @@ export class VideoCenterComponent implements OnInit {
      this.notes.push({timeSpot:timeSp, timeOfNote:currentTimeOfNote, noteText:this.currentNote, noteTitle:this.noteTitle, timeNoteCreated:this.displayMinuteBasedTime(currentTimeOfNote)})
      this.clearNotePad()
      this.orderNotesBasedOffOfTime()
+
+     this.createNoteInBackend()
    }
+   createNoteInBackend(){
+     //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"} 
+     // t0 http://localhost:5000/notes/
+     this.notesService.createNote().subscribe(res => {
+       console.log('res',res)
+     })
+   }
+
    discardNote(){
     this.isNoteCenterOpen = false;
     this.clearNotePad()
