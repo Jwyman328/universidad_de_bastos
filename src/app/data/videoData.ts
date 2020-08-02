@@ -7,7 +7,7 @@ export const allVideos = [
     videoUrl: 'J1fil2hqVDM',
     noteCount: 0,
     year: 2015,
-    categories: ['class', 'politics'],
+    categories: ['allInstitute', 'allType','class', 'politics'],
   },
   {
     title:
@@ -17,7 +17,7 @@ export const allVideos = [
     videoUrl: 'T1dNzuA6-Ws',
     noteCount: 0,
     year: 2015,
-    categories: ['class', 'politics'],
+    categories: ['allInstitute', 'allType','class', 'politics'],
     course: 1,
   },
   {
@@ -28,7 +28,7 @@ export const allVideos = [
     videoUrl: 'BcBV3yO6gas',
     noteCount: 0,
     year: 2015,
-    categories: ['class', 'politics'],
+    categories: ['allInstitute', 'allType','class', 'politics'],
     course: 1,
   },
   {
@@ -39,7 +39,7 @@ export const allVideos = [
     videoUrl: 'oY4-YQwC8t4',
     noteCount: 0,
     year: 2015,
-    categories: ['class', 'politics'],
+    categories: ['allInstitute', 'allType','class', 'politics'],
     course: 1,
   },
   {
@@ -50,7 +50,7 @@ export const allVideos = [
     videoUrl: 'jAUqug9-_DQ',
     noteCount: 0,
     year: 2015,
-    categories: ['class', 'politics'],
+    categories: ['allInstitute', 'allType','class', 'politics'],
     course: 1,
   },
   {
@@ -60,7 +60,7 @@ export const allVideos = [
     videoUrl: 'KudXdAYhIgk',
     noteCount: 0,
     year: 2017,
-    categories: ['conference', 'values', 'culture', 'xoanDeLugo'],
+    categories: ['allInstitute', 'allType','conference', 'values', 'culture', 'xoanDeLugo'],
     course: null,
   },
   {
@@ -70,7 +70,7 @@ export const allVideos = [
     videoUrl: 'u3uhRnNylHA',
     noteCount: 0,
     year: 2017,
-    categories: ['conference', 'wellFare', 'state', 'xoanDeLugo'],
+    categories: ['allInstitute', 'allType','conference', 'wellFare', 'state', 'xoanDeLugo'],
     course: null,
   },
   {
@@ -80,7 +80,7 @@ export const allVideos = [
     videoUrl: 'bqHmWExGPHM',
     noteCount: 0,
     year: 2020,
-    categories: ['conference', 'values', 'literature', 'xoanDeLugo'],
+    categories: ['allInstitute', 'allType','conference', 'values', 'literature', 'xoanDeLugo'],
     course: null,
   },
   {
@@ -90,7 +90,7 @@ export const allVideos = [
     videoUrl: 'a6F2RgWLdZc',
     noteCount: 0,
     year: 2020,
-    categories: ['conference', 'austrianEconomics', 'xoanDeLugo'],
+    categories: ['allInstitute', 'allType','conference', 'austrianEconomics', 'xoanDeLugo'],
     course: null,
   },
   {
@@ -101,7 +101,7 @@ export const allVideos = [
     videoUrl: 'A3MuQ_e2-0w',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', 'austrianEconomics', 'ancap', 'culture'],
+    categories: ['allInstitute', 'allType','interview', 'austrianEconomics', 'ancap', 'culture'],
     course: 2,
   },
   {
@@ -112,7 +112,7 @@ export const allVideos = [
     videoUrl: '71H489CRvQg',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', 'austrianEconomics', 'ancap', 'culture'],
+    categories: ['allInstitute', 'allType','interview', 'austrianEconomics', 'ancap', 'culture'],
     course: 2,
   },
   {
@@ -123,7 +123,7 @@ export const allVideos = [
     videoUrl: 'n7Y88CjL1UA',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', 'ancap', 'state'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'state'],
     course: 2,
   },
   {
@@ -134,7 +134,7 @@ export const allVideos = [
     videoUrl: 'uxSYLoA2aFg',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', 'ancap', 'state', 'paleo', 'covid19'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'state', 'paleo', 'covid19'],
     course: 2,
   },
   {
@@ -145,7 +145,7 @@ export const allVideos = [
     videoUrl: 'lXc8DHhg1uk',
     noteCount: 0,
     year: 2018,
-    categories: ['interview', 'paleo', 'culture'],
+    categories: ['allInstitute', 'allType','interview', 'paleo', 'culture'],
     course: null,
   },
   {
@@ -155,7 +155,7 @@ export const allVideos = [
     videoUrl: '68FyCKyULH8',
     noteCount: 0,
     year: 2017,
-    categories: ['interview'],
+    categories: ['allInstitute', 'allType','interview'],
     course: null,
   },
   {
@@ -165,7 +165,7 @@ export const allVideos = [
     videoUrl: 'NhMVD5Dq-nc',
     noteCount: 0,
     year: 2019,
-    categories: ['interview', 'ancap', 'state', 'paleo'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'state', 'paleo'],
     course: null,
   },
   {
@@ -176,7 +176,7 @@ export const allVideos = [
     videoUrl: 'WVEBh0jp1s0',
     noteCount: 0,
     year: 2019,
-    categories: ['interview', 'ancap'],
+    categories: ['allInstitute', 'allType','interview', 'ancap'],
     course: null,
   },
   {
@@ -186,7 +186,7 @@ export const allVideos = [
     videoUrl: 'rAP_P-hKBcs',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', 'ancap', 'state'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'state'],
     course: null,
   },
   {
@@ -196,7 +196,7 @@ export const allVideos = [
     videoUrl: '0BBaNDjypRQ',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', 'ancap', 'covid19', 'politics'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'covid19', 'politics'],
     course: null,
   },
   {
@@ -207,7 +207,7 @@ export const allVideos = [
     videoUrl: 'CgjCKnIRh5w',
     noteCount: 0,
     year: 2019,
-    categories: ['interview', 'ancap', 'paleo', 'socialism'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'paleo', 'socialism'],
     course: 6,
   },
   {
@@ -218,7 +218,7 @@ export const allVideos = [
     videoUrl: 'u5i4TIDWzIo',
     noteCount: 0,
     year: 2018,
-    categories: ['interview', 'literature' , 'xoanDeLugo'],
+    categories: ['allInstitute', 'allType','interview', 'literature' , 'xoanDeLugo'],
     course: 6,
   },
   {
@@ -229,7 +229,7 @@ export const allVideos = [
     videoUrl: '_NgGOTsLp2s',
     noteCount: 0,
     year: 2018,
-    categories: ['interview', 'ancap', 'paleo', 'values', 'xoanDeLugo'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'paleo', 'values', 'xoanDeLugo'],
     course: null,
   },
   {
@@ -240,7 +240,7 @@ export const allVideos = [
     videoUrl: 'uVTSPFUvF34',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', 'ancap', 'paleo'],
+    categories: ['allInstitute', 'allType','interview', 'ancap', 'paleo'],
     course: null,
   },
   {
@@ -251,7 +251,7 @@ export const allVideos = [
     videoUrl: 'bpRPLt6Cu0Y',
     noteCount: 0,
     year: 2020,
-    categories: ['groupChat', 'xoanDeLugo', 'covid19'],
+    categories: ['allInstitute', 'allType','groupChat', 'xoanDeLugo', 'covid19'],
     course: null,
   },
   {
@@ -261,7 +261,7 @@ export const allVideos = [
     videoUrl: 'wsGbE-9e2-U',
     noteCount: 0,
     year: 2017,
-    categories: ['interview'],
+    categories: ['allInstitute', 'allType','interview'],
     course: 4,
   },
   {
@@ -271,7 +271,7 @@ export const allVideos = [
     videoUrl: '22v1GawaQ40',
     noteCount: 0,
     year: 2017,
-    categories: ['interview'],
+    categories: ['allInstitute', 'allType','interview'],
     course: 4,
   },
   {
@@ -281,7 +281,7 @@ export const allVideos = [
     videoUrl: 'c6F0O-k-h2I',
     noteCount: 0,
     year: 2017,
-    categories: ['interview'],
+    categories: ['allInstitute', 'allType','interview'],
     course: 4,
   },
   {
@@ -291,7 +291,7 @@ export const allVideos = [
     videoUrl: 'xousJZ4Q5W4',
     noteCount: 0,
     year: 2017,
-    categories: ['interview'],
+    categories: ['allInstitute', 'allType','interview'],
     course: 4,
   },
   {
@@ -301,7 +301,7 @@ export const allVideos = [
     videoUrl: 'lsDlQCfbCXQ',
     noteCount: 0,
     year: 2017,
-    categories: ['interview', 'juanDeMariana'],
+    categories: ['allInstitute', 'allType','interview', 'juanDeMariana'],
     course: 4,
   },
   {
@@ -312,7 +312,7 @@ export const allVideos = [
     videoUrl: 'zgnht-gW8Ks',
     noteCount: 0,
     year: 2016,
-    categories: ['interview', 'UFM', 'rothbard', 'state'],
+    categories: ['allInstitute', 'allType','interview', 'UFM', 'rothbard', 'state'],
     course: 5,
   },
   {
@@ -322,7 +322,7 @@ export const allVideos = [
     videoUrl: 'NzZJipDVd9o',
     noteCount: 0,
     year: 2013,
-    categories: ['conference', 'juanDeMariana', 'paleo', 'ancap'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'paleo', 'ancap'],
     course: null,
   },
   {
@@ -332,7 +332,7 @@ export const allVideos = [
     videoUrl: '5lds4DnTJVQ',
     noteCount: 0,
     year: 2020,
-    categories: ['conference', 'juanDeMariana', 'state'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'state'],
     course: null,
   },
   {
@@ -343,7 +343,7 @@ export const allVideos = [
     videoUrl: 'zMFy6JOaB9E',
     noteCount: 0,
     year: 2015,
-    categories: ['conference', 'juanDeMariana', 'defense', 'state'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'defense', 'state'],
     course: null,
   },
   {
@@ -353,7 +353,7 @@ export const allVideos = [
     videoUrl: 'zMFy6JOaB9E',
     noteCount: 0,
     year: 2017,
-    categories: [
+    categories: ['allInstitute', 'allType',
       'conference',
       'juanDeMariana',
       'austrianEconomics',
@@ -368,7 +368,7 @@ export const allVideos = [
     videoUrl: 'zMFy6JOaB9E',
     noteCount: 0,
     year: 2016,
-    categories: ['conference', 'juanDeMariana', 'sociology', 'literature'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'sociology', 'literature'],
     course: null,
   },
   {
@@ -379,7 +379,7 @@ export const allVideos = [
     videoUrl: 'Nx-S7kjWZpg',
     noteCount: 0,
     year: 2016,
-    categories: ['conference', 'juanDeMariana', 'austrianEconomics', 'land'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'austrianEconomics', 'land'],
     course: null,
   },
   {
@@ -389,7 +389,7 @@ export const allVideos = [
     videoUrl: 'Zt7CfsNh3EQ',
     noteCount: 0,
     year: 2015,
-    categories: ['conference', 'juanDeMariana', 'politics'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'politics'],
     course: null,
   },
   {
@@ -399,7 +399,7 @@ export const allVideos = [
     videoUrl: 'HwM2hFiivag',
     noteCount: 0,
     year: 2012,
-    categories: ['conference', 'juanDeMariana', 'literature'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'literature'],
     course: null,
   },
   {
@@ -409,7 +409,7 @@ export const allVideos = [
     videoUrl: 'Eo4szP_YoTM',
     noteCount: 0,
     year: 2019,
-    categories: ['conference', 'juanDeMariana', 'politics', 'state'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'politics', 'state'],
     course: null,
   },
   {
@@ -419,7 +419,7 @@ export const allVideos = [
     videoUrl: 'TIQ-jxzxL1U',
     noteCount: 0,
     year: 2018,
-    categories: ['conference', 'juanDeMariana', 'communism'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'communism'],
     course: null,
   },
   {
@@ -429,7 +429,7 @@ export const allVideos = [
     videoUrl: 'N3S3unPUW_U',
     noteCount: 0,
     year: 2016,
-    categories: ['conference', 'juanDeMariana', 'state', 'pensions'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'state', 'pensions'],
     course: null,
   },
   {
@@ -439,7 +439,7 @@ export const allVideos = [
     videoUrl: 'TYdNllH8zQg',
     noteCount: 0,
     year: 2017,
-    categories: ['conference', 'juanDeMariana', 'state', 'frenchRevolution'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'state', 'frenchRevolution'],
     course: null,
   },
   {
@@ -450,7 +450,7 @@ export const allVideos = [
     videoUrl: 'n24Z5iFhNRA',
     noteCount: 0,
     year: 2014,
-    categories: ['conference', 'juanDeMariana', 'state', 'clases', 'politics'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'state', 'clases', 'politics'],
     course: null,
   },
   {
@@ -460,7 +460,7 @@ export const allVideos = [
     videoUrl: 'N7Ly3DmXsQw',
     noteCount: 0,
     year: 2015,
-    categories: ['conference', 'juanDeMariana', 'literature'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'literature'],
     course: null,
   },
   {
@@ -470,7 +470,7 @@ export const allVideos = [
     videoUrl: '3GdDi9FM5Rk',
     noteCount: 0,
     year: 2017,
-    categories: ['conference', 'juanDeMariana', 'economics', 'state'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'economics', 'state'],
     course: null,
   },
   {
@@ -481,7 +481,7 @@ export const allVideos = [
     videoUrl: 'rONLcH72MxE',
     noteCount: 0,
     year: 2014,
-    categories: [
+    categories: ['allInstitute', 'allType',
       'conference',
       'juanDeMariana',
       'literature',
@@ -498,7 +498,7 @@ export const allVideos = [
     videoUrl: 'jCB3BeIiG64',
     noteCount: 0,
     year: 2014,
-    categories: [
+    categories: ['allInstitute', 'allType',
       'conference',
       'UFM',
       'literature',
@@ -515,7 +515,7 @@ export const allVideos = [
     videoUrl: 'y0aDBBBfbuo',
     noteCount: 0,
     year: 2016,
-    categories: ['conference', 'rothbard', 'ancap', 'socialism'],
+    categories: ['allInstitute', 'allType','conference', 'rothbard', 'ancap', 'socialism'],
     course: null,
   },
   {
@@ -526,7 +526,7 @@ export const allVideos = [
     videoUrl: 'O47IN1G0B3Q',
     noteCount: 0,
     year: 2014,
-    categories: ['conference', 'UFM', 'rights', 'property'],
+    categories: ['allInstitute', 'allType','conference', 'UFM', 'rights', 'property'],
     course: null,
   },
   {
@@ -536,7 +536,7 @@ export const allVideos = [
     videoUrl: 'S_DnIdhdrmQ',
     noteCount: 0,
     year: 2015,
-    categories: ['conference', 'UFM', 'state'],
+    categories: ['allInstitute', 'allType','conference', 'UFM', 'state'],
     course: null,
   },
   {
@@ -546,7 +546,7 @@ export const allVideos = [
     videoUrl: 'cAKGmn4bbsI',
     noteCount: 0,
     year: 2014,
-    categories: ['conference', 'studentsForLiberty', 'poverty'],
+    categories: ['allInstitute', 'allType','conference', 'studentsForLiberty', 'poverty'],
     course: null,
   },
   {
@@ -556,7 +556,7 @@ export const allVideos = [
     videoUrl: '7dcUXDgayZg',
     noteCount: 0,
     year: 2017,
-    categories: ['interview', 'school', 'college', 'university'],
+    categories: ['allInstitute', 'allType','interview', 'school', 'college', 'university'],
     course: null,
   },
   {
@@ -566,7 +566,7 @@ export const allVideos = [
     videoUrl: 'lBEOwFm_gI4',
     noteCount: 0,
     year: 2016,
-    categories: ['conference', 'studentsForLiberty', 'frenchRevolution'],
+    categories: ['allInstitute', 'allType','conference', 'studentsForLiberty', 'frenchRevolution'],
     course: null,
   },
   {
@@ -576,7 +576,7 @@ export const allVideos = [
     videoUrl: '6F0TZGtyZE8',
     noteCount: 0,
     year: 2014,
-    categories: ['conference', 'UFM', 'politics'],
+    categories: ['allInstitute', 'allType','conference', 'UFM', 'politics'],
     course: null,
   },
   {
@@ -586,7 +586,7 @@ export const allVideos = [
     videoUrl: 's_lYz_1iQXs',
     noteCount: 0,
     year: 2018,
-    categories: ['interview', 'politics'],
+    categories: ['allInstitute', 'allType','interview', 'politics'],
     course: null,
   },
   {
@@ -596,7 +596,7 @@ export const allVideos = [
     videoUrl: 'D87K2A9Ig_Q',
     noteCount: 0,
     year: 2013,
-    categories: ['conference', 'juanDeMariana', 'economics'],
+    categories: ['allInstitute', 'allType','conference', 'juanDeMariana', 'economics'],
     course: null,
   },
   {
@@ -606,7 +606,7 @@ export const allVideos = [
 'https://yt3.ggpht.com/a/AATXAJx8RpCg87EZQd73lrcRw1NqPdlYvLEMvLfY7mgmZw=s176-c-k-c0xffffffff-no-rj-mo',  
     noteCount: 0,
     year: 2017,
-    categories: ['conference', 'cludDeLosViernes', 'politics'],
+    categories: ['allInstitute', 'allType','conference', 'cludDeLosViernes', 'politics'],
     course: null,
   },
   {
@@ -616,7 +616,7 @@ export const allVideos = [
     'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2018,
-    categories: ['conference', "UFM", 'poverty'],
+    categories: ['allInstitute', 'allType','conference', "UFM", 'poverty'],
     course: null,
   },
   {
@@ -626,7 +626,7 @@ export const allVideos = [
     'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2018,
-    categories: ['conference', "UFM", 'politics'],
+    categories: ['allInstitute', 'allType','conference', "UFM", 'politics'],
     course: null,
   },
   {
@@ -636,7 +636,7 @@ export const allVideos = [
     'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2013,
-    categories: ['conference', "UFM", 'politics'],
+    categories: ['allInstitute', 'allType','conference', "UFM", 'politics'],
     course: null,
   },
   {
@@ -646,7 +646,7 @@ export const allVideos = [
     'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2015,
-    categories: ['conference', "UFM", 'politics', 'time'],
+    categories: ['allInstitute', 'allType','conference', "UFM", 'politics', 'time'],
     course: null,
   },
   {
@@ -656,7 +656,7 @@ export const allVideos = [
     'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2018,
-    categories: ['conference', "UFM", 'politics', 'environment'],
+    categories: ['allInstitute', 'allType','conference', "UFM", 'politics', 'environment'],
     course: null,
   },
   {
@@ -666,7 +666,7 @@ export const allVideos = [
     'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2019,
-    categories: ['conference', "UFM", 'politics'],
+    categories: ['allInstitute', 'allType','conference', "UFM", 'politics'],
     course: null,
   },
   {
@@ -675,7 +675,7 @@ export const allVideos = [
     image:'https://yt3.ggpht.com/a/AATXAJzl-qu4pIZ1n_L3gFeFwGhC5X2AO3Bnxo8gOIBK=s176-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2014,
-    categories: ['conference', "enviornment", 'land'],
+    categories: ['allInstitute', 'allType','conference', "enviornment", 'land'],
     course: null,
   },
   {
@@ -684,7 +684,7 @@ export const allVideos = [
     image:'https://yt3.ggpht.com/a/AATXAJxxvlqYU097SF1WuvFOjLkN1BCZdskwbY1EPiAaNw=s176-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2020,
-    categories: ['interview', "ancap"],
+    categories: ['allInstitute', 'allType','interview', "ancap"],
     course: null,
   },
   {
@@ -693,7 +693,7 @@ export const allVideos = [
     image: 'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2018,
-    categories: ['conference', "politics", "UFM"],
+    categories: ['allInstitute', 'allType','conference', "politics", "UFM"],
     course: 7,
   },
   {
@@ -702,8 +702,17 @@ export const allVideos = [
     image: 'https://yt3.ggpht.com/a/AATXAJySIH-YIoFb-eOgHw-DllI68JB8hKtEuNaHXLsJSA=s288-c-k-c0xffffffff-no-rj-mo',
     noteCount: 0,
     year: 2018,
-    categories: ['conference', "politics", "UFM"],
+    categories: ['allInstitute', 'allType','conference', "politics", "UFM"],
     course: 7,
+  },
+  {
+    title: 'VOX : APOCALIPSIS PROGRE Y CRISIS QUE SE AVECINA CON MIGUEL ANXO BASTOS',
+    videoUrl: 'BSEx2VilHMI',
+    image: 'https://yt3.ggpht.com/a/AATXAJxgZ6gTmYfZY17ezvwoloogjd9dzhElQ3CySkWQgQ=s176-c-k-c0xffffffff-no-rj-mo',
+    noteCount: 0,
+    year: 2019,
+    categories: ['allInstitute', 'allType','interview', "politics"],
+    course: null,
   },
 ];
 //
