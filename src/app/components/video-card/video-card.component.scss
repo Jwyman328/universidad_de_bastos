@@ -9,6 +9,7 @@
     border-radius: 20px;
     transition: all .3s;
     color: black;
+    display: inline-block;
 
 
     &:hover {
@@ -24,6 +25,8 @@
 
     &__title {
         padding: 10px;
+        width: 90%;
+        height: 15%;
     }
 
     &__note-count{
