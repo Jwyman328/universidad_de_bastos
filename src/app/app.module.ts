@@ -22,6 +22,7 @@ import { LoginInPageComponent } from './pages/login-in-page/login-in-page.compon
 import { AuthCardTitleComponent } from './components/titles/auth-card-title/auth-card-title.component';
 import { AllVideosComponent } from './pages/all-videos/all-videos.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
+import { SelectBoxComponent } from './components/select-box/select-box.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { VideoCardComponent } from './components/video-card/video-card.component
     SignUpPageComponent,
     AuthCardTitleComponent,
     AllVideosComponent,
-    VideoCardComponent
+    VideoCardComponent,
+    SelectBoxComponent
     //AuthCardComponent,
     //SignupFormComponent2
     //FormButtonComponent,

@@ -1,30 +1,56 @@
 <div class="home-page-container">
   <app-header></app-header>
+  <div class="institution">
+    <app-select-box></app-select-box>
+    <select
+      class="custom-select"
+      [(ngModel)]="selectedInstitue"
+      name="institute"
+      (ngModelChange)="queryVideos()"
+    >
+      <option class="custom-select__item" value="UFM">UFM</option>
+      <option value="xoanDeLugo">Xoán de Lugo</option>
+      <option value="juanDeMariana">Juan De Mariana</option>
+      <option value="allInstitute">All</option>
+    </select>
+    <select
+      class="institution"
+      [(ngModel)]="selectedType"
+      name="type"
+      (ngModelChange)="queryVideos()"
+    >
+      <option value="interview">Entrevista</option>
+      <option value="conference">Conference</option>
+      <option value="allType">All</option>
+    </select>
+    <select
+      class="institution"
+      [(ngModel)]="yearSelected"
+      name="year"
+      (ngModelChange)="queryVideos()"
+    >
+      <option value="2012">2012</option>
+      <option value="2013">2013</option>
+      <option value="2014">2014</option>
+      <option value="2015">2015</option>
+      <option value="2016">2016</option>
+      <option value="2017">2017</option>
+      <option value="2018">2018</option>
+      <option value="2019">2019</option>
+      <option value="2020">2020</option>
+      <option value="anyYear">Any</option>
+    </select>
+    <select
+      class="institution"
+      [(ngModel)]="selectedSort"
+      name="sort"
+      (ngModelChange)="sortVideos(selectedSort)"
+    >
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+    </select>
+  </div>
 
-  <select class='institution' [(ngModel)]='selectedInstitue' name="institute" (ngModelChange)='queryVideos()' >
-    <option value="UFM">UFM</option>
-    <option value="xoanDeLugo">Xoán de Lugo</option>
-    <option value="juanDeMariana">Juan De Mariana</option>
-    <option  value="allInstitute">All</option>
-  </select>
-  <select class='institution' [(ngModel)]='selectedType' name="type" (ngModelChange)='queryVideos()' >
-    <option value="interview">Entrevista</option>
-    <option value="conference">Conference</option>
-    <option  value="allType">All</option>
-  </select>
-  <select class='institution' [(ngModel)]='yearSelected' name="year" (ngModelChange)='queryVideos()' >
-    <option value="2012">2012</option>
-    <option value="2013">2013</option>
-    <option value="2014">2014</option>
-    <option value="2015">2015</option>
-    <option value="2016">2016</option>
-    <option value="2017">2017</option>
-    <option value="2018">2018</option>
-    <option value="2019">2019</option>
-    <option value="2020">2020</option>
-    <option value="anyYear">Any</option>
-
-  </select>
   <div class="all-videos-container">
     <ng-container *ngFor="let videoData of selectedVideos">
       <app-video-card [videoData]="videoData"></app-video-card>
