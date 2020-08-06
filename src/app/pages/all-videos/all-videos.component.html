@@ -1,7 +1,19 @@
 <div class="home-page-container">
   <app-header></app-header>
   <div class="institution">
-    <app-select-box></app-select-box>
+    <app-select-box
+      [defaultSelected]="institutionSelectOptions[0]"
+      [selectOptions]="institutionSelectOptions"
+    ></app-select-box>
+    <app-select-box
+      [defaultSelected]="typeSelectOptions[0]"
+      [selectOptions]="typeSelectOptions"
+    ></app-select-box>
+    <app-select-box
+      [defaultSelected]="yearelectOptions[0]"
+      [selectOptions]="yearelectOptions"
+    ></app-select-box>
+
     <select
       class="custom-select"
       [(ngModel)]="selectedInstitue"

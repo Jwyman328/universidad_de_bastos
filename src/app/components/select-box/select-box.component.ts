@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-select-box',
@@ -6,14 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./select-box.component.scss']
 })
 export class SelectBoxComponent implements OnInit {
+  @Input('selectOptions') selectOptions: any[];
+  @Input('defaultSelected') defaultSelected;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.selectedItem = this.defaultSelected
   }
 
     //
-    selectedItem = 'Select an item';
+    selectedItem: any = 'Select an item' 
     selectOpen = false;
   
     openSelect(){
