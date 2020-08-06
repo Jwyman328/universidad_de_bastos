@@ -95,7 +95,7 @@ export const allVideos = [
   },
   {
     title:
-      'El Rincón del Profesor Bastos#2. Socialismo,secesión,egoísmo Rand,el estado como ente anárquico(1/3)',
+      'El Rincón del Profesor Bastos#2. Socialismo, secesión, egoísmo Rand, el estado como ente anárquico(1/3)',
     image:
       'https://yt3.ggpht.com/a/AATXAJw2fPZpgdL6_Gvek-cxmHe36X0kgKTa9-n-_2hbrQ=s288-c-k-c0xffffffff-no-rj-mo',
     videoUrl: 'A3MuQ_e2-0w',
@@ -128,7 +128,7 @@ export const allVideos = [
   },
   {
     title:
-      'El Rincón del Profesor Bastos#1.Covid-19,Chile,capitalismo,liberalismo,conservadurismo,secesión,etc',
+      'El Rincón del Profesor Bastos#1.Covid-19, Chile, capitalismo, liberalismo, conservadurismo, secesión,etc',
     image:
       'https://yt3.ggpht.com/a/AATXAJw2fPZpgdL6_Gvek-cxmHe36X0kgKTa9-n-_2hbrQ=s288-c-k-c0xffffffff-no-rj-mo',
     videoUrl: 'uxSYLoA2aFg',

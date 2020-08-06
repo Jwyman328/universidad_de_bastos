@@ -10,49 +10,95 @@ export class AllVideosComponent implements OnInit {
   selectedSort = 'newest';
   selectedType = 'allType';
   allVideos = allVideos;
-  yearSelected:any = 'anyYear' 
+  yearSelected: any = 'any';
   selectedVideos = allVideos;
 
-  institutionSelectOptions = [{value:'UFM', displayName:'UFM'}, {value:'xoanDeLugo',displayName:'Xoán de Lugo'}, {value:'juanDeMariana', displayName:'Juan De Mariana'}, {value:'allInstitute',displayName:'All'}]
-  typeSelectOptions = [{value:'interview', displayName:'Entrevista'}, {value:'conference',displayName:'Conference'}, {value:'allType', displayName:'all'}]
-  yearelectOptions = [{value:2012, displayName:'2012'}, {value:2013,displayName:'2013'}, {value:2014, displayName:'2014'},{value:2015, displayName:'2015'},{value:2016, displayName:'2016'},{value:2017, displayName:'2017'},{value:2018, displayName:'2018'},{value:2019, displayName:'2019'},{value:2020, displayName:'2020'},{value:'anyYear', displayName:'Any'}]
-
+  institutionSelectOptions = [
+    { value: 'allInstitute', displayName: 'All' },
+    { value: 'UFM', displayName: 'UFM' },
+    { value: 'xoanDeLugo', displayName: 'Xoán de Lugo' },
+    { value: 'juanDeMariana', displayName: 'Juan De Mariana' },
+  ];
+  typeSelectOptions = [
+    { value: 'allType', displayName: 'all' },
+    { value: 'interview', displayName: 'Entrevista' },
+    { value: 'conference', displayName: 'Conference' },
+  ];
+  yearelectOptions = [
+    { value: 'anyYear', displayName: 'any' },
+    { value: 2012, displayName: '2012' },
+    { value: 2013, displayName: '2013' },
+    { value: 2014, displayName: '2014' },
+    { value: 2015, displayName: '2015' },
+    { value: 2016, displayName: '2016' },
+    { value: 2017, displayName: '2017' },
+    { value: 2018, displayName: '2018' },
+    { value: 2019, displayName: '2019' },
+    { value: 2020, displayName: '2020' },
+  ];
+  sortSelectOptions = [
+    { value: 'newest', displayName: 'Newest' },
+    { value: 'oldest', displayName: 'Oldest' },
+  ];
 
   //
   selectedItem = 'Select an item';
   selectOpen = false;
 
-  openSelect(){
-    this.selectOpen = !this.selectOpen
+  setInstitution(institution) {
+    this.selectedInstitue = institution.value;
+    this.queryVideos();
   }
 
-  selectItem(value){
-    this.selectedItem = value
-    this.selectOpen = false
+  setType(type) {
+    this.selectedType = type.value;
+    this.queryVideos();
+  }
 
+  setYear(year) {
+    this.yearSelected = year.displayName;
+    this.queryVideos();
+  }
+
+  openSelect() {
+    this.selectOpen = !this.selectOpen;
+  }
+
+  selectItem(value) {
+    this.selectedItem = value;
+    this.selectOpen = false;
   }
 
   constructor() {}
 
   ngOnInit(): void {
-    this.sortVideos(this.selectedSort)
+    this.queryVideos();
+    this.sortVideos(this.selectedSort);
   }
 
   queryVideos() {
     const theseVideos = this.allVideos.filter(
       (video) =>
         video.categories.includes(this.selectedInstitue) &&
-        video.categories.includes(this.selectedType) &&  (String(video.year) === this.yearSelected || this.yearSelected === 'anyYear')
+        video.categories.includes(this.selectedType) &&
+        (String(video.year) === this.yearSelected ||
+          this.yearSelected === 'any')
     );
     this.selectedVideos = theseVideos;
-    this.sortVideos(this.selectedSort)
+    this.sortVideos(this.selectedSort);
   }
-  sortVideos(sortType){
-  const currentVideos = [...this.selectedVideos]
-  currentVideos.sort((a,b) => a.year-b.year)
-    if (sortType === 'newest'){
-      currentVideos.reverse()
+
+  sortVideos(sortType) {
+    let softTypeValue = sortType;
+    if (sortType.value) {
+      softTypeValue = sortType.value;
     }
-    this.selectedVideos = currentVideos
+    this.selectedSort = softTypeValue;
+    const currentVideos = [...this.selectedVideos];
+    currentVideos.sort((a, b) => a.year - b.year);
+    if (softTypeValue === 'newest') {
+      currentVideos.reverse();
+    }
+    this.selectedVideos = currentVideos;
   }
 }

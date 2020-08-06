@@ -1,39 +1,39 @@
 .home-page-container {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    min-height: 100vh;
-    height:auto;
-    width: 100vw;
-    background-image: url('../../styles/TexturePapers/Texture6.jpg');
-    color: white;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  min-height: 100vh;
+  height: auto;
+  width: 100vw;
+  background-image: url("../../styles/TexturePapers/Texture6.jpg");
+  background-position: center top;
+  background-size: 100%;
+  color: white;
+  background-repeat: round;
+  display: flex;
 }
 
 .all-videos-container {
-    position: relative;
-    min-width: 90%;
-    min-height: 90%;
-    margin: 50px;
-    margin-top: 100px;
-    
+  position: relative;
+  min-width: 95%;
+  min-height: 90%;
+  margin: 50px;
+  margin-top: 100px;
 }
 
 .institution {
-    margin-top: 300px;
+  margin-top: 300px;
 }
 
-// .custom-select {
-//     width: 150px;
-//     height: 50px;
-//     font-size: large;
-//     background-color: rgba(255, 255, 255, 0.886);
-//     margin: 5px;
-//     border-radius: 10px;
-//     padding-left: 15px;
-//     font-family: cursive;
-// }
-// .custom-select:hover select {
-//     appearance: none;
-// }
-
+.select-box-bar {
+  margin-top: 300px;
+  width: 75%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 30px;
+}
 

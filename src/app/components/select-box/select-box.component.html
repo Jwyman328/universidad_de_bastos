@@ -1,6 +1,9 @@
-<div class="real-custom-select">
-  <div (click)="openSelect()" class="real-custom-select__title">
-    <span class="real-custom-select__title-text">{{ selectedItem.displayName }}</span>
+<div class='select-box__label'>
+    {{selectLabel}}
+</div>
+<div class="real-custom-select" (mouseenter)="openSelect()" (mouseleave)="openSelect()">
+  <div  class="real-custom-select__title">
+    <span class="real-custom-select__title-text">{{ selectedItem.displayName |titlecase}}</span>
     <span class='arrow-down'>
       <svg
         version="1.1"
@@ -47,7 +50,7 @@
         (click)="selectItem(selectOption)"
         class="real-custom-select__item"
       >
-        {{ selectOption.displayName }}
+        {{ selectOption.displayName | titlecase}}
       </div>
     </ng-container>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-select-box',
@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SelectBoxComponent implements OnInit {
   @Input('selectOptions') selectOptions: any[];
   @Input('defaultSelected') defaultSelected;
+  @Input('selectLabel') selectLabel: string;
+  @Output() changeSelectEvent = new EventEmitter<string>();
 
   constructor() { }
 
@@ -26,7 +28,8 @@ export class SelectBoxComponent implements OnInit {
     selectItem(value){
       this.selectedItem = value
       this.selectOpen = false
-  
+
+      this.changeSelectEvent.emit(value);
     }
   
 
