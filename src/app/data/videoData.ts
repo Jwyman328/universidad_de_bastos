@@ -261,7 +261,7 @@ export const allVideos = [
     videoUrl: 'wsGbE-9e2-U',
     noteCount: 0,
     year: 2017,
-    categories: ['allInstitute', 'allType','interview'],
+    categories: ['allInstitute', 'allType','interview', 'UFM'],
     course: 4,
   },
   {
@@ -271,7 +271,7 @@ export const allVideos = [
     videoUrl: '22v1GawaQ40',
     noteCount: 0,
     year: 2017,
-    categories: ['allInstitute', 'allType','interview'],
+    categories: ['allInstitute', 'allType','interview', 'UFM'],
     course: 4,
   },
   {
@@ -281,7 +281,7 @@ export const allVideos = [
     videoUrl: 'c6F0O-k-h2I',
     noteCount: 0,
     year: 2017,
-    categories: ['allInstitute', 'allType','interview'],
+    categories: ['allInstitute', 'allType','interview', 'UFM'],
     course: 4,
   },
   {
@@ -291,7 +291,7 @@ export const allVideos = [
     videoUrl: 'xousJZ4Q5W4',
     noteCount: 0,
     year: 2017,
-    categories: ['allInstitute', 'allType','interview'],
+    categories: ['allInstitute', 'allType','interview', 'UFM'],
     course: 4,
   },
   {
