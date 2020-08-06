@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef, NgZone, ViewChildren, QueryList, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  NgZone,
+  ViewChildren,
+  QueryList,
+  ElementRef,
+} from '@angular/core';
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NotesService } from 'src/app/services/http-requests/notes.service';
@@ -7,11 +15,8 @@ import { NotesService } from 'src/app/services/http-requests/notes.service';
   selector: 'app-video-center',
   templateUrl: './video-center.component.html',
   styleUrls: ['./video-center.component.scss'],
-
 })
 export class VideoCenterComponent implements OnInit {
-  
-  
   //second try
   title = 'dummyApp-YTIFrameAPI';
 
@@ -23,13 +28,13 @@ export class VideoCenterComponent implements OnInit {
   public myplayer: any;
   public pausedAt: number = 0;
   public isPaused: boolean = false;
-  public totalDuration:number;
+  public totalDuration: number;
   public pixelPerSecond = 105;
-  public notes = []
-  public currentNote:string = '';
-  public noteTitle:string;
-  public isNoteCenterOpen:boolean = false;
-
+  public notes = [];
+  public currentNote: string = '';
+  public noteTitle: string;
+  public isNoteCenterOpen: boolean = false;
+  public videoTitle:string;
 
   subscription: any = null;
   source: any = interval(1000);
@@ -38,9 +43,13 @@ export class VideoCenterComponent implements OnInit {
 
   isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  constructor(private ngZone: NgZone,    private activatedRouter: ActivatedRoute, private notesService:NotesService
-    ) {
+  constructor(
+    private ngZone: NgZone,
+    private activatedRouter: ActivatedRoute,
+    private notesService: NotesService
+  ) {
     this.video = this.activatedRouter.snapshot.paramMap.get('videoUrl');
+    this.videoTitle = this.activatedRouter.snapshot.paramMap.get('videoTitle');
 
   }
 
@@ -48,7 +57,6 @@ export class VideoCenterComponent implements OnInit {
   init() {
     // Return if Player is already created
     if (window['YT']) {
-      
       this.startVideo();
       return;
     }
@@ -67,10 +75,8 @@ export class VideoCenterComponent implements OnInit {
     this.init();
   }
 
-  
-
   ngOnDestroy() {
-   this.cleanupSubs();
+    this.cleanupSubs();
   }
 
   startVideo() {
@@ -87,28 +93,28 @@ export class VideoCenterComponent implements OnInit {
         rel: 0,
         showinfo: 0,
         fs: 0,
-        playsinline: 1
-
+        playsinline: 1,
       },
       events: {
-        'onStateChange': (event) => this.ngZone.run(() => this.onPlayerStateChange(event)),
-        'onError': (event) => this.ngZone.run(() => this.onPlayerError(event)),
-        'onReady': (event) => this.ngZone.run(() => this.onPlayerReady(event)),
-      }
+        onStateChange: (event) =>
+          this.ngZone.run(() => this.onPlayerStateChange(event)),
+        onError: (event) => this.ngZone.run(() => this.onPlayerError(event)),
+        onReady: (event) => this.ngZone.run(() => this.onPlayerReady(event)),
+      },
     });
   }
 
   /* 4. It will be called when the Video Player is ready */
   onPlayerReady(event) {
     this.myplayer = event.target;
-    this.totalDuration = this.player.getDuration()
-    this.calculateSpot()
+    this.totalDuration = this.player.getDuration();
+    this.calculateSpot();
     if (this.isRestricted) {
       event.target.mute();
       //do not want to play automatically
-     // this.onPlayVideo()
+      // this.onPlayVideo()
     } else {
-      this.player.mute()
+      this.player.mute();
       //do not want to play automatically
       //this.onPlayVideo()
     }
@@ -116,58 +122,56 @@ export class VideoCenterComponent implements OnInit {
 
   /* 5. API will call this function when Player State changes like PLAYING, PAUSED, ENDED */
   onPlayerStateChange(event) {
-    console.log(event)
+    console.log(event);
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
         if (this.cleanTime() == 0) {
           console.log('started ' + this.cleanTime());
         } else {
-          console.log('playing ' + this.cleanTime())
-        };
-        this.onCheckProgress()
+          console.log('playing ' + this.cleanTime());
+        }
+        this.onCheckProgress();
         break;
       case window['YT'].PlayerState.PAUSED:
-           this.onPlayerPaused()
+        this.onPlayerPaused();
         break;
       case window['YT'].PlayerState.ENDED:
         console.log('ended ');
         break;
-    };
-  };
+    }
+  }
 
   onPlayerPaused() {
     if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
       console.log('paused' + ' @ ' + this.cleanTime());
       this.pausedAt = this.player.getCurrentTime();
       this.cleanupSubs();
-    };
+    }
   }
   onPause() {
-    console.log("here in pause", this.videoProg);
+    console.log('here in pause', this.videoProg);
     this.player.pauseVideo();
-   
   }
   onPlay() {
     this.player.seekTo(this.pausedAt, true);
-    this.onPlayVideo()
+    this.onPlayVideo();
   }
 
-
   cleanTime(): number {
-    return Math.round(this.myplayer.getCurrentTime())
-  };
+    return Math.round(this.myplayer.getCurrentTime());
+  }
 
   onPlayerError(event) {
     switch (event.data) {
       case 2:
-        console.log('' + this.video)
+        console.log('' + this.video);
         break;
       case 100:
         break;
       case 101 || 150:
         break;
-    };
-  };
+    }
+  }
 
   onPlayVideo() {
     this.player.playVideo();
@@ -179,109 +183,112 @@ export class VideoCenterComponent implements OnInit {
   }
 
   onUnmute() {
-    this.player.unMute()
+    this.player.unMute();
   }
 
   cleanupSubs() {
-    if (this.subscription != null ) {
-       this.subscription.unsubscribe();
-       console.log("Cleaned up sub");
-       this.subscription = null;
-       
-
+    if (this.subscription != null) {
+      this.subscription.unsubscribe();
+      console.log('Cleaned up sub');
+      this.subscription = null;
     } else {
-      console.log("No subs to unsub");
+      console.log('No subs to unsub');
     }
   }
 
   onCheckProgress() {
-    
-    console.log("check progress set")
+    console.log('check progress set');
     if (this.subscription != null) {
       this.cleanupSubs();
     }
-    this.subscription = this.source.subscribe(val => {
-      this.videoProg = this.cleanTime()
-      console.log("check progress fired. ", this.videoProg);
+    this.subscription = this.source.subscribe((val) => {
+      this.videoProg = this.cleanTime();
+      console.log('check progress fired. ', this.videoProg);
     });
-//
-
+    //
   }
-  //custom functions 
+  //custom functions
 
-  calculateSpot(){
-    const pixelPerSecond = 840 / this.totalDuration
-    this.pixelPerSecond = pixelPerSecond
-   }
- 
-   createNote(){
-     // get the pixel placement of where the note is taken
-     // then place a marker on this spot with ngstyle?
-     const currentTimeOfNote = this.player.getCurrentTime()
-     const timeSp = (currentTimeOfNote *  this.pixelPerSecond) + 'px'
-     console.log('what is this should display nice', this.displayMinuteBasedTime(currentTimeOfNote))
-     this.notes.push({timeSpot:timeSp, timeOfNote:currentTimeOfNote, noteText:this.currentNote, noteTitle:this.noteTitle, timeNoteCreated:this.displayMinuteBasedTime(currentTimeOfNote)})
-     this.clearNotePad()
-     this.orderNotesBasedOffOfTime()
+  calculateSpot() {
+    const pixelPerSecond = 840 / this.totalDuration;
+    this.pixelPerSecond = pixelPerSecond;
+  }
 
-     this.createNoteInBackend()
-   }
-   createNoteInBackend(){
-     //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"} 
-     // t0 http://localhost:5000/notes/
-     this.notesService.createNote().subscribe(res => {
-       console.log('res',res)
-     })
-   }
+  createNote() {
+    // get the pixel placement of where the note is taken
+    // then place a marker on this spot with ngstyle?
+    const currentTimeOfNote = this.player.getCurrentTime();
+    const timeSp = currentTimeOfNote * this.pixelPerSecond + 'px';
+    console.log(
+      'what is this should display nice',
+      this.displayMinuteBasedTime(currentTimeOfNote)
+    );
+    this.notes.push({
+      timeSpot: timeSp,
+      timeOfNote: currentTimeOfNote,
+      noteText: this.currentNote,
+      noteTitle: this.noteTitle,
+      timeNoteCreated: this.displayMinuteBasedTime(currentTimeOfNote),
+    });
+    this.clearNotePad();
+    this.orderNotesBasedOffOfTime();
 
-   discardNote(){
+    this.createNoteInBackend();
+  }
+  createNoteInBackend() {
+    //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
+    // t0 http://localhost:5000/notes/
+    this.notesService.createNote().subscribe((res) => {
+      console.log('res', res);
+    });
+  }
+
+  discardNote() {
     this.isNoteCenterOpen = false;
-    this.clearNotePad()
-   }
+    this.clearNotePad();
+  }
 
-   clearNotePad(){
-     this.currentNote = '';
-     this.noteTitle = ''
-   }
+  clearNotePad() {
+    this.currentNote = '';
+    this.noteTitle = '';
+  }
 
-   toggleNoteCenter(){
+  toggleNoteCenter() {
     this.isNoteCenterOpen = !this.isNoteCenterOpen;
-   }
+  }
 
-   displayMinuteBasedTime(seconds){
-    if (seconds < 60){
+  displayMinuteBasedTime(seconds) {
+    if (seconds < 60) {
       //do nothing
-      return seconds
-    }else{
-      const minutes = seconds / 60
-      const onlyMinutes = parseInt(String(minutes))
-      let onlySeconds: any = seconds - (onlyMinutes * 60)
-      if(onlySeconds < 10){
-        onlySeconds = '0' + onlySeconds.toString()
+      return Math.floor(seconds);
+    } else {
+      const minutes = seconds / 60;
+      const onlyMinutes = parseInt(String(minutes));
+      let onlySeconds: any = seconds - onlyMinutes * 60;
+      if (onlySeconds < 10) {
+        onlySeconds = '0' + onlySeconds.toString();
       }
-      const onlySecondsNoDecimal = String(onlySeconds).split('.')
-      return `${onlyMinutes}:${onlySecondsNoDecimal[0]}`
+      const onlySecondsNoDecimal = String(onlySeconds).split('.');
+      return `${onlyMinutes}:${onlySecondsNoDecimal[0]}`;
     }
-   }
+  }
 
-   gotoNoteTimeSpot(event, note){
-    event.stopPropagation()
-    this.player.seekTo(note.timeOfNote)
-    console.log(this.components)
-   }
+  gotoNoteTimeSpot(event, note) {
+    event.stopPropagation();
+    this.player.seekTo(note.timeOfNote);
+    console.log(this.components);
+  }
 
-   orderNotesBasedOffOfTime(){
-   this.notes.sort((a,b) => a.timeOfNote-b.timeOfNote)
-   }
+  orderNotesBasedOffOfTime() {
+    this.notes.sort((a, b) => a.timeOfNote - b.timeOfNote);
+  }
 
-   @ViewChildren('allNotes') components:any;
+  @ViewChildren('allNotes') components: any;
 
-   travelToNote(indexOfelement:number){
-    const arr = this.components._results
-  const thisEle =  arr[indexOfelement]
-  thisEle.nativeElement.scrollIntoView({ behavior: 'smooth' })
-    console.log('clicked cl',thisEle.nativeElement) //
-   }
-
-
+  travelToNote(indexOfelement: number) {
+    const arr = this.components._results;
+    const thisEle = arr[indexOfelement];
+    thisEle.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    console.log('clicked cl', thisEle.nativeElement); //
+  }
 }

@@ -9,7 +9,7 @@ import { AllVideosComponent } from './pages/all-videos/all-videos.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent,canActivate: [AuthGuard] },
-  { path: 'video-center/:videoUrl', component: VideoCenterComponent,canActivate: [AuthGuard] },
+  { path: 'video-center/:videoUrl/:videoTitle', component: VideoCenterComponent,canActivate: [AuthGuard] },
   { path: 'videos', component: AllVideosComponent},
   { path: 'signup', component: SignUpPageComponent },
   { path: 'login', component: LoginInPageComponent},

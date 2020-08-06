@@ -15,7 +15,7 @@ export class VideoCardComponent implements OnInit {
   }
 
   goToNoteCenter(){
-    this.route.navigate(['video-center',`${this.videoData.videoUrl}`])
+    this.route.navigate(['video-center',`${this.videoData.videoUrl}`,`${this.videoData.title}`])
   }
 
 }
