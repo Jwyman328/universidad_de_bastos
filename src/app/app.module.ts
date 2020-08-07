@@ -23,6 +23,7 @@ import { AuthCardTitleComponent } from './components/titles/auth-card-title/auth
 import { AllVideosComponent } from './pages/all-videos/all-videos.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
 import { SelectBoxComponent } from './components/select-box/select-box.component';
+import { SmallHeaderComponent } from './components/small-header/small-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { SelectBoxComponent } from './components/select-box/select-box.component
     AuthCardTitleComponent,
     AllVideosComponent,
     VideoCardComponent,
-    SelectBoxComponent
+    SelectBoxComponent,
+    SmallHeaderComponent
     //AuthCardComponent,
     //SignupFormComponent2
     //FormButtonComponent,

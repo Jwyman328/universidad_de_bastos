@@ -1,0 +1,47 @@
+.header-container {
+    position: absolute;
+    left:0px;
+    top:0px;
+    width: 100vw;
+    height: 15vh;
+    background-color: rgba(255, 217, 0, 0.749); // rgba(255, 255, 0, 0.618)
+    display: flex;
+    align-items: center;
+    justify-content: flex-start
+}
+
+.xoanDeLugoLogo {
+    background-image: url('../../styles/logos/xoanDeLugoSmall.png');
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+
+.header__title {
+    font-family: cursive;
+    font-size: 25px;
+    padding: 10px;
+    width: 300px;
+    padding-top: 30px;
+    position: relative;
+    left: 25px;
+    bottom: 5px;
+    line-height: 30px;
+    text-indent:-1.0em;
+
+}
+
+.university-title {
+    position: relative;
+    // left:0px;
+    // top:0px;
+    width: 300px;
+    height: 15vh;
+    //background-color: rgba(255, 217, 0, 0.749); // rgba(255, 255, 0, 0.618)
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 50px;
+    margin-right: 200px;
+}
