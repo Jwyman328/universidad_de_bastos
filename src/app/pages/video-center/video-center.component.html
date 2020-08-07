@@ -25,7 +25,9 @@
     <button class='note-center-button' (click)="toggleNoteCenter()">Note Center</button>
   </div>
   <div *ngIf="isNoteCenterOpen" class="note-center">
-    <div class="create-note-area">
+    
+
+   <div class="create-note-area">
       <div class="create-note-area__currentTime-bubble">
         {{ displayMinuteBasedTime(videoProg) }}
       </div>
@@ -42,31 +44,16 @@
         <app-form-button (click)="discardNote()" [buttonText]="'Discard note'">
         </app-form-button>
       </div>
-    </div>
+    </div> 
   </div>
 
   <div class="line-seperator"></div>
 
   <div *ngIf="isNoteCenterOpen">
-    <div class="display-note" *ngFor="let note of notes" #allNotes>
-        <div class="display-note__timeStamp">
-            {{ note.timeNoteCreated }}
-        </div>
-        <div class="display-note__title" >
-           {{ note.noteTitle }}
-        </div>
-        <div class="display-note__text">
-            <p>{{ note.noteText }} </p>
-        </div>
-    </div>
+    <ng-container *ngFor="let note of notes" #allNotes>
+      <app-display-note [note]='note'></app-display-note>
+    </ng-container >
   </div>
 </div>
 
-<!--         <div class="card">
-          <button class="btn btn-dark mb-3" (click)="onMute()">Mute</button>
 
-          <button class="btn btn-dark mb-3" (click)="onUnmute()">Unmute</button>
-          <button class="btn btn-dark mb-3" (click)="onPause()">Pause</button>
-
-          <button class="btn btn-dark mb-3" (click)="onPlay()">Play</button>
-        </div> -->

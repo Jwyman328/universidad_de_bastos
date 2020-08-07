@@ -55,6 +55,7 @@ export class VideoCenterComponent implements OnInit {
 
   /* 2. Initialize method for YT IFrame API */
   init() {
+    this.getAllNotes()
     // Return if Player is already created
     if (window['YT']) {
       this.startVideo();
@@ -122,13 +123,10 @@ export class VideoCenterComponent implements OnInit {
 
   /* 5. API will call this function when Player State changes like PLAYING, PAUSED, ENDED */
   onPlayerStateChange(event) {
-    console.log(event);
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
         if (this.cleanTime() == 0) {
-          console.log('started ' + this.cleanTime());
         } else {
-          console.log('playing ' + this.cleanTime());
         }
         this.onCheckProgress();
         break;
@@ -136,20 +134,17 @@ export class VideoCenterComponent implements OnInit {
         this.onPlayerPaused();
         break;
       case window['YT'].PlayerState.ENDED:
-        console.log('ended ');
         break;
     }
   }
 
   onPlayerPaused() {
     if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
-      console.log('paused' + ' @ ' + this.cleanTime());
       this.pausedAt = this.player.getCurrentTime();
       this.cleanupSubs();
     }
   }
   onPause() {
-    console.log('here in pause', this.videoProg);
     this.player.pauseVideo();
   }
   onPlay() {
@@ -164,7 +159,6 @@ export class VideoCenterComponent implements OnInit {
   onPlayerError(event) {
     switch (event.data) {
       case 2:
-        console.log('' + this.video);
         break;
       case 100:
         break;
@@ -189,21 +183,17 @@ export class VideoCenterComponent implements OnInit {
   cleanupSubs() {
     if (this.subscription != null) {
       this.subscription.unsubscribe();
-      console.log('Cleaned up sub');
       this.subscription = null;
     } else {
-      console.log('No subs to unsub');
     }
   }
 
   onCheckProgress() {
-    console.log('check progress set');
     if (this.subscription != null) {
       this.cleanupSubs();
     }
     this.subscription = this.source.subscribe((val) => {
       this.videoProg = this.cleanTime();
-      console.log('check progress fired. ', this.videoProg);
     });
     //
   }
@@ -230,17 +220,37 @@ export class VideoCenterComponent implements OnInit {
       noteTitle: this.noteTitle,
       timeNoteCreated: this.displayMinuteBasedTime(currentTimeOfNote),
     });
+    this.createNoteInBackend(currentTimeOfNote,this.noteTitle, this.currentNote);
     this.clearNotePad();
     this.orderNotesBasedOffOfTime();
-
-    this.createNoteInBackend();
   }
-  createNoteInBackend() {
+
+  createNoteInBackend(noteTimeSpotInSeconds,noteTitle, noteText ) {
     //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
     // t0 http://localhost:5000/notes/
-    this.notesService.createNote().subscribe((res) => {
+    this.notesService.createNote( this.video, noteTimeSpotInSeconds, noteTitle, noteText).subscribe((res) => {
       console.log('res', res);
     });
+    this.getAllNotes()
+  }
+
+  getAllNotes(){
+    this.notesService.getAllNotesForVideo(this.video).subscribe((res:any) => {
+      const allCurrentNotes = res
+      allCurrentNotes.map(note => {
+        const timeSp = note.videoTimeNoteTakenInSeconds * this.pixelPerSecond + 'px';
+        this.notes.push({
+          _id: note._id ,
+          timeSpot: timeSp,
+          timeOfNote: note.videoTimeNoteTakenInSeconds,
+          noteText: note.noteText,
+          noteTitle: note.noteTitle,
+          timeNoteCreated: this.displayMinuteBasedTime(note.videoTimeNoteTakenInSeconds),
+        });
+      })
+      this.orderNotesBasedOffOfTime();
+      
+    })
   }
 
   discardNote() {
@@ -252,7 +262,6 @@ export class VideoCenterComponent implements OnInit {
     this.currentNote = '';
     this.noteTitle = '';
   }
-
   toggleNoteCenter() {
     this.isNoteCenterOpen = !this.isNoteCenterOpen;
   }
@@ -276,7 +285,6 @@ export class VideoCenterComponent implements OnInit {
   gotoNoteTimeSpot(event, note) {
     event.stopPropagation();
     this.player.seekTo(note.timeOfNote);
-    console.log(this.components);
   }
 
   orderNotesBasedOffOfTime() {
@@ -289,6 +297,6 @@ export class VideoCenterComponent implements OnInit {
     const arr = this.components._results;
     const thisEle = arr[indexOfelement];
     thisEle.nativeElement.scrollIntoView({ behavior: 'smooth' });
-    console.log('clicked cl', thisEle.nativeElement); //
   }
+
 }

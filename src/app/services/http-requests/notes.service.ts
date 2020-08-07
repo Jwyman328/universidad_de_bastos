@@ -13,12 +13,40 @@ export class NotesService extends RequestSentStatus  {
     this.token = this.userAuthDataService.getToken()
   }
 
-  createNote() {
-    console.log('hit')
+  createNote(videoId, videoTimeNoteTakenInSeconds, noteTitle, noteText) {
+    console.log('vtnt', videoTimeNoteTakenInSeconds)
     this.handleRequestSent();
     return this.http.post(
-     'https://universidad-de-bastos.herokuapp.com/notes/',
-     {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"},
+     'http://localhost:5000/notes/',
+     {"videoTimeNoteTakenInSeconds":Number(videoTimeNoteTakenInSeconds) , "videoId": videoId, "noteTitle": noteTitle, "noteText":noteText},
+     {
+      headers: new HttpHeaders({
+        Authorization: `JWT ${this.token}`,
+        'Content-Type': 'application/json',
+      }),
+    }
+      
+    );
+  }
+
+  getAllNotesForVideo(videoId){
+    this.handleRequestSent();
+    return this.http.get(
+     `http://localhost:5000/notes/${videoId}`,
+     {
+      headers: new HttpHeaders({
+        Authorization: `JWT ${this.token}`,
+        'Content-Type': 'application/json',
+      }),
+    }
+      
+    );
+  }
+
+  updateNote(noteId,updatedNote){
+    this.handleRequestSent();
+    return this.http.put(
+     `http://localhost:5000/notes/${noteId}`,updatedNote,
      {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,

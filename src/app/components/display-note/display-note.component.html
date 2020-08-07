@@ -1,0 +1,35 @@
+<div *ngIf='!isInEditMode' class="display-note"  #allNotes>
+    <p (click)='editNote()'>edit note </p>
+    <div class="display-note__timeStamp">
+        {{ videoTime}}
+    </div>
+    <div class="display-note__title" >
+       {{ noteTitle }}
+    </div>
+    <div class="display-note__text">
+        <p>{{ currentNote }} </p>
+    </div>
+</div>
+
+<div *ngIf='isInEditMode' class="note-center">
+
+<div   class="create-note-area">
+    <p (click)='leaveEditMode()'> leave edit note </p>
+    <div class="create-note-area__currentTime-bubble">
+     {{videoTime}}
+    </div>
+    <input [(ngModel)]="noteTitle" placeholder="Title" class='create-note-area__note-title'/>
+    <textarea
+    placeholder="Note text"
+      [(ngModel)]="currentNote"
+      type="text"
+      class="create-note-area__note-textbox"
+    ></textarea>
+    <div class="create-note-area__buttons">
+      <app-form-button (click)="saveNote()" [buttonText]="'Save'">
+      </app-form-button>
+      <app-form-button (click)="cancelNote()" [buttonText]="'Cancel'">
+      </app-form-button>
+    </div>
+  </div> 
+</div>

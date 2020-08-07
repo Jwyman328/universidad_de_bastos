@@ -24,6 +24,8 @@ import { AllVideosComponent } from './pages/all-videos/all-videos.component';
 import { VideoCardComponent } from './components/video-card/video-card.component';
 import { SelectBoxComponent } from './components/select-box/select-box.component';
 import { SmallHeaderComponent } from './components/small-header/small-header.component';
+import { DisplayNoteComponent } from './components/display-note/display-note.component';
+import { EditNoteComponent } from './components/edit-note/edit-note.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,9 @@ import { SmallHeaderComponent } from './components/small-header/small-header.com
     AllVideosComponent,
     VideoCardComponent,
     SelectBoxComponent,
-    SmallHeaderComponent
+    SmallHeaderComponent,
+    DisplayNoteComponent,
+    EditNoteComponent,
     //AuthCardComponent,
     //SignupFormComponent2
     //FormButtonComponent,
