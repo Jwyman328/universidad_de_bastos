@@ -1,6 +1,7 @@
 .video-header {
+    position: relative;
     width: 100vw;
-    height: 10vh;
+    height: 15vh;
     background-color: rgba(255, 255, 0, 0.516);
     color: black;
     margin-top: 0px;
@@ -10,4 +11,54 @@
         margin-top: 0px;
         text-align: center;
     }
+}
+
+.video-title {
+    position: absolute;
+    top: 3%;
+    left: 43%;
+    transform: translateX(-30%);
+    font-size: 30px;
+    text-align: center;
+    width: 45%;
+    max-height: 30%;
+    text-overflow: ellipsis;
+}
+
+
+.xoanDeLugoLogo {
+    background-image: url('../../styles/logos/xoanDeLugoSmall.png');
+    width: 110px;
+    height: 100px;
+    background-repeat: no-repeat;
+    z-index: 100;
+}
+
+.header__title {
+    font-family: cursive;
+    font-size: 25px;
+    padding: 10px;
+    width: 300px;
+    padding-top: 30px;
+    position: relative;
+    left: 10px;
+    bottom: 5px;
+    line-height: 30px;
+    text-indent:-1.0em;
+
+}
+
+.university-title {
+    position: relative;
+    display: inline-block;
+    // left:0px;
+    // top:0px;
+    width: 300px;
+    height: 15vh;
+    //background-color: rgba(255, 217, 0, 0.749); // rgba(255, 255, 0, 0.618)
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 20px;
+    margin-right: 200px;
 }
