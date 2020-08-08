@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuthDataService } from 'src/app/services/http-requests/userData/user-auth-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { UserAuthDataService } from 'src/app/services/http-requests/userData/use
 })
 export class HeaderComponent implements OnInit {
   isShowOptions = false
-  constructor(    private userAuthDataService: UserAuthDataService,) { }
+  constructor(    private userAuthDataService: UserAuthDataService, private route: Router) { }
   user:string
   ngOnInit(): void {
     this.user = this.userAuthDataService.getUserName()
@@ -24,6 +25,10 @@ export class HeaderComponent implements OnInit {
   }
   logOut(){
     this.userAuthDataService.logOutUser()
+  }
+
+  goToHomePage(){
+    this.route.navigate(['/'])
   }
 
 }

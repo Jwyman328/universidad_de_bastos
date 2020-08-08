@@ -23,6 +23,7 @@
     width: 45%;
     max-height: 30%;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 
 
@@ -32,6 +33,7 @@
     height: 100px;
     background-repeat: no-repeat;
     z-index: 100;
+    cursor: pointer;
 }
 
 .header__title {
