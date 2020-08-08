@@ -33,7 +33,7 @@ export class VideoCenterComponent implements OnInit {
   public notes = [];
   public currentNote: string = '';
   public noteTitle: string;
-  public isNoteCenterOpen: boolean = false;
+  public isNoteCenterOpen: boolean = true;
   public videoTitle:string;
 
   subscription: any = null;
