@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserAuthDataService } from './services/http-requests/userData/user-auth-data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,8 @@ import { UserAuthDataService } from './services/http-requests/userData/user-auth
 export class AppComponent {
   title = 'bastosFrontend';
   constructor(
-    private userAuthDataService: UserAuthDataService,
   ) {}
   
-  logOut(){
-    this.userAuthDataService.logOutUser()
-  }
+
 }
 

@@ -3,7 +3,7 @@
     left:0px;
     top:0px;
     width: 100vw;
-    height: 15vh;
+    height: 12vh;
     background-color: rgba(255, 217, 0, 0.749); // rgba(255, 255, 0, 0.618)
     display: flex;
     align-items: center;
@@ -21,4 +21,32 @@
     font-family: cursive;
     font-size: 45px;
     padding: 20px;
+}
+
+.header-options {
+    position: relative;
+}
+
+.options-drop-down{
+    position: absolute;
+    top: 100%;
+    right: 20%;
+    height: 200px;
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.899);
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    z-index: 50000000;
+    color: black;
+
+    &__item {
+        position: relative;
+        width: 100%;
+        padding-left: 20px;
+        margin-top: 10px;
+        cursor: pointer;
+
+        
+    }
 }
