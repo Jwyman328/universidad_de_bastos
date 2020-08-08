@@ -4,57 +4,56 @@ import { RequestSentStatus } from './RequestSentStatusHandler/RequestSentStatusH
 import { UserAuthDataService } from './userData/user-auth-data.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class NotesService extends RequestSentStatus  {
-  token:string;
-  constructor(  private http: HttpClient, private userAuthDataService:UserAuthDataService ) { 
-    super()
-    this.token = this.userAuthDataService.getToken()
+export class NotesService extends RequestSentStatus {
+  token: string;
+  constructor(
+    private http: HttpClient,
+    private userAuthDataService: UserAuthDataService
+  ) {
+    super();
+    this.token = this.userAuthDataService.getToken();
   }
 
   createNote(videoId, videoTimeNoteTakenInSeconds, noteTitle, noteText) {
-    console.log('vtnt', videoTimeNoteTakenInSeconds)
+    console.log('vtnt', videoTimeNoteTakenInSeconds);
     this.handleRequestSent();
     return this.http.post(
-     'https://universidad-de-bastos.herokuapp.com/notes/',
-     {"videoTimeNoteTakenInSeconds":Number(videoTimeNoteTakenInSeconds) , "videoId": videoId, "noteTitle": noteTitle, "noteText":noteText},
-     {
-      headers: new HttpHeaders({
-        Authorization: `JWT ${this.token}`,
-        'Content-Type': 'application/json',
-      }),
-    }
-      
+      'http://localhost:5000/notes/',
+      {
+        videoTimeNoteTakenInSeconds: Number(videoTimeNoteTakenInSeconds),
+        videoId: videoId,
+        noteTitle: noteTitle,
+        noteText: noteText,
+      },
+      {
+        headers: new HttpHeaders({
+          Authorization: `JWT ${this.token}`,
+          'Content-Type': 'application/json',
+        }),
+      }
     );
   }
 
-  getAllNotesForVideo(videoId){
+  getAllNotesForVideo(videoId) {
     this.handleRequestSent();
-    return this.http.get(
-     `https://universidad-de-bastos.herokuapp.com/notes/${videoId}`,
-     {
+    return this.http.get(`http://localhost:5000/notes/${videoId}`, {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',
       }),
-    }
-      
-    );
+    });
   }
 
-  updateNote(noteId,updatedNote){
+  updateNote(noteId, updatedNote) {
     this.handleRequestSent();
-    return this.http.put(
-     `https://universidad-de-bastos.herokuapp.com/notes/${noteId}`,updatedNote,
-     {
+    return this.http.put(`http://localhost:5000/notes/${noteId}`, updatedNote, {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',
       }),
-    }
-      
-    );
+    });
   }
 }
 //https://universidad-de-bastos.herokuapp.com/notes/

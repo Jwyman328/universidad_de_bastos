@@ -1,6 +1,5 @@
 <div *ngIf='!isInEditMode' class="display-note"  #allNotes>
-    <p (click)='editNote()'>edit note </p>
-    <div class="display-note__timeStamp">
+        <div class="display-note__timeStamp">
         {{ videoTime}}
     </div>
     <div class="display-note__title" >
@@ -9,6 +8,11 @@
     <div class="display-note__text">
         <p>{{ currentNote }} </p>
     </div>
+    <div class='display-note__buttons'>
+        <img class='display-note__button'  (click)='editNote()' src="https://img.icons8.com/android/24/000000/edit.png"/>
+        <img class='display-note__button' src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"/>
+    </div>
+
 </div>
 
 <div *ngIf='isInEditMode' class="note-center">

@@ -8,7 +8,7 @@
     color:black;
     display: grid;
     grid-template-rows: .3fr 1fr ;
-    grid-template-columns: .1fr 1fr ;
+    grid-template-columns: .1fr 1fr .2fr ;
 
     border-color: rgba(255, 255, 255, 0.838);
     border-width: 2px;
@@ -20,6 +20,8 @@
         font-size: x-large;
         color: gold;
         word-wrap: break-word;
+        position: relative;
+        padding-left: 10px;
 
 
         border-bottom-color: white;
@@ -49,6 +51,26 @@
 
         
 
+    }
+
+    &__buttons{
+        // position: relative;
+        // top: 3%;
+        // left: 98%;
+        grid-row: 1/2;
+        grid-column: 3/4;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    &__button {
+        transition: all .3s;
+        z-index: 10000;
+
+        &:hover {
+            transform: scale(1.3);
+        }
     }
     
 }
