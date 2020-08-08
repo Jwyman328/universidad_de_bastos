@@ -177,6 +177,9 @@
         color: black;
         border-radius: 50px;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     &__note-title {
         grid-row: 1/2;

@@ -1,30 +1,39 @@
-<div *ngIf='!isInEditMode' class="display-note"  #allNotes>
-        <div class="display-note__timeStamp">
-        {{ videoTime}}
-    </div>
-    <div class="display-note__title" >
-       {{ noteTitle }}
-    </div>
-    <div class="display-note__text">
-        <p>{{ currentNote }} </p>
-    </div>
-    <div class='display-note__buttons'>
-        <img class='display-note__button'  (click)='editNote()' src="https://img.icons8.com/android/24/000000/edit.png"/>
-        <img class='display-note__button' src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"/>
-    </div>
-
+<div *ngIf="!isInEditMode" class="display-note" #allNotes>
+  <div class="display-note__timeStamp">
+    <span class="video-time"> {{ videoTime }}</span>
+  </div>
+  <div class="display-note__title">
+    {{ noteTitle }}
+  </div>
+  <div class="display-note__text">
+    <p>{{ currentNote }}</p>
+  </div>
+  <div class="display-note__buttons">
+    <img
+      class="display-note__button"
+      (click)="editNote()"
+      src="https://img.icons8.com/android/24/000000/edit.png"
+    />
+    <img
+      class="display-note__button"
+      src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"
+    />
+  </div>
 </div>
 
-<div *ngIf='isInEditMode' class="note-center">
-
-<div   class="create-note-area">
-    <p (click)='leaveEditMode()'> leave edit note </p>
+<div *ngIf="isInEditMode" class="note-center">
+  <div class="create-note-area">
+    <p (click)="leaveEditMode()">leave edit note</p>
     <div class="create-note-area__currentTime-bubble">
-     {{videoTime}}
+      {{ videoTime }}
     </div>
-    <input [(ngModel)]="noteTitle" placeholder="Title" class='create-note-area__note-title'/>
+    <input
+      [(ngModel)]="noteTitle"
+      placeholder="Title"
+      class="create-note-area__note-title"
+    />
     <textarea
-    placeholder="Note text"
+      placeholder="Note text"
       [(ngModel)]="currentNote"
       type="text"
       class="create-note-area__note-textbox"
@@ -35,5 +44,5 @@
       <app-form-button (click)="cancelNote()" [buttonText]="'Cancel'">
       </app-form-button>
     </div>
-  </div> 
+  </div>
 </div>
