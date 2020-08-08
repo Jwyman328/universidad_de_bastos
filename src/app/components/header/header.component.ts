@@ -9,8 +9,9 @@ import { UserAuthDataService } from 'src/app/services/http-requests/userData/use
 export class HeaderComponent implements OnInit {
   isShowOptions = false
   constructor(    private userAuthDataService: UserAuthDataService,) { }
-
+  user:string
   ngOnInit(): void {
+    this.user = this.userAuthDataService.getUserName()
   }
 
   showOptions(){

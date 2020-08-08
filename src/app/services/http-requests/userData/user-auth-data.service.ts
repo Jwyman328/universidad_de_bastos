@@ -15,8 +15,14 @@ export class UserAuthDataService {
     return localStorage.getItem('token')
   }
 
+  getUserName(){
+    return localStorage.getItem('username')
+  }
+
   setUsername = (username:string) => {
     this.username = username;
+    localStorage.setItem('username',username)
+
   }
 
   setToken = (token:string) => {
