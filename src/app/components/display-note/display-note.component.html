@@ -1,3 +1,5 @@
+<ng-container *ngIf='!isNoteDeleted'>
+
 <div *ngIf="!isInEditMode" class="display-note" #allNotes>
   <div class="display-note__timeStamp">
     <span class="video-time"> {{ videoTime }}</span>
@@ -15,6 +17,7 @@
       src="https://img.icons8.com/android/24/000000/edit.png"
     />
     <img
+      (click)='openDeleteNote()'
       class="display-note__button"
       src="https://img.icons8.com/ios-glyphs/30/000000/delete-forever.png"
     />
@@ -46,3 +49,22 @@
     </div>
   </div>
 </div>
+
+<div *ngIf='showDeleteNoteModal' class='delete-note-modal-container'>
+   <div class='delete-note-card'>
+        <h2 class='delete-note-card__header'>Please Confirm</h2>
+        <div class='seperator'></div>
+        <p class='delete-note-card__text'>Are you sure you want to delete your note "{{noteTitle}}"?</p>
+        <div class='delete-note-card__buttons'>
+            <div (click)='cancelDeleteNote()' class='delete-note-card__button delete-note-card__button-cancel'>
+                Cancel
+            </div>
+            <div (click)='deleteNote()' class=' delete-note-card__button delete-note-card__button-ok'>
+                OK
+            </div>
+        </div>
+   </div>
+</div>
+
+</ng-container>
+

@@ -7,7 +7,9 @@ import { NotesService } from 'src/app/services/http-requests/notes.service';
   styleUrls: ['./display-note.component.scss'],
 })
 export class DisplayNoteComponent implements OnInit {
+  isNoteDeleted = false;
   isInEditMode = false;
+  showDeleteNoteModal = false;
   @Input('note') note;
   noteTitle = '';
   currentNote = '';
@@ -26,6 +28,20 @@ export class DisplayNoteComponent implements OnInit {
 
   editNote() {
     this.isInEditMode = true;
+  }
+
+  deleteNote(){
+    this.notesService.deleteNote(this.note._id).subscribe(res => {
+      this.isNoteDeleted = true
+    })
+    this.showDeleteNoteModal = false
+  }
+  cancelDeleteNote(){
+    this.showDeleteNoteModal = false
+  }
+
+  openDeleteNote(){
+    this.showDeleteNoteModal = true
   }
 
   leaveEditMode() {
@@ -47,6 +63,5 @@ export class DisplayNoteComponent implements OnInit {
     this.currentNote = this.note.noteText;
     this.videoTime = this.note.timeNoteCreated;
     this.leaveEditMode()
-
   }
 }

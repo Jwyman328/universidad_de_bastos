@@ -209,10 +209,6 @@ export class VideoCenterComponent implements OnInit {
     // then place a marker on this spot with ngstyle?
     const currentTimeOfNote = this.player.getCurrentTime();
     const timeSp = currentTimeOfNote * this.pixelPerSecond + 'px';
-    console.log(
-      'what is this should display nice',
-      this.displayMinuteBasedTime(currentTimeOfNote)
-    );
     this.notes.push({
       timeSpot: timeSp,
       timeOfNote: currentTimeOfNote,
@@ -235,11 +231,13 @@ export class VideoCenterComponent implements OnInit {
   }
 
   getAllNotes(){
+    console.log('get all notes')
     this.notesService.getAllNotesForVideo(this.video).subscribe((res:any) => {
       const allCurrentNotes = res
+      const newNotes = []
       allCurrentNotes.map(note => {
         const timeSp = note.videoTimeNoteTakenInSeconds * this.pixelPerSecond + 'px';
-        this.notes.push({
+        newNotes.push({
           _id: note._id ,
           timeSpot: timeSp,
           timeOfNote: note.videoTimeNoteTakenInSeconds,
@@ -248,6 +246,7 @@ export class VideoCenterComponent implements OnInit {
           timeNoteCreated: this.displayMinuteBasedTime(note.videoTimeNoteTakenInSeconds),
         });
       })
+      this.notes = newNotes
       this.orderNotesBasedOffOfTime();
       
     })

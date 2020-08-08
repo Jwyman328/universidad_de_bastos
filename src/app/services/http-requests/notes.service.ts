@@ -55,6 +55,16 @@ export class NotesService extends RequestSentStatus {
       }),
     });
   }
+
+  deleteNote(noteId) {
+    this.handleRequestSent();
+    return this.http.delete(`http://localhost:5000/notes/${noteId}`, {
+      headers: new HttpHeaders({
+        Authorization: `JWT ${this.token}`,
+        'Content-Type': 'application/json',
+      }),
+    });
+  }
 }
 //https://universidad-de-bastos.herokuapp.com/notes/
 //'http://localhost:5000/notes/'
