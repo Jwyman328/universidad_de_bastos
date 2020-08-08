@@ -7,7 +7,7 @@
         <div class='header-options' (mouseenter)='showOptions()'   >
             <img width="40px" src="https://img.icons8.com/material/24/000000/admin-settings-male.png"/>
             <div (mouseenter)='showOptions()' (mouseleave)='hideOptions()' class='options-drop-down' *ngIf='isShowOptions'>
-                <div class='options-drop-down__main-item'>{{user}}</div>
+                <div class='options-drop-down__main-item'><p>{{user}}</p></div>
                 <div (click)='logOut()' class='options-drop-down__item'>Log out</div>
             </div>
         </div>
