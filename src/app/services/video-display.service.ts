@@ -31,6 +31,13 @@ export class VideoDisplayService {
   constructor(    private ngZone: NgZone
     ) { }
 
+    test(player){
+      this.player = player
+      console.log('hello', player)
+      this.player.playVideo()
+      console.log(this.player.getDuration(), 'gd')
+    }
+
   // startVideo() {
   //   console.log('video display service', this.video.value)
   //   this.reframed = false;
@@ -60,16 +67,21 @@ export class VideoDisplayService {
   onPlayerReady(event) {
     this.myplayer = event.target;
     this.totalDuration = this.player.getDuration();
-    //this.calculateSpot();
+    this.calculateSpot();
     if (this.isRestricted) {
       event.target.mute();
       //do not want to play automatically
-      // this.onPlayVideo()
+      this.onPlayVideo()
     } else {
       this.player.mute();
       //do not want to play automatically
-      //this.onPlayVideo()
+      this.onPlayVideo()
     }
+  }
+
+  calculateSpot() {
+    const pixelPerSecond = 840 / this.totalDuration;
+    this.pixelPerSecond = pixelPerSecond;
   }
 
   onPlayerStateChange(event) {

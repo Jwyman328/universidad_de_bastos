@@ -42,16 +42,19 @@ export class VideoCenterComponent implements OnInit {
     private ngZone: NgZone,
     private activatedRouter: ActivatedRoute,
     private notesService: NotesService,
-    public videoDisplayService:VideoDisplayService,
+    public videoDisplayService: VideoDisplayService
   ) {
-    this.videoDisplayService.setVideo(this.activatedRouter.snapshot.paramMap.get('videoUrl')) 
-    this.videoDisplayService.setVideoTitle(this.activatedRouter.snapshot.paramMap.get('videoTitle'))
-
+    this.videoDisplayService.setVideo(
+      this.activatedRouter.snapshot.paramMap.get('videoUrl')
+    );
+    this.videoDisplayService.setVideoTitle(
+      this.activatedRouter.snapshot.paramMap.get('videoTitle')
+    );
   }
 
   /* 2. Initialize method for YT IFrame API */
   init() {
-    this.getAllNotes()
+    this.getAllNotes();
     // Return if Player is already created
     if (window['YT']) {
       this.startVideo();
@@ -64,7 +67,9 @@ export class VideoCenterComponent implements OnInit {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     /* 3. startVideo() will create an <iframe> (and YouTube player) after the API code downloads. */
-    window['onYouTubeIframeAPIReady'] = () => this.startVideo();
+    window['onYouTubeIframeAPIReady'] = () => {
+      this.startVideo();
+    };
   }
 
   ngOnInit() {
@@ -93,9 +98,14 @@ export class VideoCenterComponent implements OnInit {
       },
       events: {
         onStateChange: (event) =>
-          this.ngZone.run(() => this.videoDisplayService.onPlayerStateChange(event)),
-        onError: (event) => this.ngZone.run(() => this.videoDisplayService.onPlayerError(event)),
-        onReady: (event) => this.ngZone.run(() => this.videoDisplayService.onPlayerReady(event)),
+          this.ngZone.run(() =>
+            this.videoDisplayService.onPlayerStateChange(event)
+          ),
+        onError: (event) =>
+          this.ngZone.run(() => this.videoDisplayService.onPlayerError(event)),
+        onReady: (event) =>
+          this.ngZone.run(() => { this.videoDisplayService.test(this.player);
+            this.videoDisplayService.onPlayerReady(event)}),//this.videoDisplayService.player = this.player;  this.videoDisplayService.totalDuration = this.player.getDuration()
       },
     });
   }
@@ -103,7 +113,6 @@ export class VideoCenterComponent implements OnInit {
   cleanTime(): number {
     return Math.round(this.myplayer.getCurrentTime());
   }
-
 
   calculateSpot() {
     const pixelPerSecond = 840 / this.videoDisplayService.totalDuration;
@@ -113,8 +122,9 @@ export class VideoCenterComponent implements OnInit {
   createNote() {
     // get the pixel placement of where the note is taken
     // then place a marker on this spot with ngstyle?
-    const currentTimeOfNote = this.player.getCurrentTime();
+    const currentTimeOfNote = this.videoDisplayService.player.getCurrentTime();
     const timeSp = currentTimeOfNote * this.pixelPerSecond + 'px';
+    console.log('on create the note what we got?', timeSp, currentTimeOfNote)
     this.notes.push({
       timeSpot: timeSp,
       timeOfNote: currentTimeOfNote,
@@ -122,39 +132,57 @@ export class VideoCenterComponent implements OnInit {
       noteTitle: this.noteTitle,
       timeNoteCreated: this.displayMinuteBasedTime(currentTimeOfNote),
     });
-    this.createNoteInBackend(currentTimeOfNote,this.noteTitle, this.currentNote);
+    this.createNoteInBackend(
+      currentTimeOfNote,
+      this.noteTitle,
+      this.currentNote
+    );
     this.clearNotePad();
     this.orderNotesBasedOffOfTime();
   }
 
-  createNoteInBackend(noteTimeSpotInSeconds,noteTitle, noteText ) {
+  createNoteInBackend(noteTimeSpotInSeconds, noteTitle, noteText) {
     //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
     // t0 http://localhost:5000/notes/
-    this.notesService.createNote( this.videoDisplayService.video.value, noteTimeSpotInSeconds, noteTitle, noteText).subscribe((res) => {
-      console.log('res', res);
-    });
-    this.getAllNotes()
+    this.notesService
+      .createNote(
+        this.videoDisplayService.video.value,
+        noteTimeSpotInSeconds,
+        noteTitle,
+        noteText
+      )
+      .subscribe((res) => {
+        console.log('res', res);
+      });
+    this.getAllNotes();
   }
 
-  getAllNotes(){
-    console.log('get all notes')
-    this.notesService.getAllNotesForVideo(this.videoDisplayService.video.value).subscribe((res:any) => {
-      const allCurrentNotes = res
-      const newNotes = []
-      allCurrentNotes.map(note => {
-        const timeSp = note.videoTimeNoteTakenInSeconds * this.pixelPerSecond + 'px';
-        newNotes.push({
-          _id: note._id ,
-          timeSpot: timeSp,
-          timeOfNote: note.videoTimeNoteTakenInSeconds,
-          noteText: note.noteText,
-          noteTitle: note.noteTitle,
-          timeNoteCreated: this.displayMinuteBasedTime(note.videoTimeNoteTakenInSeconds),
+  getAllNotes() {
+    console.log('get all notes');
+    this.notesService
+      .getAllNotesForVideo(this.videoDisplayService.video.value)
+      .subscribe((res: any) => {
+        const allCurrentNotes = res;
+        const newNotes = [];
+        allCurrentNotes.map((note) => {
+          const timeSp =
+            (note.videoTimeNoteTakenInSeconds) * this.pixelPerSecond + 'px';
+            console.log('the note in the note ', timeSp)
+
+          newNotes.push({
+            _id: note._id,
+            timeSpot: timeSp,
+            timeOfNote: note.videoTimeNoteTakenInSeconds,
+            noteText: note.noteText,
+            noteTitle: note.noteTitle,
+            timeNoteCreated: this.displayMinuteBasedTime(
+              note.videoTimeNoteTakenInSeconds
+            ),
+          });
         });
-      })
-      this.notes = newNotes
-      this.orderNotesBasedOffOfTime();
-    })
+        this.notes = newNotes;
+        this.orderNotesBasedOffOfTime();
+      });
   }
 
   discardNote() {
@@ -188,7 +216,7 @@ export class VideoCenterComponent implements OnInit {
 
   gotoNoteTimeSpot(event, note) {
     event.stopPropagation();
-    this.player.seekTo(note.timeOfNote);
+    this.videoDisplayService.player.seekTo(note.timeOfNote);
   }
 
   orderNotesBasedOffOfTime() {
@@ -202,5 +230,4 @@ export class VideoCenterComponent implements OnInit {
     const thisEle = arr[indexOfelement];
     thisEle.nativeElement.scrollIntoView({ behavior: 'smooth' });
   }
-
 }
