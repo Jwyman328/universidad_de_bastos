@@ -25,18 +25,11 @@ export class VideoCenterComponent implements OnInit {
   public player: any;
   public reframed: Boolean = false;
   public myplayer: any;
-  public pixelPerSecond = 105;
   public notes = [];
   public currentNote: string = '';
   public noteTitle: string;
   public isNoteCenterOpen: boolean = true;
-
-  subscription: any = null;
-  source: any = interval(1000);
-  intervalId: any;
-  //public videoProg: any = 0;
-
-  isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  public areNotesReadyToBeDisplayed : boolean = false
 
   constructor(
     private ngZone: NgZone,
@@ -104,26 +97,22 @@ export class VideoCenterComponent implements OnInit {
         onError: (event) =>
           this.ngZone.run(() => this.videoDisplayService.onPlayerError(event)),
         onReady: (event) =>
-          this.ngZone.run(() => { this.videoDisplayService.test(this.player);
-            this.videoDisplayService.onPlayerReady(event)}),//this.videoDisplayService.player = this.player;  this.videoDisplayService.totalDuration = this.player.getDuration()
+          this.ngZone.run(() => { this.videoDisplayService.setVideoPlayer(this.player);
+            this.videoDisplayService.onPlayerReady(event); this.setNotesReadyToBeDisplayed()}),//this.videoDisplayService.player = this.player;  this.videoDisplayService.totalDuration = this.player.getDuration()
       },
     });
   }
 
-  cleanTime(): number {
-    return Math.round(this.myplayer.getCurrentTime());
-  }
-
-  calculateSpot() {
-    const pixelPerSecond = 840 / this.videoDisplayService.totalDuration;
-    this.pixelPerSecond = pixelPerSecond;
+  setNotesReadyToBeDisplayed(){
+    this.areNotesReadyToBeDisplayed = true
+    this.getAllNotes()
   }
 
   createNote() {
     // get the pixel placement of where the note is taken
     // then place a marker on this spot with ngstyle?
     const currentTimeOfNote = this.videoDisplayService.player.getCurrentTime();
-    const timeSp = currentTimeOfNote * this.pixelPerSecond + 'px';
+    const timeSp = currentTimeOfNote * this.videoDisplayService.pixelPerSecond + 'px';
     console.log('on create the note what we got?', timeSp, currentTimeOfNote)
     this.notes.push({
       timeSpot: timeSp,
@@ -166,7 +155,7 @@ export class VideoCenterComponent implements OnInit {
         const newNotes = [];
         allCurrentNotes.map((note) => {
           const timeSp =
-            (note.videoTimeNoteTakenInSeconds) * this.pixelPerSecond + 'px';
+            (note.videoTimeNoteTakenInSeconds) * this.videoDisplayService.pixelPerSecond + 'px';
             console.log('the note in the note ', timeSp)
 
           newNotes.push({
@@ -194,6 +183,7 @@ export class VideoCenterComponent implements OnInit {
     this.currentNote = '';
     this.noteTitle = '';
   }
+
   toggleNoteCenter() {
     this.isNoteCenterOpen = !this.isNoteCenterOpen;
   }

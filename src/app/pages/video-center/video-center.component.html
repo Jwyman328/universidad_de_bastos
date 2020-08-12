@@ -6,6 +6,9 @@
         <div class="video-player__time-line">
 
         </div>
+        <ng-container *ngIf='areNotesReadyToBeDisplayed'>
+
+       
       <div
         class="time-bar-note"
         *ngFor="let note of notes; let indexOfelement=index;"
@@ -18,6 +21,7 @@
 
         </div>
       </div>
+    </ng-container>
     </div>
   </div>
 

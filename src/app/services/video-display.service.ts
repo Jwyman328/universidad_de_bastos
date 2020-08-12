@@ -31,55 +31,26 @@ export class VideoDisplayService {
   constructor(    private ngZone: NgZone
     ) { }
 
-    test(player){
+    setVideoPlayer(player){
       this.player = player
-      console.log('hello', player)
-      this.player.playVideo()
-      console.log(this.player.getDuration(), 'gd')
     }
-
-  // startVideo() {
-  //   console.log('video display service', this.video.value)
-  //   this.reframed = false;
-  //   this.player = new window['YT'].Player('player', {
-  //     height: '390',
-  //     width: '840',
-  //     videoId: this.video,
-  //     playerVars: {
-  //       autoplay: 0,
-  //       modestbranding: 1,
-  //       controls: 1,
-  //       disablekb: 0,
-  //       rel: 0,
-  //       showinfo: 0,
-  //       fs: 0,
-  //       playsinline: 1,
-  //     },
-  //     events: {
-  //       onStateChange: (event) =>
-  //         this.ngZone.run(() => this.onPlayerStateChange(event)),
-  //       onError: (event) => this.ngZone.run(() => this.onPlayerError(event)),
-  //       onReady: (event) => this.ngZone.run(() => this.onPlayerReady(event)),
-  //     },
-  //   });
-  // }
 
   onPlayerReady(event) {
     this.myplayer = event.target;
     this.totalDuration = this.player.getDuration();
-    this.calculateSpot();
+    this.calculatePixelPerSecond();
     if (this.isRestricted) {
       event.target.mute();
       //do not want to play automatically
-      this.onPlayVideo()
+      //this.onPlayVideo()
     } else {
       this.player.mute();
       //do not want to play automatically
-      this.onPlayVideo()
+      //this.onPlayVideo()
     }
   }
 
-  calculateSpot() {
+  calculatePixelPerSecond() {
     const pixelPerSecond = 840 / this.totalDuration;
     this.pixelPerSecond = pixelPerSecond;
   }
