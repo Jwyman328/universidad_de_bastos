@@ -1,5 +1,5 @@
 <div class="video-center-page-container">
-  <app-video-header [videoTitle]='videoTitle'></app-video-header>
+  <app-video-header [videoTitle]='videoDisplayService.videoTitle.value'></app-video-header>
   <div class="video-player">
     <div class="embed-responsive" id="player"></div>
     <div class="video-player__time-bar">
@@ -29,7 +29,7 @@
 
    <div class="create-note-area">
       <div class="create-note-area__currentTime-bubble">
-        {{ displayMinuteBasedTime(videoProg) }}
+        {{ displayMinuteBasedTime(videoDisplayService.videoProg.value) }}
       </div>
       <input [(ngModel)]="noteTitle" placeholder="Title" class='create-note-area__note-title'/>
       <textarea

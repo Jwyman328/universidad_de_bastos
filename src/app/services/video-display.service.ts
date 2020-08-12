@@ -1,9 +1,159 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
+import { interval, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VideoDisplayService {
 
-  constructor() { }
+  public YT: any;
+  public video = new BehaviorSubject('');
+  public player: any;
+  public reframed: Boolean = false;
+  public myplayer: any;
+  public pausedAt: number = 0;
+  public isPaused: boolean = false;
+  public totalDuration: number;
+  public pixelPerSecond = 105;
+  public notes = [];
+  public currentNote: string = '';
+  public noteTitle :any;
+  public isNoteCenterOpen: boolean = true;
+  public videoTitle = new BehaviorSubject('');;
+
+  subscription: any = null;
+  source: any = interval(1000);
+  intervalId: any;
+  public videoProg: any = new BehaviorSubject(0);
+
+  isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  constructor(    private ngZone: NgZone
+    ) { }
+
+  // startVideo() {
+  //   console.log('video display service', this.video.value)
+  //   this.reframed = false;
+  //   this.player = new window['YT'].Player('player', {
+  //     height: '390',
+  //     width: '840',
+  //     videoId: this.video,
+  //     playerVars: {
+  //       autoplay: 0,
+  //       modestbranding: 1,
+  //       controls: 1,
+  //       disablekb: 0,
+  //       rel: 0,
+  //       showinfo: 0,
+  //       fs: 0,
+  //       playsinline: 1,
+  //     },
+  //     events: {
+  //       onStateChange: (event) =>
+  //         this.ngZone.run(() => this.onPlayerStateChange(event)),
+  //       onError: (event) => this.ngZone.run(() => this.onPlayerError(event)),
+  //       onReady: (event) => this.ngZone.run(() => this.onPlayerReady(event)),
+  //     },
+  //   });
+  // }
+
+  onPlayerReady(event) {
+    this.myplayer = event.target;
+    this.totalDuration = this.player.getDuration();
+    //this.calculateSpot();
+    if (this.isRestricted) {
+      event.target.mute();
+      //do not want to play automatically
+      // this.onPlayVideo()
+    } else {
+      this.player.mute();
+      //do not want to play automatically
+      //this.onPlayVideo()
+    }
+  }
+
+  onPlayerStateChange(event) {
+    switch (event.data) {
+      case window['YT'].PlayerState.PLAYING:
+        if (this.cleanTime() == 0) {
+        } else {
+        }
+        this.onCheckProgress();
+        break;
+      case window['YT'].PlayerState.PAUSED:
+        this.onPlayerPaused();
+        break;
+      case window['YT'].PlayerState.ENDED:
+        break;
+    }
+  }
+
+  onPlayerPaused() {
+    if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
+      this.pausedAt = this.player.getCurrentTime();
+      this.cleanupSubs();
+    }
+  }
+
+  onPause() {
+    this.player.pauseVideo();
+  }
+  onPlay() {
+    this.player.seekTo(this.pausedAt, true);
+    this.onPlayVideo();
+  }
+
+  cleanTime(): number {
+    return Math.round(this.myplayer.getCurrentTime());
+  }
+
+  onPlayerError(event) {
+    switch (event.data) {
+      case 2:
+        break;
+      case 100:
+        break;
+      case 101 || 150:
+        break;
+    }
+  }
+
+  onPlayVideo() {
+    this.player.playVideo();
+    this.pausedAt = 0;
+  }
+
+  onMute() {
+    this.player.mute();
+  }
+
+  onUnmute() {
+    this.player.unMute();
+  }
+
+  cleanupSubs() {
+    if (this.subscription != null) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    } else {
+    }
+  }
+
+  onCheckProgress() {
+    if (this.subscription != null) {
+      this.cleanupSubs();
+    }
+    this.subscription = this.source.subscribe((val) => {
+      this.videoProg.next(this.cleanTime() );
+    });
+    //
+  }
+
+  setVideo(video:string){
+    this.video.next(video)
+  }
+
+  setVideoTitle(videoTitle){
+    this.videoTitle.next(videoTitle)
+  }
 }
