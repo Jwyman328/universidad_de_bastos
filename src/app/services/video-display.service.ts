@@ -20,7 +20,7 @@ export class VideoDisplayService {
   public noteTitle :any;
   public isNoteCenterOpen: boolean = true;
   public videoTitle = new BehaviorSubject('');;
-
+  
   subscription: any = null;
   source: any = interval(1000);
   intervalId: any;
@@ -35,6 +35,36 @@ export class VideoDisplayService {
       this.player = player
     }
 
+  async  startVideo() {
+      this.reframed = false;
+      this.player = new window['YT'].Player('player', {
+        height: '390',
+        width: '840',
+        videoId: this.video.value,
+        playerVars: {
+          autoplay: 0,
+          modestbranding: 1,
+          controls: 1,
+          disablekb: 0,
+          rel: 0,
+          showinfo: 0,
+          fs: 0,
+          playsinline: 1,
+        },
+        events: {
+          onStateChange: (event) =>
+            this.ngZone.run(() =>
+              this.onPlayerStateChange(event)
+            ),
+          onError: (event) =>
+            this.ngZone.run(() => this.onPlayerError(event)),
+          onReady: (event) =>
+            this.ngZone.run(() => { 
+              this.onPlayerReady(event);}),// this.setVideoPlayer(this.player); this.videoDisplayService.player = this.player;  this.videoDisplayService.totalDuration = this.player.getDuration()
+        },
+      });
+    }
+    isReady = false
   onPlayerReady(event) {
     this.myplayer = event.target;
     this.totalDuration = this.player.getDuration();
@@ -48,6 +78,7 @@ export class VideoDisplayService {
       //do not want to play automatically
       //this.onPlayVideo()
     }
+    this.isReady = true
   }
 
   calculatePixelPerSecond() {

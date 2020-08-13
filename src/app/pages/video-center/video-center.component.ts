@@ -11,6 +11,7 @@ import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NotesService } from 'src/app/services/http-requests/notes.service';
 import { VideoDisplayService } from 'src/app/services/video-display.service';
+import { DisplayNoteComponent } from '../../components/display-note/display-note.component';
 
 @Component({
   selector: 'app-video-center',
@@ -24,7 +25,6 @@ export class VideoCenterComponent implements OnInit {
   public YT: any;
   public player: any;
   public reframed: Boolean = false;
-  public myplayer: any;
   public notes = [];
   public currentNote: string = '';
   public noteTitle: string;
@@ -50,7 +50,8 @@ export class VideoCenterComponent implements OnInit {
     this.getAllNotes();
     // Return if Player is already created
     if (window['YT']) {
-      this.startVideo();
+      this.videoDisplayService.startVideo();
+
       return;
     }
 
@@ -61,51 +62,57 @@ export class VideoCenterComponent implements OnInit {
 
     /* 3. startVideo() will create an <iframe> (and YouTube player) after the API code downloads. */
     window['onYouTubeIframeAPIReady'] = () => {
-      this.startVideo();
+      this.videoDisplayService.startVideo().then((res) => {
+        console.log('here')
+        this.setNotesReadyToBeDisplayed()
+      });
     };
   }
 
   ngOnInit() {
     this.init();
+    this.setNotesReadyToBeDisplayed()
+
   }
 
   ngOnDestroy() {
     this.videoDisplayService.cleanupSubs();
   }
 
-  startVideo() {
-    this.reframed = false;
-    this.player = new window['YT'].Player('player', {
-      height: '390',
-      width: '840',
-      videoId: this.videoDisplayService.video.value,
-      playerVars: {
-        autoplay: 0,
-        modestbranding: 1,
-        controls: 1,
-        disablekb: 0,
-        rel: 0,
-        showinfo: 0,
-        fs: 0,
-        playsinline: 1,
-      },
-      events: {
-        onStateChange: (event) =>
-          this.ngZone.run(() =>
-            this.videoDisplayService.onPlayerStateChange(event)
-          ),
-        onError: (event) =>
-          this.ngZone.run(() => this.videoDisplayService.onPlayerError(event)),
-        onReady: (event) =>
-          this.ngZone.run(() => { this.videoDisplayService.setVideoPlayer(this.player);
-            this.videoDisplayService.onPlayerReady(event); this.setNotesReadyToBeDisplayed()}),//this.videoDisplayService.player = this.player;  this.videoDisplayService.totalDuration = this.player.getDuration()
-      },
-    });
-  }
+  // startVideo() {
+  //   this.reframed = false;
+  //   this.player = new window['YT'].Player('player', {
+  //     height: '390',
+  //     width: '840',
+  //     videoId: this.videoDisplayService.video.value,
+  //     playerVars: {
+  //       autoplay: 0,
+  //       modestbranding: 1,
+  //       controls: 1,
+  //       disablekb: 0,
+  //       rel: 0,
+  //       showinfo: 0,
+  //       fs: 0,
+  //       playsinline: 1,
+  //     },
+  //     events: {
+  //       onStateChange: (event) =>
+  //         this.ngZone.run(() =>
+  //           this.videoDisplayService.onPlayerStateChange(event)
+  //         ),
+  //       onError: (event) =>
+  //         this.ngZone.run(() => this.videoDisplayService.onPlayerError(event)),
+  //       onReady: (event) =>
+  //         this.ngZone.run(() => { this.videoDisplayService.setVideoPlayer(this.player);
+  //           this.videoDisplayService.onPlayerReady(event); this.setNotesReadyToBeDisplayed()}),//this.videoDisplayService.player = this.player;  this.videoDisplayService.totalDuration = this.player.getDuration()
+  //     },
+  //   });
+  // }
 
   setNotesReadyToBeDisplayed(){
     this.areNotesReadyToBeDisplayed = true
-    this.getAllNotes()
+
+   return this.getAllNotes()
   }
 
   createNote() {
@@ -217,7 +224,9 @@ export class VideoCenterComponent implements OnInit {
 
   travelToNote(indexOfelement: number) {
     const arr = this.components._results;
-    const thisEle = arr[indexOfelement];
+    const thisEle : ElementRef<HTMLElement> = arr[indexOfelement];
+    console.log('this ele', indexOfelement)
     thisEle.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    //this.components.scrollIntoView({ behavior: 'smooth' });
   }
 }
