@@ -64,7 +64,7 @@ export class VideoDisplayService {
         },
       });
     }
-    isReady = false
+    isReady =  new BehaviorSubject(false) 
   onPlayerReady(event) {
     this.myplayer = event.target;
     this.totalDuration = this.player.getDuration();
@@ -78,7 +78,8 @@ export class VideoDisplayService {
       //do not want to play automatically
       //this.onPlayVideo()
     }
-    this.isReady = true
+    this.isReady.next(true)
+
   }
 
   calculatePixelPerSecond() {

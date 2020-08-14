@@ -13,11 +13,11 @@
         class="time-bar-note"
         *ngFor="let note of notes; let indexOfelement=index;"
         [ngStyle]="{ left: note.timeSpot }"
-        (click)='gotoNoteTimeSpot($event,note); $event.stopPropagation()'
+        (click)=' $event.stopPropagation(); gotoNoteTimeSpot($event,note);'
       >
         <div class="time-bar-note__details">
           {{ note.noteTitle }}
-          <div class='travel-to-note-button'><img  (click)='travelToNote(indexOfelement); $event.stopPropagation()'  class='travel-to-note-button__img' src="https://img.icons8.com/ios-filled/50/000000/low-priority.png"/></div>
+          <div class='travel-to-note-button'><img  (click)=' $event.stopPropagation(); travelToNote(indexOfelement);'  class='travel-to-note-button__img' src="https://img.icons8.com/ios-filled/50/000000/low-priority.png"/></div>
 
         </div>
       </div>
@@ -35,10 +35,11 @@
       <div class="create-note-area__currentTime-bubble">
         {{ displayMinuteBasedTime(videoDisplayService.videoProg.value) }}
       </div>
-      <input [(ngModel)]="noteTitle" placeholder="Title" class='create-note-area__note-title'/>
+      <input [value]="noteTitle" (change)='setNoteTitle($event)' placeholder="Title" class='create-note-area__note-title'/>
       <textarea
       placeholder="Note text"
-        [(ngModel)]="currentNote"
+        [value]="currentNote" 
+        (change)='setCurrentNote($event)' 
         type="text"
         class="create-note-area__note-textbox"
       ></textarea>
@@ -55,7 +56,7 @@
 
   <div *ngIf="isNoteCenterOpen">
     <ng-container *ngFor="let note of notes" #allNotes>
-      <app-display-note [note]='note'></app-display-note>
+      <app-display-note [note]='note' #ref=''></app-display-note>
     </ng-container >
   </div>
 </div>
