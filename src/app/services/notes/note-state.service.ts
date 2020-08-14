@@ -7,11 +7,19 @@ import { BehaviorSubject } from 'rxjs';
 export class NoteStateService {
   noteTitle = new BehaviorSubject('');
   currentNote =  new BehaviorSubject('');
-  currentVideoNotes:any[];
+  currentVideoNotes:any[] = [];
   constructor() { }
 
   orderNotesBasedOffOfTime() {
-    this.currentVideoNotes.sort((a, b) => a.timeOfNote - b.timeOfNote);
+    if (this.currentVideoNotes.length > 0){
+      this.currentVideoNotes.sort((a, b) => a.timeOfNote - b.timeOfNote);
+    }
   }
+
+  clearNotePad() {
+    this.currentNote.next('')
+    this.noteTitle.next('')
+  }
+
 
 }

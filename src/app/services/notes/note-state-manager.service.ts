@@ -25,8 +25,8 @@ export class NoteStateManagerService {
       this.noteStateService.noteTitle.value,
       this.noteStateService.currentNote.value
     );
-  //  this.clearNotePad();
-  //  this.orderNotesBasedOffOfTime();
+    
+   this.noteStateService.orderNotesBasedOffOfTime();
   }
 
   createNoteInBackend(noteTimeSpotInSeconds, noteTitle:string, noteText:string) {
@@ -88,4 +88,6 @@ export class NoteStateManagerService {
       return `${onlyMinutes}:${onlySecondsNoDecimal[0]}`;
     }
   }
+
+
 }

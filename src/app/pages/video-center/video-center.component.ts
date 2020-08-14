@@ -80,6 +80,16 @@ export class VideoCenterComponent implements OnInit {
       }
     })
 
+    this.noteStateService.currentNote.subscribe((newCurrentNote) => {
+      this.currentNote = newCurrentNote
+    })
+
+    this.noteStateService.noteTitle.subscribe((newNoteTitle) => {
+      this.noteTitle = newNoteTitle
+    })
+
+
+
   }
 
   ngOnDestroy() {
@@ -119,28 +129,29 @@ export class VideoCenterComponent implements OnInit {
     //   this.noteTitle,
     //   this.currentNote
     // );
-    // this.clearNotePad();
-    // this.orderNotesBasedOffOfTime();
+
 
     this.noteStateManagerService.createNote()
+    this.clearNotePad();
+    //this.orderNotesBasedOffOfTime();
 
   }
 
-  createNoteInBackend(noteTimeSpotInSeconds, noteTitle, noteText) {
-    //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
-    // t0 http://localhost:5000/notes/
-    this.notesService
-      .createNote(
-        this.videoDisplayService.video.value,
-        noteTimeSpotInSeconds,
-        noteTitle,
-        noteText
-      )
-      .subscribe((res) => {
-        console.log('res', res);
-      });
-    this.getAllNotes();
-  }
+  // createNoteInBackend(noteTimeSpotInSeconds, noteTitle, noteText) {
+  //   //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
+  //   // t0 http://localhost:5000/notes/
+  //   this.notesService
+  //     .createNote(
+  //       this.videoDisplayService.video.value,
+  //       noteTimeSpotInSeconds,
+  //       noteTitle,
+  //       noteText
+  //     )
+  //     .subscribe((res) => {
+  //       console.log('res', res);
+  //     });
+  //   this.getAllNotes();
+  // }
 
   getAllNotes() {
     console.log('get all notes');
