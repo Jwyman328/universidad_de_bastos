@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RequestSentStatus } from './RequestSentStatusHandler/RequestSentStatusHandler';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class SignupUserService extends RequestSentStatus {
   postSignUpUser(signUpData: any) {
     this.handleRequestSent();
     return this.http.post(
-      `https://universidad-de-bastos.herokuapp.com/auth/sign_up`,
+      `${environment.backendAPIBaseUrl}/auth/sign_up`,
       signUpData,
       
     );

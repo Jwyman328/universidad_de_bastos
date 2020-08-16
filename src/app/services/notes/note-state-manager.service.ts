@@ -31,8 +31,6 @@ export class NoteStateManagerService {
     noteTitle: string,
     noteText: string
   ) {
-    //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
-    // t0 http://localhost:5000/notes/
     this.notesService
       .createNote(
         this.videoDisplayService.video.value,
@@ -41,12 +39,11 @@ export class NoteStateManagerService {
         noteText
       )
       .subscribe((res) => {
-        console.log('res', res);
+        console.log('note created');
       });
   }
 
   getAllNotes() {
-    console.log('get all notes');
     this.notesService
       .getAllNotesForVideo(this.videoDisplayService.video.value)
       .subscribe((res: any) => {
@@ -57,7 +54,6 @@ export class NoteStateManagerService {
             note.videoTimeNoteTakenInSeconds *
               this.videoDisplayService.pixelPerSecond +
             'px';
-          console.log('the note in the note ', timeSp);
 
           newNotes.push({
             _id: note._id,

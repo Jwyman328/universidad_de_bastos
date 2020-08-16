@@ -18,7 +18,6 @@ export class NotesService extends RequestSentStatus {
   }
 
   createNote(videoId, videoTimeNoteTakenInSeconds, noteTitle, noteText) {
-    console.log('vtnt', videoTimeNoteTakenInSeconds);
     this.handleRequestSent();
     return this.http.post(
       `${environment.backendAPIBaseUrl}/notes/`,
@@ -49,7 +48,7 @@ export class NotesService extends RequestSentStatus {
 
   updateNote(noteId, updatedNote) {
     this.handleRequestSent();
-    return this.http.put(`https://universidad-de-bastos.herokuapp.com/notes/${noteId}`, updatedNote, {
+    return this.http.put(`${environment.backendAPIBaseUrl}/notes/${noteId}`, updatedNote, {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',
@@ -59,7 +58,7 @@ export class NotesService extends RequestSentStatus {
 
   deleteNote(noteId) {
     this.handleRequestSent();
-    return this.http.delete(`https://universidad-de-bastos.herokuapp.com/notes/${noteId}`, {
+    return this.http.delete(`${environment.backendAPIBaseUrl}/notes/${noteId}`, {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',
@@ -67,5 +66,4 @@ export class NotesService extends RequestSentStatus {
     });
   }
 }
-//https://universidad-de-bastos.herokuapp.com/notes/
-//'http://localhost:5000/notes/'
+

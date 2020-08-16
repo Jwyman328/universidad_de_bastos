@@ -15,7 +15,6 @@ export class EditNoteComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.note, 'cnt')
     this.noteTitle = this.note.noteTitle
     this.currentNote = this.note.noteText
     this.videoTime = this.note.timeNoteCreated
