@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { NotesService } from 'src/app/services/http-requests/notes.service';
+import { note } from '../../models/note';
 
 @Component({
   selector: 'app-display-note',
@@ -10,7 +11,7 @@ export class DisplayNoteComponent implements OnInit {
   isNoteDeleted = false;
   isInEditMode = false;
   showDeleteNoteModal = false;
-  @Input('note') note;
+  @Input('note') note: note;
   noteTitle = '';
   currentNote = '';
   videoTime = 0;
@@ -30,18 +31,19 @@ export class DisplayNoteComponent implements OnInit {
     this.isInEditMode = true;
   }
 
-  deleteNote(){
-    this.notesService.deleteNote(this.note._id).subscribe(res => {
-      this.isNoteDeleted = true
-    })
-    this.showDeleteNoteModal = false
+  deleteNote() {
+    this.notesService.deleteNote(this.note._id).subscribe((res) => {
+      console.log('get response?')
+      this.isNoteDeleted = true;
+    });
+    this.showDeleteNoteModal = false;
   }
-  cancelDeleteNote(){
-    this.showDeleteNoteModal = false
+  cancelDeleteNote() {
+    this.showDeleteNoteModal = false;
   }
 
-  openDeleteNote(){
-    this.showDeleteNoteModal = true
+  openDeleteNote() {
+    this.showDeleteNoteModal = true;
   }
 
   leaveEditMode() {
@@ -50,18 +52,24 @@ export class DisplayNoteComponent implements OnInit {
 
   saveNote() {
     const updateNoted = {
-      "noteText": this.currentNote,
-      "noteTitle": this.noteTitle,
+      noteText: this.currentNote,
+      noteTitle: this.noteTitle,
     };
-    this.notesService.updateNote(this.note._id,updateNoted).subscribe(res => {
-      this.leaveEditMode()
-    });
+    //set local state
+    this.note.noteText = this.currentNote;
+    this.note.noteTitle = this.noteTitle;
+
+    this.notesService
+      .updateNote(this.note._id, updateNoted)
+      .subscribe((res) => {
+        this.leaveEditMode();
+      });
   }
 
   cancelNote() {
     this.noteTitle = this.note.noteTitle;
     this.currentNote = this.note.noteText;
     this.videoTime = this.note.timeNoteCreated;
-    this.leaveEditMode()
+    this.leaveEditMode();
   }
 }

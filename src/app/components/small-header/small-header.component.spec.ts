@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SmallHeaderComponent } from './small-header.component';
+// import { SmallHeaderComponent } from './small-header.component';
 
-describe('SmallHeaderComponent', () => {
-  let component: SmallHeaderComponent;
-  let fixture: ComponentFixture<SmallHeaderComponent>;
+// describe('SmallHeaderComponent', () => {
+//   let component: SmallHeaderComponent;
+//   let fixture: ComponentFixture<SmallHeaderComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SmallHeaderComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ SmallHeaderComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SmallHeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(SmallHeaderComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

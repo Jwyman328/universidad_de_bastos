@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FormButtonComponent2 implements OnInit {
 
-  @Input('handleSubmit')  handleSubmit: () => void;
+  @Input('handleSubmit')  handleSubmit: () => any;
   constructor() { }
 
   ngOnInit(): void {
