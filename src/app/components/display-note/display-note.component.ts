@@ -33,7 +33,6 @@ export class DisplayNoteComponent implements OnInit {
 
   deleteNote() {
     this.notesService.deleteNote(this.note._id).subscribe((res) => {
-      console.log('get response?')
       this.isNoteDeleted = true;
     });
     this.showDeleteNoteModal = false;

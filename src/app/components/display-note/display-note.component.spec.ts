@@ -14,7 +14,9 @@ import { UserAuthDataMockService } from 'src/app/services/http-requests/userData
 import { UserAuthDataService } from 'src/app/services/http-requests/userData/user-auth-data.service';
 import { NoteStateService } from 'src/app/services/notes/note-state.service';
 import { noteMock } from 'src/app/testing/mockData/noteMock';
+import { NotesMockService } from 'src/app/services/http-requests/notesMock.service';
 
+let deleteSpy;
 fdescribe('DisplayNoteComponent set note and display it', () => {
   let component: DisplayNoteComponent;
   let fixture: ComponentFixture<DisplayNoteComponent>;
@@ -30,7 +32,7 @@ fdescribe('DisplayNoteComponent set note and display it', () => {
           multi: true,
         },
         { provide: UserAuthDataService, useClass: UserAuthDataMockService },
-        { provide: NotesService, useClass: NotesService },
+        { provide: NotesService, useClass: NotesMockService },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -152,6 +154,8 @@ fdescribe('DisplayNoteComponent set note and display it', () => {
 
   describe('Test delete note modal', () => {
     beforeEach(() => {
+      deleteSpy = jasmine.createSpyObj('NotesService',['deleteNote'])
+
       fixture = TestBed.createComponent(DisplayNoteComponent);
       component = fixture.componentInstance;
       component.note = { ...noteMock };
@@ -177,14 +181,11 @@ fdescribe('DisplayNoteComponent set note and display it', () => {
 
       deleteNoteCardCancelButton.click();
       fixture.detectChanges();
-      const deleteNoteCard = fixture.debugElement.query(
-        By.css('.delete-note-modal-container')
-      );
 
-      expect(deleteNoteCard).toEqual(null);
+      expect(component.showDeleteNoteModal).toEqual(false);
     });
 
-    it('should have delete note delete button click remove delete modal from screen making it unfindable.', () => {
+    it('should have delete note delete button click remove delete modal from screen making the note empty', () => {
       const deleteNoteCardDeleteButton: HTMLElement = fixture.debugElement.query(
         By.css('.delete-note-card__button-ok')
       ).nativeElement;
@@ -192,13 +193,20 @@ fdescribe('DisplayNoteComponent set note and display it', () => {
       deleteNoteCardDeleteButton.click();
       fixture.detectChanges();
 
-      const deleteNoteCard = fixture.debugElement.query(
-        By.css('.delete-note-modal-container')
-      );
-      fixture.detectChanges();
-
-      expect(deleteNoteCard).toEqual(null);
+      expect(component.showDeleteNoteModal).toEqual(false);
     });
+
+    it('should have delete note delete button click make isNoteDeleted true', async() => {
+        const deleteNoteCardDeleteButton: HTMLElement = fixture.debugElement.query(
+          By.css('.delete-note-card__button-ok')
+        ).nativeElement;
+  
+        await deleteNoteCardDeleteButton.click();
+        fixture.detectChanges();
+  
+        expect(component.isNoteDeleted).toEqual(true);
+
+      });
   });
 });
 
