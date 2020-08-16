@@ -10,7 +10,7 @@ export class NoteStateManagerService {
 
   constructor(private noteStateService:NoteStateService, private notesService:NotesService, private videoDisplayService:VideoDisplayService) { }
 
-  createNote() {
+ async createNote() {
     const currentTimeOfNote = this.videoDisplayService.player.getCurrentTime();
     const timeSp = currentTimeOfNote * this.videoDisplayService.pixelPerSecond + 'px';
     // this.notes.push({
@@ -25,8 +25,8 @@ export class NoteStateManagerService {
       this.noteStateService.noteTitle.value,
       this.noteStateService.currentNote.value
     );
-    
-   this.noteStateService.orderNotesBasedOffOfTime();
+    await this.getAllNotes();
+
   }
 
   createNoteInBackend(noteTimeSpotInSeconds, noteTitle:string, noteText:string) {
@@ -42,7 +42,6 @@ export class NoteStateManagerService {
       .subscribe((res) => {
         console.log('res', res);
       });
-    this.getAllNotes();
   }
 
   getAllNotes() {
@@ -68,7 +67,7 @@ export class NoteStateManagerService {
             ),
           });
         });
-        this.noteStateService.currentVideoNotes = newNotes;
+        this.noteStateService.setCurrentVideoNotes(newNotes);
         this.noteStateService.orderNotesBasedOffOfTime();
       });
   }
