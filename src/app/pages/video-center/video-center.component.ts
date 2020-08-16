@@ -55,7 +55,6 @@ export class VideoCenterComponent implements OnInit {
     // Return if Player is already created
     if (window['YT']) {
       this.videoDisplayService.startVideo();
-
       return;
     }
 

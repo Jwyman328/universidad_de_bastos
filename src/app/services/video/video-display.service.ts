@@ -2,10 +2,9 @@ import { Injectable, NgZone } from '@angular/core';
 import { interval, BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VideoDisplayService {
-
   public YT: any;
   public video = new BehaviorSubject('');
   public player: any;
@@ -17,10 +16,10 @@ export class VideoDisplayService {
   public pixelPerSecond = 105;
   public notes = [];
   public currentNote: string = '';
-  public noteTitle :any;
+  public noteTitle: any;
   public isNoteCenterOpen: boolean = true;
-  public videoTitle = new BehaviorSubject('');;
-  
+  public videoTitle = new BehaviorSubject('');
+
   subscription: any = null;
   source: any = interval(1000);
   intervalId: any;
@@ -28,58 +27,50 @@ export class VideoDisplayService {
 
   isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  constructor(    private ngZone: NgZone
-    ) { }
+  constructor(private ngZone: NgZone) {}
 
-    setVideoPlayer(player){
-      this.player = player
-    }
+  setVideoPlayer(player) {
+    this.player = player;
+  }
 
-  async  startVideo() {
-      this.reframed = false;
-      this.player = new window['YT'].Player('player', {
-        height: '390',
-        width: '840',
-        videoId: this.video.value,
-        playerVars: {
-          autoplay: 0,
-          modestbranding: 1,
-          controls: 1,
-          disablekb: 0,
-          rel: 0,
-          showinfo: 0,
-          fs: 0,
-          playsinline: 1,
-        },
-        events: {
-          onStateChange: (event) =>
-            this.ngZone.run(() =>
-              this.onPlayerStateChange(event)
-            ),
-          onError: (event) =>
-            this.ngZone.run(() => this.onPlayerError(event)),
-          onReady: (event) =>
-            this.ngZone.run(() => { 
-              this.onPlayerReady(event);}),// this.setVideoPlayer(this.player); this.videoDisplayService.player = this.player;  this.videoDisplayService.totalDuration = this.player.getDuration()
-        },
-      });
-    }
-    isReady =  new BehaviorSubject(false) 
+  async startVideo() {
+    this.reframed = false;
+    this.player = new window['YT'].Player('player', {
+      height: '390',
+      width: '840',
+      videoId: this.video.value,
+      playerVars: {
+        autoplay: 0,
+        modestbranding: 1,
+        controls: 1,
+        disablekb: 0,
+        rel: 0,
+        showinfo: 0,
+        fs: 0,
+        playsinline: 1,
+      },
+      events: {
+        onStateChange: (event) =>
+          this.ngZone.run(() => this.onPlayerStateChange(event)),
+        onError: (event) => this.ngZone.run(() => this.onPlayerError(event)),
+        onReady: (event) =>
+          this.ngZone.run(() => {
+            this.onPlayerReady(event);
+          }),
+      },
+    });
+  }
+  isReady = new BehaviorSubject(false);
   onPlayerReady(event) {
     this.myplayer = event.target;
     this.totalDuration = this.player.getDuration();
     this.calculatePixelPerSecond();
     if (this.isRestricted) {
       event.target.mute();
-      //do not want to play automatically
-      //this.onPlayVideo()
     } else {
       this.player.mute();
-      //do not want to play automatically
-      //this.onPlayVideo()
     }
-    this.isReady.next(true)
-
+    this.isReady.next(true);
   }
 
   calculatePixelPerSecond() {
@@ -159,16 +150,16 @@ export class VideoDisplayService {
       this.cleanupSubs();
     }
     this.subscription = this.source.subscribe((val) => {
-      this.videoProg.next(this.cleanTime() );
+      this.videoProg.next(this.cleanTime());
     });
     //
   }
 
-  setVideo(video:string){
-    this.video.next(video)
+  setVideo(video: string) {
+    this.video.next(video);
   }
 
-  setVideoTitle(videoTitle){
-    this.videoTitle.next(videoTitle)
+  setVideoTitle(videoTitle) {
+    this.videoTitle.next(videoTitle);
   }
 }

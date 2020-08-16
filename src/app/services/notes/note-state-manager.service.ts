@@ -4,32 +4,33 @@ import { NotesService } from '../http-requests/notes.service';
 import { VideoDisplayService } from '../video/video-display.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NoteStateManagerService {
+  constructor(
+    private noteStateService: NoteStateService,
+    private notesService: NotesService,
+    private videoDisplayService: VideoDisplayService
+  ) {}
 
-  constructor(private noteStateService:NoteStateService, private notesService:NotesService, private videoDisplayService:VideoDisplayService) { }
-
- async createNote() {
+  async createNote() {
     const currentTimeOfNote = this.videoDisplayService.player.getCurrentTime();
-    const timeSp = currentTimeOfNote * this.videoDisplayService.pixelPerSecond + 'px';
-    // this.notes.push({
-    //   timeSpot: timeSp,
-    //   timeOfNote: currentTimeOfNote,
-    //   noteText: this.currentNote,
-    //   noteTitle: this.noteTitle,
-    //   timeNoteCreated: this.displayMinuteBasedTime(currentTimeOfNote),
-    // });
+    const timeSp =
+      currentTimeOfNote * this.videoDisplayService.pixelPerSecond + 'px';
+
     this.createNoteInBackend(
       currentTimeOfNote,
       this.noteStateService.noteTitle.value,
       this.noteStateService.currentNote.value
     );
     await this.getAllNotes();
-
   }
 
-  createNoteInBackend(noteTimeSpotInSeconds, noteTitle:string, noteText:string) {
+  createNoteInBackend(
+    noteTimeSpotInSeconds,
+    noteTitle: string,
+    noteText: string
+  ) {
     //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
     // t0 http://localhost:5000/notes/
     this.notesService
@@ -53,8 +54,10 @@ export class NoteStateManagerService {
         const newNotes = [];
         allCurrentNotes.map((note) => {
           const timeSp =
-            (note.videoTimeNoteTakenInSeconds) * this.videoDisplayService.pixelPerSecond + 'px';
-            console.log('the note in the note ', timeSp)
+            note.videoTimeNoteTakenInSeconds *
+              this.videoDisplayService.pixelPerSecond +
+            'px';
+          console.log('the note in the note ', timeSp);
 
           newNotes.push({
             _id: note._id,
@@ -87,6 +90,4 @@ export class NoteStateManagerService {
       return `${onlyMinutes}:${onlySecondsNoDecimal[0]}`;
     }
   }
-
-
 }
