@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-video-header',
@@ -7,9 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class VideoHeaderComponent implements OnInit {
   @Input('videoTitle') videoTitle:string;
-  constructor() { }
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToHomePage(){
+    this.route.navigate(['/'])
   }
 
 }

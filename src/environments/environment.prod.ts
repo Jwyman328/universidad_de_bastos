@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  backendAPIBaseUrl: 'https://universidad-de-bastos.herokuapp.com',
 };

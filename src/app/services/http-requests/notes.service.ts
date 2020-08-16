@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestSentStatus } from './RequestSentStatusHandler/RequestSentStatusHandler';
 import { UserAuthDataService } from './userData/user-auth-data.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class NotesService extends RequestSentStatus {
     console.log('vtnt', videoTimeNoteTakenInSeconds);
     this.handleRequestSent();
     return this.http.post(
-      'https://universidad-de-bastos.herokuapp.com/notes/',
+      `${environment.backendAPIBaseUrl}/notes/`,
       {
         videoTimeNoteTakenInSeconds: Number(videoTimeNoteTakenInSeconds),
         videoId: videoId,
@@ -38,7 +39,7 @@ export class NotesService extends RequestSentStatus {
 
   getAllNotesForVideo(videoId) {
     this.handleRequestSent();
-    return this.http.get(`https://universidad-de-bastos.herokuapp.com/notes/${videoId}`, {
+    return this.http.get(`${environment.backendAPIBaseUrl}/notes/${videoId}`, {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',

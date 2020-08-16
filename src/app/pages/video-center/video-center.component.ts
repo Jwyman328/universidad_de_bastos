@@ -10,6 +10,10 @@ import {
 import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { NotesService } from 'src/app/services/http-requests/notes.service';
+import { VideoDisplayService } from 'src/app/services/video/video-display.service';
+import { DisplayNoteComponent } from '../../components/display-note/display-note.component';
+import { NoteStateManagerService } from '../../services/notes/note-state-manager.service';
+import { NoteStateService } from 'src/app/services/notes/note-state.service';
 
 @Component({
   selector: 'app-video-center',
@@ -18,47 +22,39 @@ import { NotesService } from 'src/app/services/http-requests/notes.service';
 })
 export class VideoCenterComponent implements OnInit {
   //second try
-  title = 'dummyApp-YTIFrameAPI';
 
   /* 1. Some required variables which will be used by YT API*/
   public YT: any;
-  public video: any;
   public player: any;
   public reframed: Boolean = false;
-  public myplayer: any;
-  public pausedAt: number = 0;
-  public isPaused: boolean = false;
-  public totalDuration: number;
-  public pixelPerSecond = 105;
   public notes = [];
   public currentNote: string = '';
-  public noteTitle: string;
+  public noteTitle: string = '';
   public isNoteCenterOpen: boolean = true;
-  public videoTitle:string;
-
-  subscription: any = null;
-  source: any = interval(1000);
-  intervalId: any;
-  public videoProg: any = 0;
-
-  isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  public areNotesReadyToBeDisplayed: boolean = false;
 
   constructor(
     private ngZone: NgZone,
     private activatedRouter: ActivatedRoute,
-    private notesService: NotesService
+    private notesService: NotesService,
+    private noteStateManagerService: NoteStateManagerService,
+    private noteStateService: NoteStateService,
+    public videoDisplayService: VideoDisplayService
   ) {
-    this.video = this.activatedRouter.snapshot.paramMap.get('videoUrl');
-    this.videoTitle = this.activatedRouter.snapshot.paramMap.get('videoTitle');
-
+    this.videoDisplayService.setVideo(
+      this.activatedRouter.snapshot.paramMap.get('videoUrl')
+    );
+    this.videoDisplayService.setVideoTitle(
+      this.activatedRouter.snapshot.paramMap.get('videoTitle')
+    );
   }
 
   /* 2. Initialize method for YT IFrame API */
   init() {
-    this.getAllNotes()
+    this.getAllNotes();
     // Return if Player is already created
     if (window['YT']) {
-      this.startVideo();
+      this.videoDisplayService.startVideo();
       return;
     }
 
@@ -68,188 +64,59 @@ export class VideoCenterComponent implements OnInit {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     /* 3. startVideo() will create an <iframe> (and YouTube player) after the API code downloads. */
-    window['onYouTubeIframeAPIReady'] = () => this.startVideo();
+    window['onYouTubeIframeAPIReady'] = () => {
+      this.videoDisplayService.startVideo();
+    };
   }
 
   ngOnInit() {
-    //this.video = 'BsL7pjxko7Q'; //'nRiOw3qGYq4';
     this.init();
+    this.setNotesReadyToBeDisplayed();
+
+    this.videoDisplayService.isReady.subscribe((isReady: boolean) => {
+      if (isReady) {
+        this.setNotesReadyToBeDisplayed();
+      }
+    });
+
+    this.noteStateService.currentNote.subscribe((newCurrentNote) => {
+      this.currentNote = newCurrentNote;
+    });
+
+    this.noteStateService.noteTitle.subscribe((newNoteTitle) => {
+      this.noteTitle = newNoteTitle;
+    });
+
+    this.noteStateService.currentVideoNotes.subscribe((newNotes) => {
+      this.notes = newNotes;
+    });
   }
 
   ngOnDestroy() {
-    this.cleanupSubs();
+    this.videoDisplayService.cleanupSubs();
   }
 
-  startVideo() {
-    this.reframed = false;
-    this.player = new window['YT'].Player('player', {
-      height: '390',
-      width: '840',
-      videoId: this.video,
-      playerVars: {
-        autoplay: 0,
-        modestbranding: 1,
-        controls: 1,
-        disablekb: 0,
-        rel: 0,
-        showinfo: 0,
-        fs: 0,
-        playsinline: 1,
-      },
-      events: {
-        onStateChange: (event) =>
-          this.ngZone.run(() => this.onPlayerStateChange(event)),
-        onError: (event) => this.ngZone.run(() => this.onPlayerError(event)),
-        onReady: (event) => this.ngZone.run(() => this.onPlayerReady(event)),
-      },
-    });
+  setNotesReadyToBeDisplayed() {
+    this.areNotesReadyToBeDisplayed = true;
+
+    return this.getAllNotes();
   }
 
-  /* 4. It will be called when the Video Player is ready */
-  onPlayerReady(event) {
-    this.myplayer = event.target;
-    this.totalDuration = this.player.getDuration();
-    this.calculateSpot();
-    if (this.isRestricted) {
-      event.target.mute();
-      //do not want to play automatically
-      // this.onPlayVideo()
-    } else {
-      this.player.mute();
-      //do not want to play automatically
-      //this.onPlayVideo()
-    }
+  setNoteTitle(event) {
+    this.noteStateService.noteTitle.next(event.target.value);
   }
 
-  /* 5. API will call this function when Player State changes like PLAYING, PAUSED, ENDED */
-  onPlayerStateChange(event) {
-    switch (event.data) {
-      case window['YT'].PlayerState.PLAYING:
-        if (this.cleanTime() == 0) {
-        } else {
-        }
-        this.onCheckProgress();
-        break;
-      case window['YT'].PlayerState.PAUSED:
-        this.onPlayerPaused();
-        break;
-      case window['YT'].PlayerState.ENDED:
-        break;
-    }
-  }
-
-  onPlayerPaused() {
-    if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
-      this.pausedAt = this.player.getCurrentTime();
-      this.cleanupSubs();
-    }
-  }
-  onPause() {
-    this.player.pauseVideo();
-  }
-  onPlay() {
-    this.player.seekTo(this.pausedAt, true);
-    this.onPlayVideo();
-  }
-
-  cleanTime(): number {
-    return Math.round(this.myplayer.getCurrentTime());
-  }
-
-  onPlayerError(event) {
-    switch (event.data) {
-      case 2:
-        break;
-      case 100:
-        break;
-      case 101 || 150:
-        break;
-    }
-  }
-
-  onPlayVideo() {
-    this.player.playVideo();
-    this.pausedAt = 0;
-  }
-
-  onMute() {
-    this.player.mute();
-  }
-
-  onUnmute() {
-    this.player.unMute();
-  }
-
-  cleanupSubs() {
-    if (this.subscription != null) {
-      this.subscription.unsubscribe();
-      this.subscription = null;
-    } else {
-    }
-  }
-
-  onCheckProgress() {
-    if (this.subscription != null) {
-      this.cleanupSubs();
-    }
-    this.subscription = this.source.subscribe((val) => {
-      this.videoProg = this.cleanTime();
-    });
-    //
-  }
-  //custom functions
-
-  calculateSpot() {
-    const pixelPerSecond = 840 / this.totalDuration;
-    this.pixelPerSecond = pixelPerSecond;
+  setCurrentNote(event) {
+    this.noteStateService.currentNote.next(event.target.value);
   }
 
   createNote() {
-    // get the pixel placement of where the note is taken
-    // then place a marker on this spot with ngstyle?
-    const currentTimeOfNote = this.player.getCurrentTime();
-    const timeSp = currentTimeOfNote * this.pixelPerSecond + 'px';
-    this.notes.push({
-      timeSpot: timeSp,
-      timeOfNote: currentTimeOfNote,
-      noteText: this.currentNote,
-      noteTitle: this.noteTitle,
-      timeNoteCreated: this.displayMinuteBasedTime(currentTimeOfNote),
-    });
-    this.createNoteInBackend(currentTimeOfNote,this.noteTitle, this.currentNote);
+    this.noteStateManagerService.createNote();
     this.clearNotePad();
-    this.orderNotesBasedOffOfTime();
   }
 
-  createNoteInBackend(noteTimeSpotInSeconds,noteTitle, noteText ) {
-    //post {"videoTimeNoteTakenInSeconds":50.5460 , "videoId": "54qfdasfst"}
-    // t0 http://localhost:5000/notes/
-    this.notesService.createNote( this.video, noteTimeSpotInSeconds, noteTitle, noteText).subscribe((res) => {
-      console.log('res', res);
-    });
-    this.getAllNotes()
-  }
-
-  getAllNotes(){
-    console.log('get all notes')
-    this.notesService.getAllNotesForVideo(this.video).subscribe((res:any) => {
-      const allCurrentNotes = res
-      const newNotes = []
-      allCurrentNotes.map(note => {
-        const timeSp = note.videoTimeNoteTakenInSeconds * this.pixelPerSecond + 'px';
-        newNotes.push({
-          _id: note._id ,
-          timeSpot: timeSp,
-          timeOfNote: note.videoTimeNoteTakenInSeconds,
-          noteText: note.noteText,
-          noteTitle: note.noteTitle,
-          timeNoteCreated: this.displayMinuteBasedTime(note.videoTimeNoteTakenInSeconds),
-        });
-      })
-      this.notes = newNotes
-      this.orderNotesBasedOffOfTime();
-      
-    })
+  getAllNotes() {
+    this.noteStateManagerService.getAllNotes();
   }
 
   discardNote() {
@@ -261,6 +128,7 @@ export class VideoCenterComponent implements OnInit {
     this.currentNote = '';
     this.noteTitle = '';
   }
+
   toggleNoteCenter() {
     this.isNoteCenterOpen = !this.isNoteCenterOpen;
   }
@@ -283,19 +151,16 @@ export class VideoCenterComponent implements OnInit {
 
   gotoNoteTimeSpot(event, note) {
     event.stopPropagation();
-    this.player.seekTo(note.timeOfNote);
-  }
-
-  orderNotesBasedOffOfTime() {
-    this.notes.sort((a, b) => a.timeOfNote - b.timeOfNote);
+    this.videoDisplayService.player.seekTo(note.timeOfNote);
   }
 
   @ViewChildren('allNotes') components: any;
 
   travelToNote(indexOfelement: number) {
     const arr = this.components._results;
-    const thisEle = arr[indexOfelement];
-    thisEle.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    const thisEle: any = arr[indexOfelement];
+    thisEle.nativeElement.previousElementSibling.scrollIntoView({
+      behavior: 'smooth',
+    });
   }
-
 }

@@ -1,5 +1,5 @@
 <div class='header-container' (mouseenter)='hideOptions()'>
-        <a  class='xoanDeLugoLogo' add target="_blank" href="https://xoandelugo.org/"></a>
+        <div (click)='goToHomePage()'  class='xoanDeLugoLogo' add target="_blank" href="https://xoandelugo.org/"></div>
         <h1 class='header__title'>
             Universidad Miguel Anxo Bastos
         </h1>
@@ -7,7 +7,7 @@
         <div class='header-options' (mouseenter)='showOptions()'   >
             <img width="40px" src="https://img.icons8.com/material/24/000000/admin-settings-male.png"/>
             <div (mouseenter)='showOptions()' (mouseleave)='hideOptions()' class='options-drop-down' *ngIf='isShowOptions'>
-                <div class='options-drop-down__main-item'>{{user}}</div>
+                <div class='options-drop-down__main-item'><p>{{user}}</p></div>
                 <div (click)='logOut()' class='options-drop-down__item'>Log out</div>
             </div>
         </div>
