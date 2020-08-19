@@ -6,11 +6,13 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { LoginInPageComponent } from './pages/login-in-page/login-in-page.component';
 import { AuthGuard } from './services/auth-guards/AuthGuard.service';
 import { AllVideosComponent } from './pages/all-videos/all-videos.component';
+import { BookCenterComponent } from './pages/book-center/book-center.component';
 
 const routes: Routes = [
   //{ path: '', component: HomepageComponent,canActivate: [AuthGuard] },
   { path: 'video-center/:videoUrl/:videoTitle', component: VideoCenterComponent,canActivate: [AuthGuard] },
   { path: '', component: AllVideosComponent},
+  { path: 'book-center', component: BookCenterComponent},
   { path: 'signup', component: SignUpPageComponent },
   { path: 'login', component: LoginInPageComponent},
 

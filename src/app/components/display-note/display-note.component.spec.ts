@@ -17,7 +17,7 @@ import { noteMock } from 'src/app/testing/mockData/noteMock';
 import { NotesMockService } from 'src/app/services/http-requests/notesMock.service';
 
 let deleteSpy;
-fdescribe('DisplayNoteComponent set note and display it', () => {
+describe('DisplayNoteComponent set note and display it', () => {
   let component: DisplayNoteComponent;
   let fixture: ComponentFixture<DisplayNoteComponent>;
 
@@ -209,83 +209,3 @@ fdescribe('DisplayNoteComponent set note and display it', () => {
       });
   });
 });
-
-//
-// import { TestBed, async } from "@angular/core/testing";
-
-// import { ModelPreferencesStateManagerService } from "./model-preferences-state-manager.service";
-// import {
-//   HttpClientTestingModule,
-//   HttpTestingController,
-// } from "@angular/common/http/testing";
-// import { HTTP_INTERCEPTORS } from "@angular/common/http";
-// import { HttpRequestPreferencesAndThemesSuccessCaseInterceptorMock } from "../../shared/test-helpers/httpInterceptor/HttpRequestPreferencesAndThemesSuccessCaseInterceptorMock";
-// import { userPreferencesDataMock } from "../../shared/test-helpers/data/mockBackendData/userPreferencesDataMock";
-// import { preBuiltThemesInBackend } from "../../shared/test-helpers/data/mockBackendData/prebuiltThemesInBackend";
-// import { BackendService } from "app/shared/services/backend.service";
-// import { MockBackendService } from "../../../../../test/component/mocks/backend.service.mock";
-// import { HttpRequestPreferencesAndThemesFailureCaseInterceptorMock } from "../../shared/test-helpers/httpInterceptor/HttpRequestPreferencesAndThemesFailureCaseInterceptorMock";
-// import {
-//   modelPreferencesDataMockAlpha,
-//   modelPreferencesDefaultDataMock,
-// } from "app/preferences/shared/test-helpers/data/mockBackendData/modelPreferenceDataMock";
-
-// let httpTestingController: HttpTestingController;
-// let service: ModelPreferencesStateManagerService;
-// describe("ModelPreferencesStateManagerService", () => {
-//   describe("set up ModelPreferencesStateManagerService with success case Http mock", () => {
-//     beforeEach(() => {
-//       TestBed.configureTestingModule({
-//         imports: [HttpClientTestingModule],
-//         providers: [
-//           {
-//             provide: HTTP_INTERCEPTORS,
-//             useClass: HttpRequestPreferencesAndThemesSuccessCaseInterceptorMock,
-//             multi: true,
-//           },
-//           { provide: BackendService, useClass: MockBackendService },
-//         ],
-//       });
-//       httpTestingController = TestBed.get(HttpTestingController);
-//       service = TestBed.get(ModelPreferencesStateManagerService);
-//     });
-
-//     it("should have getModelPreferencesInDbAndLoadToLocalState set modelPreferece data locally after http mock call", async (done) => {
-//       await service.modelColorPageStateService.modelId.next(
-//         modelPreferencesDataMockAlpha.modelId
-//       );
-//       expect(service.modelColorPageStateService.modelId.value).toEqual(
-//         modelPreferencesDataMockAlpha.modelId
-//       );
-
-//       const response = service.getModelPreferencesInDbAndLoadToLocalState(
-//         "5f00a0abf6a7d376711a1001"
-//       );
-//       response
-//         .then((response) => {
-//           const modelPreferenceFontSizePx =
-//             service.modelFontStateService.fontSize.value;
-//           const modelPreferenceThemeName =
-//             service.modelColorPageStateService.currentThemeName.value;
-//           const modelPreferenceColorThemeNames =
-//             service.modelColorPageStateService.currentChartColorThemes.value;
-//           expect(modelPreferenceFontSizePx).toEqual(
-//             modelPreferencesDataMockAlpha.fontSizePx
-//           );
-//           expect(modelPreferenceThemeName).toEqual("Alpha");
-//           expect(modelPreferenceColorThemeNames).toEqual({
-//             Categorical: "Alpha",
-//             Density: "Alpha",
-//             Bar: "Alpha",
-//             Dsa: "Alpha",
-//             Singular: "Alpha",
-//           });
-//           done();
-//         })
-//         .catch((err) => {
-//           expect(true).toEqual(false);
-//           done();
-//         });
-//     });
-// })
-// });

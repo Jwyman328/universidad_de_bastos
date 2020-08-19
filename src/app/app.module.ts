@@ -25,7 +25,9 @@ import { VideoCardComponent } from './components/video-card/video-card.component
 import { SelectBoxComponent } from './components/select-box/select-box.component';
 import { SmallHeaderComponent } from './components/small-header/small-header.component';
 import { DisplayNoteComponent } from './components/display-note/display-note.component';
-import { EditNoteComponent } from './components/edit-note/edit-note.component';
+import { BookCenterComponent } from './pages/book-center/book-center.component';
+import { BookCenterHeaderComponent } from './components/book-center-header/book-center-header.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +53,9 @@ import { EditNoteComponent } from './components/edit-note/edit-note.component';
     SelectBoxComponent,
     SmallHeaderComponent,
     DisplayNoteComponent,
-    EditNoteComponent,
+    BookCenterComponent,
+    BookCenterHeaderComponent,
+    BookCardComponent,
     //AuthCardComponent,
     //SignupFormComponent2
     //FormButtonComponent,
