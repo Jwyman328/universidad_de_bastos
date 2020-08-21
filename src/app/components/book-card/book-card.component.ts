@@ -7,10 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BookCardComponent implements OnInit {
   @Input('bookData') bookData;
-
+  isRead: boolean;
   constructor() { }
 
   ngOnInit(): void {
+   this.isRead = this.bookData.hasBeenReadByUser
+  }
+
+  readIt(){
+    this.isRead = !this.isRead
   }
 
 }
