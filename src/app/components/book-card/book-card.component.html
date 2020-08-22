@@ -13,7 +13,7 @@
       </div>
       <div class='card-content ' (click)="readIt()">
           <div [ngClass]="{'card-back__read-it-button--read-color':isRead,'card-back__read-it-button--not-read-color':!isRead }" class='card-back__read-it-button'>
-            {{isRead?'UNDO READ':'read' | uppercase}}
+            {{isRead?'NO LEIDO':'LEIDO' | uppercase}}
           </div>
       </div>
       <div class="card-content">
