@@ -13,7 +13,6 @@ export class BookCenterComponent implements OnInit {
 
   ngOnInit(): void {
     this.booksService.getBooks().subscribe((res)=>{
-      console.log('the book response', res)
       this.bookData = res
     })
   }
