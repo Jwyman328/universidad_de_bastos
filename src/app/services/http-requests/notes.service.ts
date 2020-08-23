@@ -45,7 +45,6 @@ export class NotesService extends RequestSentStatus {
       }),
     });
   }
-
   updateNote(noteId, updatedNote) {
     this.handleRequestSent();
     return this.http.put(`${environment.backendAPIBaseUrl}/notes/${noteId}`, updatedNote, {
