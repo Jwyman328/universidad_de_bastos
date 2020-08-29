@@ -2,19 +2,21 @@
     <app-book-center-header></app-book-center-header>
     <div class="all-videos-container">
         <div class="select-box-bar">
-           <!--  <app-select-box
-              [selectLabel]="'Institution'"
+             <app-select-box
+              [selectLabel]="'Read Status'"
               class="select-box"
-              (changeSelectEvent)="setInstitution($event)"
-              [defaultSelected]="institutionSelectOptions[0]"
-              [selectOptions]="institutionSelectOptions"
+              (changeSelectEvent)="sortByReadStatus($event)"
+              [defaultSelected]="readStatusOptions[0]"
+              [selectOptions]="readStatusOptions"
             ></app-select-box>
+           
+           
             <app-select-box
-              [selectLabel]="'Event Type'"
-              (changeSelectEvent)="setType($event)"
-              [defaultSelected]="typeSelectOptions[0]"
-              [selectOptions]="typeSelectOptions"
-            ></app-select-box>
+              [selectLabel]="'Date'"
+              (changeSelectEvent)="sortByDate($event)"
+              [defaultSelected]="dateOptions[0]"
+              [selectOptions]="dateOptions"
+            ></app-select-box> <!-- 
             <app-select-box
               [selectLabel]="'Year'"
               (changeSelectEvent)="setYear($event)"
