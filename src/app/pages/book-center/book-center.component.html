@@ -5,7 +5,7 @@
              <app-select-box
               [selectLabel]="'Read Status'"
               class="select-box"
-              (changeSelectEvent)="sortByReadStatus($event)"
+              (changeSelectEvent)="setReadStatus($event)"
               [defaultSelected]="readStatusOptions[0]"
               [selectOptions]="readStatusOptions"
             ></app-select-box>
@@ -13,16 +13,16 @@
            
             <app-select-box
               [selectLabel]="'Date'"
-              (changeSelectEvent)="sortByDate($event)"
+              (changeSelectEvent)="setDateSort($event)"
               [defaultSelected]="dateOptions[0]"
               [selectOptions]="dateOptions"
-            ></app-select-box> <!-- 
+            ></app-select-box> 
             <app-select-box
-              [selectLabel]="'Year'"
-              (changeSelectEvent)="setYear($event)"
-              [defaultSelected]="yearelectOptions[0]"
-              [selectOptions]="yearelectOptions"
-            ></app-select-box>
+              [selectLabel]="'Category'"
+              (changeSelectEvent)="setCategoryFilter($event)"
+              [defaultSelected]="filterCategories[0]"
+              [selectOptions]="filterCategories"
+            ></app-select-box><!-- 
             <app-select-box
             [selectLabel]="'Sort'"
             (changeSelectEvent)="sortVideos($event)"
@@ -31,7 +31,7 @@
           ></app-select-box> -->
           </div> 
         
-        <ng-container *ngFor="let individualBookData of bookData">
+        <ng-container *ngFor="let individualBookData of sortedAndFilteredBookData">
 
                     <app-book-card (handleBookReadButton)='handleBookReadButton()' [bookData]='individualBookData'></app-book-card>
 

@@ -5,79 +5,118 @@ import { BooksService } from '../../services/http-requests/books.service';
 @Component({
   selector: 'app-book-center',
   templateUrl: './book-center.component.html',
-  styleUrls: ['./book-center.component.scss']
+  styleUrls: ['./book-center.component.scss'],
 })
 export class BookCenterComponent implements OnInit {
   bookData;
-  selectedReadSort: "read" | "not read" = 'read';
-  selectedDateSort: {value:"newest"} | {value: "oldest"} ={ value: "newest"};
-  sortedBookData;
-  readStatusOptions = [{displayName:'read', value:'read'}, {displayName:'not read', value:'not read'}]
-  dateOptions = [{displayName:'newest', value:'newest'}, {displayName:'oldest', value:'oldest'}]
+  selectedReadSort: 'read' | 'not read' | 'all' = 'all';
+  selectedDateSort: { value: 'newest' } | { value: 'oldest' } = {
+    value: 'newest',
+  };
+  sortedAndFilteredBookData;
+  selectedCategory = { value: 'all' };
+  filterCategories = [
+    { displayName: 'all', value: 'all' },
+    { displayName: 'sociology', value: 'sociology' },
+    { displayName: 'Economía', value: 'Economía' },
+    { displayName: 'Filosofía política', value: 'Filosofía política' },
+    { displayName: 'fiction', value: 'fiction' },
+    { displayName: 'Derecho', value: 'Derecho' },
+  ];
+  readStatusOptions = [
+    { displayName: 'all', value: 'all' },
+    { displayName: 'read', value: 'read' },
+    { displayName: 'not read', value: 'not read' },
+  ];
+  dateOptions = [
+    { displayName: 'newest', value: 'newest' },
+    { displayName: 'oldest', value: 'oldest' },
+  ];
 
-  constructor(private booksService:BooksService) { }
+  constructor(private booksService: BooksService) {}
 
   ngOnInit(): void {
-    this.fetchAndSetBooks()
+    this.fetchAndSetBooks();
   }
 
-  fetchAndSetBooks(){
-    this.booksService.getBooks().subscribe((res)=>{
-      this.bookData = res
+  fetchAndSetBooks() {
+    this.booksService.getBooks().subscribe((res) => {
+      this.bookData = res;
+      this.sortedAndFilteredBookData = res;
 
-      this.sortBooksByAllCurrentSorts()
-    })
+      this.sortByDate(this.selectedDateSort);
+    });
+  }
+  
+  setReadStatus(event) {
+    this.selectedReadSort = event.value;
+    this.applyFilters();
   }
 
-  sortBooksByAllCurrentSorts(){
-    this.sortByDate(this.selectedDateSort)
-    this.sortBooksByReadStatus(this.selectedReadSort)
+  setDateSort(dateSort) {
+    this.selectedDateSort = dateSort;
+
+    this.sortByDate(this.selectedDateSort);
   }
 
-  sortByReadStatus(event){
-    this.sortBooksByReadStatus(event.value)
+  setCategoryFilter(selectedCategory) {
+    this.selectedCategory = selectedCategory;
+    this.applyFilters();
   }
 
-  sortBooksByReadStatus(readStatus) {
-    this.selectedReadSort = readStatus
 
-    let readBooks = [];
-    let unreadBooks = [];
-    const bookDataSorted = this.bookData.map((bookData)=>{
-      if (bookData.hasBeenReadByUser === true){
-        readBooks.push(bookData)
-      }else{
-        unreadBooks.push(bookData)
-      }
-    })
-
-    let allBooksSofted = []
-    if (readStatus === 'read'){
-      console.log(readBooks, 'red books')
-      allBooksSofted = [...readBooks,...unreadBooks]
-    }else{
-      allBooksSofted = [...unreadBooks, ...readBooks]
-    }
-    
-    this.bookData = allBooksSofted
-  }
-
-  sortByDate(sortType){
+  sortByDate(sortType) {
     let softTypeValue = sortType;
     if (sortType.value) {
       softTypeValue = sortType.value;
     }
     this.selectedDateSort = softTypeValue;
-    const booksSortedByDate = [...this.bookData];
+    const booksSortedByDate = [...this.sortedAndFilteredBookData];
     booksSortedByDate.sort((a, b) => a.year - b.year);
     if (softTypeValue === 'newest') {
       booksSortedByDate.reverse();
     }
-    this.bookData = booksSortedByDate;
+    this.sortedAndFilteredBookData = booksSortedByDate;
   }
 
-  handleBookReadButton(){
-    this.fetchAndSetBooks()
+  handleBookReadButton() {
+    this.fetchAndSetBooks();
   }
 
+  applyFilters() {
+    let filteredVideosByCategory = [];
+
+    if (this.selectedCategory.value === 'all') {
+      //
+      filteredVideosByCategory = this.bookData;
+    } else {
+      const booksFiltered = this.bookData.filter((book) =>
+        book.catagories.includes(this.selectedCategory.value)
+      );
+      filteredVideosByCategory = booksFiltered;
+    }
+
+    let bookDataSorted;
+    let filteredVideosByReadStatus = [];
+
+    let hasBeenReadByUser;
+    if (this.selectedReadSort === 'read') {
+      hasBeenReadByUser = true;
+
+      bookDataSorted = filteredVideosByCategory.filter(
+        (bookData) => bookData.hasBeenReadByUser === hasBeenReadByUser
+      );
+    } else if (this.selectedReadSort === 'not read') {
+      hasBeenReadByUser = false;
+
+      bookDataSorted = filteredVideosByCategory.filter(
+        (bookData) => bookData.hasBeenReadByUser === hasBeenReadByUser
+      );
+    } else {
+      bookDataSorted = filteredVideosByCategory;
+    }
+
+    this.sortedAndFilteredBookData = bookDataSorted;
+    this.sortByDate(this.selectedDateSort);
+  }
 }
