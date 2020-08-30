@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { BooksService } from '../../services/http-requests/books.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { BooksService } from '../../services/http-requests/books.service';
 })
 export class BookCardComponent implements OnInit {
   @Input('bookData') bookData;
+  @Output('handleBookReadButton') handleBookReadButton = new EventEmitter()
+
   isRead: boolean;
   constructor(private booksService: BooksService) {}
 
@@ -26,13 +28,13 @@ export class BookCardComponent implements OnInit {
 
   private addBookToIsReadBooks() {
     this.booksService.removeBookRead(this.bookData._id).subscribe((res) => {
-      console.log('book not rad');
+      this.handleBookReadButton.emit('bookLikeStatusChanged')
     });
   }
 
   private removeBookFromisReadBooks() {
     this.booksService.addBookRead(this.bookData._id).subscribe((res) => {
-      console.log('book rad');
+      this.handleBookReadButton.emit('bookLikeStatusChanged')
     });
   }
 }

@@ -33,7 +33,7 @@
         
         <ng-container *ngFor="let individualBookData of bookData">
 
-                    <app-book-card [bookData]='individualBookData'></app-book-card>
+                    <app-book-card (handleBookReadButton)='handleBookReadButton()' [bookData]='individualBookData'></app-book-card>
 
         </ng-container>
       </div>

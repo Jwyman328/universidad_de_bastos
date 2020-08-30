@@ -9,26 +9,38 @@ import { BooksService } from '../../services/http-requests/books.service';
 })
 export class BookCenterComponent implements OnInit {
   bookData;
-  selectedSort = 'read';
-  sortedBooks;
+  selectedReadSort: "read" | "not read" = 'read';
+  selectedDateSort: {value:"newest"} | {value: "oldest"} ={ value: "newest"};
+  sortedBookData;
   readStatusOptions = [{displayName:'read', value:'read'}, {displayName:'not read', value:'not read'}]
   dateOptions = [{displayName:'newest', value:'newest'}, {displayName:'oldest', value:'oldest'}]
 
   constructor(private booksService:BooksService) { }
 
   ngOnInit(): void {
+    this.fetchAndSetBooks()
+  }
+
+  fetchAndSetBooks(){
     this.booksService.getBooks().subscribe((res)=>{
       this.bookData = res
+
+      this.sortBooksByAllCurrentSorts()
     })
   }
 
+  sortBooksByAllCurrentSorts(){
+    this.sortByDate(this.selectedDateSort)
+    this.sortBooksByReadStatus(this.selectedReadSort)
+  }
+
   sortByReadStatus(event){
-    console.log('read status', event)
-    console.log(this.bookData, )
     this.sortBooksByReadStatus(event.value)
   }
 
   sortBooksByReadStatus(readStatus) {
+    this.selectedReadSort = readStatus
+
     let readBooks = [];
     let unreadBooks = [];
     const bookDataSorted = this.bookData.map((bookData)=>{
@@ -55,13 +67,17 @@ export class BookCenterComponent implements OnInit {
     if (sortType.value) {
       softTypeValue = sortType.value;
     }
-    this.selectedSort = softTypeValue;
+    this.selectedDateSort = softTypeValue;
     const booksSortedByDate = [...this.bookData];
     booksSortedByDate.sort((a, b) => a.year - b.year);
     if (softTypeValue === 'newest') {
       booksSortedByDate.reverse();
     }
     this.bookData = booksSortedByDate;
+  }
+
+  handleBookReadButton(){
+    this.fetchAndSetBooks()
   }
 
 }
