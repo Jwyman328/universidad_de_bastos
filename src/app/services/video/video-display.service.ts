@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { interval, BehaviorSubject } from 'rxjs';
+import { VideoWatchedService } from '../http-requests/video-watched.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +28,7 @@ export class VideoDisplayService {
 
   isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-  constructor(private ngZone: NgZone) {}
+  constructor(private ngZone: NgZone,private videoWatchedService:VideoWatchedService) {}
 
   setVideoPlayer(player) {
     this.player = player;
@@ -81,6 +82,11 @@ export class VideoDisplayService {
   onPlayerStateChange(event) {
     switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
+    
+          this.videoWatchedService.addVideoWatched({videoUrl:this.video.value}).subscribe((res)=>{
+            console.log('recorded')
+          })
+        
         if (this.cleanTime() == 0) {
         } else {
         }

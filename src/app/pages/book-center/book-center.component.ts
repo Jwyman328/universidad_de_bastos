@@ -44,7 +44,8 @@ export class BookCenterComponent implements OnInit {
       this.bookData = res;
       this.sortedAndFilteredBookData = res;
 
-      this.sortByDate(this.selectedDateSort);
+      this.applyFilters()
+
     });
   }
   
