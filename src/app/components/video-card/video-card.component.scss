@@ -11,7 +11,7 @@
     color: black;
     display: inline-block;
 
-
+    
     &:hover {
         transform: scale(1.03);
         box-shadow: 3px 3px 3px 3px rgba(36, 36, 36, 0.714);
@@ -37,4 +37,18 @@
     }
 
 
+}
+
+.video-watched{
+    border-style: solid;
+    border-width: 7px;
+    border-color:gold ;
+    border-radius: 25px;
+}
+
+.video-not-watched{
+    border-style: solid;
+    border-width: 7px;
+    border-color: grey;
+    border-radius: 30px;
 }

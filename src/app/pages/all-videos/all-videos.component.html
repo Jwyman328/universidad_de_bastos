@@ -24,11 +24,17 @@
           [selectOptions]="yearelectOptions"
         ></app-select-box>
         <app-select-box
-        [selectLabel]="'Sort'"
+        [selectLabel]="'Date'"
         (changeSelectEvent)="sortVideos($event)"
         [defaultSelected]="sortSelectOptions[0]"
         [selectOptions]="sortSelectOptions"
       ></app-select-box>
+      <app-select-box
+      [selectLabel]="'Mirado'"
+      (changeSelectEvent)="setWatchedSortStatus($event)"
+      [defaultSelected]="watchedSortSelectOptions[0]"
+      [selectOptions]="watchedSortSelectOptions"
+    ></app-select-box>
       </div>
     
     <ng-container *ngFor="let videoData of selectedVideos">

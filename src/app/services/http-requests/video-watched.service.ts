@@ -24,4 +24,13 @@ export class VideoWatchedService {
       }
      );
    }
+
+   getAllVideos(){
+     return this.http.get(`${environment.backendAPIBaseUrl}/videos/`, {
+      headers: new HttpHeaders({
+        Authorization: `JWT ${this.token}`,
+        'Content-Type': 'application/json',
+      }),
+    })
+   }
 }
