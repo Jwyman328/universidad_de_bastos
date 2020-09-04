@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bookData } from 'src/app/data/bookData';
 import { BooksService } from '../../services/http-requests/books.service';
+import { book } from 'src/app/models/book';
 
 @Component({
   selector: 'app-book-center',
@@ -8,7 +9,7 @@ import { BooksService } from '../../services/http-requests/books.service';
   styleUrls: ['./book-center.component.scss'],
 })
 export class BookCenterComponent implements OnInit {
-  bookData;
+  bookData: book[] ;
   selectedReadSort: 'read' | 'not read' | 'all' = 'all';
   selectedDateSort: { value: 'newest' } | { value: 'oldest' } = {
     value: 'newest',

@@ -12,6 +12,7 @@ export class UserAuthDataMockService {
   constructor() { }
 
   getToken(){
+    return
     //return localStorage.getItem('token')
   }
 

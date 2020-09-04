@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { allVideos } from '../../data/videoData';
 import { VideoWatchedService } from 'src/app/services/http-requests/video-watched.service';
+import { video } from 'src/app/models/video';
 @Component({
   selector: 'app-all-videos',
   templateUrl: './all-videos.component.html',
@@ -10,10 +11,10 @@ export class AllVideosComponent implements OnInit {
   selectedInstitue = 'allInstitute';
   selectedSort = 'newest';
   selectedType = 'allType';
-  allVideos; //allVideos;
+  allVideos: video[]; //allVideos;
   yearSelected: any = 'any';
   selectedVideos; //allVideos;
-  watchedSortStatus = 'All';
+  watchedSortStatus : 'All' | boolean = 'All';
 
   watchedSortSelectOptions = [
     { value: 'All', displayName: 'All' },

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserAuthDataService } from './userData/user-auth-data.service';
 import { RequestSentStatus } from './RequestSentStatusHandler/RequestSentStatusHandler';
 import { environment } from '../../../environments/environment';
+import { book } from 'src/app/models/book';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +20,8 @@ export class BooksService extends RequestSentStatus {
     this.token = this.userAuthDataService.getToken();
   }
 
-  getBooks(){
-    return this.http.get(`${environment.backendAPIBaseUrl}/books/`, {
+  getBooks(): Observable<any> {
+    return this.http.get<book[]>(`${environment.backendAPIBaseUrl}/books/`, {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',

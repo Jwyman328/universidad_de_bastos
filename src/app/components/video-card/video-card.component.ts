@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { video } from 'src/app/models/video';
 
 @Component({
   selector: 'app-video-card',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./video-card.component.scss']
 })
 export class VideoCardComponent implements OnInit {
-  @Input('videoData') videoData;
+  @Input('videoData') videoData:video;
   constructor(private route: Router) {    
   }
 

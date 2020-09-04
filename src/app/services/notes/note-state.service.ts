@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { sanitizedNote } from 'src/app/models/note';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,10 @@ import { BehaviorSubject } from 'rxjs';
 export class NoteStateService {
   noteTitle = new BehaviorSubject('');
   currentNote =  new BehaviorSubject('');
-  currentVideoNotes = new BehaviorSubject<any[]>([]);
-  constructor() { }
+  currentVideoNotes = new BehaviorSubject<sanitizedNote[]>([]);
+  constructor() { 
+
+  }
 
   orderNotesBasedOffOfTime() {
     if (this.currentVideoNotes.value.length > 0){

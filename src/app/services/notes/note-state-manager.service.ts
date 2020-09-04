@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NoteStateService } from './note-state.service';
 import { NotesService } from '../http-requests/notes.service';
 import { VideoDisplayService } from '../video/video-display.service';
+import { note, sanitizedNote } from 'src/app/models/note';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,9 @@ export class NoteStateManagerService {
   ) {}
 
   async createNote() {
+
     const currentTimeOfNote = this.videoDisplayService.player.getCurrentTime();
+
     const timeSp =
       currentTimeOfNote * this.videoDisplayService.pixelPerSecond + 'px';
 
@@ -23,6 +26,7 @@ export class NoteStateManagerService {
       this.noteStateService.noteTitle.value,
       this.noteStateService.currentNote.value
     );
+
     await this.getAllNotes();
   }
 
@@ -46,16 +50,24 @@ export class NoteStateManagerService {
   getAllNotes() {
     this.notesService
       .getAllNotesForVideo(this.videoDisplayService.video.value)
-      .subscribe((res: any) => {
-        const allCurrentNotes = res;
-        const newNotes = [];
+      .subscribe((res: note[]) => {
+        const sanitizedNotes = this.sanitizeBackendNotes(res)
+        this.noteStateService.setCurrentVideoNotes(sanitizedNotes);
+        console.log(sanitizedNotes, 'sanitized notes')
+        this.noteStateService.orderNotesBasedOffOfTime();
+      });
+  }
+
+  sanitizeBackendNotes(backendNotes):sanitizedNote[]{
+    const allCurrentNotes = backendNotes;
+        const sanitizedNotes  = [];
         allCurrentNotes.map((note) => {
           const timeSp =
             note.videoTimeNoteTakenInSeconds *
               this.videoDisplayService.pixelPerSecond +
             'px';
 
-          newNotes.push({
+            sanitizedNotes.push({
             _id: note._id,
             timeSpot: timeSp,
             timeOfNote: note.videoTimeNoteTakenInSeconds,
@@ -66,9 +78,7 @@ export class NoteStateManagerService {
             ),
           });
         });
-        this.noteStateService.setCurrentVideoNotes(newNotes);
-        this.noteStateService.orderNotesBasedOffOfTime();
-      });
+        return sanitizedNotes
   }
 
   displayMinuteBasedTime(seconds) {

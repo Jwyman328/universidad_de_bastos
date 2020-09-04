@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RequestSentStatus } from './RequestSentStatusHandler/RequestSentStatusHandler';
 import { UserAuthDataService } from './userData/user-auth-data.service';
 import { environment } from '../../../environments/environment';
+import { note } from 'src/app/models/note';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +39,7 @@ export class NotesService extends RequestSentStatus {
 
   getAllNotesForVideo(videoId) {
     this.handleRequestSent();
-    return this.http.get(`${environment.backendAPIBaseUrl}/notes/${videoId}`, {
+    return this.http.get<note[]>(`${environment.backendAPIBaseUrl}/notes/${videoId}`, {
       headers: new HttpHeaders({
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',
