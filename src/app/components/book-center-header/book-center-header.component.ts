@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class BookCenterHeaderComponent implements OnInit {
 
-  constructor(private route: Router) { }
+  constructor(public route: Router) { }
 
   ngOnInit(): void {
   }
