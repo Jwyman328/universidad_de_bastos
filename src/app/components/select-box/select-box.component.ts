@@ -6,21 +6,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./select-box.component.scss']
 })
 export class SelectBoxComponent implements OnInit {
-  @Input('selectOptions') selectOptions: any[];
+  @Input('selectOptions') selectOptions: {displayName:string}[];
   @Input('defaultSelected') defaultSelected;
   @Input('selectLabel') selectLabel: string;
   @Output() changeSelectEvent = new EventEmitter<string>();
+  selectedItem: any = 'Select an item' 
+  selectOpen = false;
 
   constructor() { }
 
   ngOnInit(): void {
     this.selectedItem = this.defaultSelected
   }
-
-    //
-    selectedItem: any = 'Select an item' 
-    selectOpen = false;
-  
     openSelect(){
       this.selectOpen = !this.selectOpen
     }

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   isShowOptions = false
-  constructor(    private userAuthDataService: UserAuthDataService, private route: Router) { }
+  constructor(    private userAuthDataService: UserAuthDataService, public route: Router) { }
   user:string
   ngOnInit(): void {
     this.user = this.userAuthDataService.getUserName()
