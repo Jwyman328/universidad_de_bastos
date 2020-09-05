@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 //let handleLoginSubmitSpy: {jasmine.Spy};
 let testBedService;
 
-fdescribe('LoginFormComponent', () => {
+describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
   let router: Router;

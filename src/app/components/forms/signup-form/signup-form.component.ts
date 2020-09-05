@@ -29,7 +29,7 @@ export class SignupFormComponent2 {
 
   //signupUser = {isLoading:false, isError:false}
 
-  constructor(private router: Router,  private userAuthDataService: UserAuthDataService,public signupUser:SignupUserService) {} //
+  constructor(public router: Router,  private userAuthDataService: UserAuthDataService,public signupUser:SignupUserService) {} //
 
 
 
