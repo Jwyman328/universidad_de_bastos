@@ -1,25 +1,30 @@
-// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { VideoCardComponent } from './video-card.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { videoDataMock } from 'src/app/testing/mockData/videoDataMock';
 
-// import { VideoCardComponent } from './video-card.component';
+describe('VideoCardComponent', () => {
+  let component: VideoCardComponent;
+  let fixture: ComponentFixture<VideoCardComponent>;
 
-// describe('VideoCardComponent', () => {
-//   let component: VideoCardComponent;
-//   let fixture: ComponentFixture<VideoCardComponent>;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+    imports:[RouterTestingModule],
+      declarations: [ VideoCardComponent ]
+    })
+    .compileComponents();
+  }));
 
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [ VideoCardComponent ]
-//     })
-//     .compileComponents();
-//   }));
+  beforeEach(() => {
+    fixture = TestBed.createComponent(VideoCardComponent);
+    component = fixture.componentInstance;
+    component.videoData = videoDataMock
+    fixture.detectChanges();
+  });
 
-//   beforeEach(() => {
-//     fixture = TestBed.createComponent(VideoCardComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+  it('should on goToNoteCenter, navigate to the specific video', () => {
+    spyOn(component.route,'navigate')
+    component.goToNoteCenter()
+    expect(component.route.navigate).toHaveBeenCalledWith(['video-center', videoDataMock.videoUrl,videoDataMock.title])
+  });
+});

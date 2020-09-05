@@ -9,7 +9,7 @@ import { video } from 'src/app/models/video';
 })
 export class VideoCardComponent implements OnInit {
   @Input('videoData') videoData:video;
-  constructor(private route: Router) {    
+  constructor(public route: Router) {    
   }
 
   ngOnInit(): void {

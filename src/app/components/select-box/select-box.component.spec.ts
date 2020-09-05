@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SelectBoxComponent } from './select-box.component';
 
-fdescribe('SelectBoxComponent', () => {
+describe('SelectBoxComponent', () => {
   let component: SelectBoxComponent;
   let fixture: ComponentFixture<SelectBoxComponent>;
 
