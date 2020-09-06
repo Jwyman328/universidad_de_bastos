@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { allVideos } from '../../data/videoData';
 import { VideoWatchedService } from 'src/app/services/http-requests/video-watched.service';
 import { video } from 'src/app/models/video';
+
 @Component({
   selector: 'app-all-videos',
   templateUrl: './all-videos.component.html',
@@ -54,6 +55,18 @@ export class AllVideosComponent implements OnInit {
   selectedItem = 'Select an item';
   selectOpen = false;
 
+
+  constructor(private videoWatchedService: VideoWatchedService) {}
+
+  ngOnInit(): void {
+    this.videoWatchedService.getAllVideos().subscribe((res) => {
+      this.allVideos = res;
+      console.log(res);
+      this.queryVideos();
+      this.sortVideos(this.selectedSort);
+    });
+  }
+
   setInstitution(institution) {
     this.selectedInstitue = institution.value;
     this.queryVideos();
@@ -83,30 +96,25 @@ export class AllVideosComponent implements OnInit {
     this.selectOpen = false;
   }
 
-  constructor(private videoWatchedService: VideoWatchedService) {}
-
-  ngOnInit(): void {
-    this.videoWatchedService.getAllVideos().subscribe((res) => {
-      this.allVideos = res;
-      console.log(res);
-      this.queryVideos();
-      this.sortVideos(this.selectedSort);
-    });
-  }
-
   queryVideos() {
-    let theseVideos = this.allVideos.filter(
-      (video) =>
-        video.categories.includes(this.selectedInstitue) &&
-        video.categories.includes(this.selectedType) &&
-        (String(video.year) === this.yearSelected ||
-          this.yearSelected === 'any') &&
-        (video.hasBeenWatchedByUser === this.watchedSortStatus ||
-          this.watchedSortStatus === 'All')
-    );
-
-    this.selectedVideos = theseVideos;
-    this.sortVideos(this.selectedSort);
+    try{
+      console.log('all vids',allVideos)
+      let theseVideos = this.allVideos.filter(
+        (video) =>{
+          video.categories.includes(this.selectedInstitue) &&
+          video.categories.includes(this.selectedType) &&
+          (String(video.year) === this.yearSelected ||
+            this.yearSelected === 'any') &&
+          (video.hasBeenWatchedByUser === this.watchedSortStatus ||
+            this.watchedSortStatus === 'All')
+        });
+        console.log('wueried',theseVideos)
+      this.selectedVideos = theseVideos;
+      this.sortVideos(this.selectedSort);
+    }catch(e){
+      console.log('err')
+    }
+    
   }
 
   sortVideos(sortType) {
