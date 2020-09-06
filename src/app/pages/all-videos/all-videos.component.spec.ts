@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let videoWatchedService: VideoWatchedService;
-fdescribe('AllVideosComponent', () => {
+describe('AllVideosComponent', () => {
   let component: AllVideosComponent;
   let fixture: ComponentFixture<AllVideosComponent>;
 

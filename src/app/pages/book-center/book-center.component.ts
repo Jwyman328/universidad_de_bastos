@@ -46,7 +46,6 @@ export class BookCenterComponent implements OnInit {
       this.sortedAndFilteredBookData = res;
 
       this.applyFilters()
-
     });
   }
   
