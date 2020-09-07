@@ -11,7 +11,7 @@ let noteStateManagerService: NoteStateManagerService;
 let noteStateService: NoteStateService;
 let videoDisplayService: VideoDisplayService;
 
-fdescribe('VideoCenterComponent', () => {
+describe('VideoCenterComponent', () => {
   let component: VideoCenterComponent;
   let fixture: ComponentFixture<VideoCenterComponent>;
 
