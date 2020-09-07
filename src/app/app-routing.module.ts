@@ -11,8 +11,8 @@ import { BookCenterComponent } from './pages/book-center/book-center.component';
 const routes: Routes = [
   //{ path: '', component: HomepageComponent,canActivate: [AuthGuard] },
   { path: 'video-center/:videoUrl/:videoTitle', component: VideoCenterComponent,canActivate: [AuthGuard] },
-  { path: '', component: AllVideosComponent},
-  { path: 'book-center', component: BookCenterComponent},
+  { path: '', component: AllVideosComponent,canActivate: [AuthGuard] },
+  { path: 'book-center', component: BookCenterComponent,canActivate: [AuthGuard] },
   { path: 'signup', component: SignUpPageComponent },
   { path: 'login', component: LoginInPageComponent},
 
