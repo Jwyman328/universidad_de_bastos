@@ -28,6 +28,7 @@ import { DisplayNoteComponent } from './components/display-note/display-note.com
 import { BookCenterComponent } from './pages/book-center/book-center.component';
 import { BookCenterHeaderComponent } from './components/book-center-header/book-center-header.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
+import { NagivationHeaderComponent } from './components/nagivation-header/nagivation-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { BookCardComponent } from './components/book-card/book-card.component';
     BookCenterComponent,
     BookCenterHeaderComponent,
     BookCardComponent,
+    NagivationHeaderComponent,
     //AuthCardComponent,
     //SignupFormComponent2
     //FormButtonComponent,
