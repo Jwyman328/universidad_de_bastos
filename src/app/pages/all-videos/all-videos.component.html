@@ -5,26 +5,26 @@
   <div class="all-videos-container">
     <div class="select-box-bar">
         <app-select-box
-          [selectLabel]="'Institution'"
+          [selectLabel]="'Institución'"
           class="select-box"
           (changeSelectEvent)="setInstitution($event)"
           [defaultSelected]="institutionSelectOptions[0]"
           [selectOptions]="institutionSelectOptions"
         ></app-select-box>
         <app-select-box
-          [selectLabel]="'Event Type'"
+          [selectLabel]="'Tipo'"
           (changeSelectEvent)="setType($event)"
           [defaultSelected]="typeSelectOptions[0]"
           [selectOptions]="typeSelectOptions"
         ></app-select-box>
         <app-select-box
-          [selectLabel]="'Year'"
+          [selectLabel]="'Año'"
           (changeSelectEvent)="setYear($event)"
           [defaultSelected]="yearelectOptions[0]"
           [selectOptions]="yearelectOptions"
         ></app-select-box>
         <app-select-box
-        [selectLabel]="'Date'"
+        [selectLabel]="'Fecha'"
         (changeSelectEvent)="sortVideos($event)"
         [defaultSelected]="sortSelectOptions[0]"
         [selectOptions]="sortSelectOptions"
