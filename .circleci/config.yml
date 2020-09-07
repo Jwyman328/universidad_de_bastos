@@ -10,7 +10,7 @@ jobs:
       - run: CI=false npm run-script build
   test:
     docker:
-      - image: circleci/node:12 # the primary container, where your job's commands are run
+      - image: weltn24/up-docker-node-chrome-headless # the primary container, where your job's commands are run
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
