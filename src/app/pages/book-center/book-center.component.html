@@ -24,11 +24,17 @@
       ></app-select-box>
     </div>
 
-    <ng-container *ngFor="let individualBookData of sortedAndFilteredBookData">
-      <app-book-card
-        (handleBookReadButton)="handleBookReadButton()"
-        [bookData]="individualBookData"
-      ></app-book-card>
+    <ng-container *ngIf='!isBooksLoading'>
+      <ng-container *ngFor="let individualBookData of sortedAndFilteredBookData">
+        <app-book-card
+          (handleBookReadButton)="handleBookReadButton()"
+          [bookData]="individualBookData"
+        ></app-book-card>
+      </ng-container>
     </ng-container>
+   
+
+    <app-spinner [isSpinning]='isBooksLoading' class='spinner' *ngIf='isBooksLoading'></app-spinner>
+
   </div>
 </div>

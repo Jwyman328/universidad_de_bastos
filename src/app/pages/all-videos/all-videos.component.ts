@@ -53,6 +53,7 @@ export class AllVideosComponent implements OnInit {
   //
   selectedItem = 'Select an item';
   selectOpen = false;
+  isVideosLoading=true;
 
   constructor(private videoWatchedService: VideoWatchedService) {}
 
@@ -61,6 +62,9 @@ export class AllVideosComponent implements OnInit {
       this.allVideos = res;
       this.queryVideos();
       this.sortVideos(this.selectedSort);
+      if(res.length > 0){
+        this.isVideosLoading=false
+      }
     });
   }
 

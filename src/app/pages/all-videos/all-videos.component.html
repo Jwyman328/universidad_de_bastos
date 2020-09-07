@@ -36,9 +36,14 @@
       [selectOptions]="watchedSortSelectOptions"
     ></app-select-box>
       </div>
-    
-    <ng-container *ngFor="let videoData of selectedVideos">
-      <app-video-card [videoData]="videoData"></app-video-card>
+    <ng-container *ngIf='!isVideosLoading'>
+      <ng-container *ngFor="let videoData of selectedVideos">
+        <app-video-card [videoData]="videoData"></app-video-card>
+      </ng-container>
     </ng-container>
+
+    <app-spinner [isSpinning]='isVideosLoading' class='spinner' *ngIf='isVideosLoading'></app-spinner>
+
   </div>
 </div>
+

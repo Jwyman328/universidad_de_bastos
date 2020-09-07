@@ -33,6 +33,8 @@ export class BookCenterComponent implements OnInit {
     { displayName: 'Nuevo', value: 'newest' },
     { displayName: 'Viejo', value: 'oldest' },
   ];
+  isBooksLoading=true;
+
 
   constructor(private booksService: BooksService) {}
 
@@ -46,6 +48,9 @@ export class BookCenterComponent implements OnInit {
       this.sortedAndFilteredBookData = res;
 
       this.applyFilters()
+      if(res.length > 0){
+        this.isBooksLoading=false
+      }
     });
   }
   
