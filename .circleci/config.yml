@@ -1,22 +1,7 @@
-version: 2
-
-jobs:
-    # The test job
-    test:
-        working_directory: ~/bastosFrontend
-        docker:
-            - image: circleci/node:10-browsers
-        steps:
-            # Checkout the code from the branch into the working_directory
-            - checkout
-            # Log the current branch
-          
-            # Install project dependencies
-            - run:
-                name: Install local dependencies
-                command: npm install
-           
-            # Test the source code
-            - run:
-                name: Testing
-                command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+workflows:
+  node-tests:
+    jobs:
+      - node/test
