@@ -53,7 +53,6 @@ export class NoteStateManagerService {
       .subscribe((res: note[]) => {
         const sanitizedNotes = this.sanitizeBackendNotes(res)
         this.noteStateService.setCurrentVideoNotes(sanitizedNotes);
-        console.log(sanitizedNotes, 'sanitized notes')
         this.noteStateService.orderNotesBasedOffOfTime();
       });
   }

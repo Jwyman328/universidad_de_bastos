@@ -58,9 +58,7 @@ export class AllVideosComponent implements OnInit {
 
   ngOnInit(): void {
     this.videoWatchedService.getAllVideos().subscribe((res) => {
-      console.log('res', res);
       this.allVideos = res;
-      //console.log(res);
       this.queryVideos();
       this.sortVideos(this.selectedSort);
     });
