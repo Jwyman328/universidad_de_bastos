@@ -9,32 +9,32 @@ import { video } from 'src/app/models/video';
 })
 export class AllVideosComponent implements OnInit {
   selectedInstitue = 'allInstitute';
-  selectedSort = 'newest';
+  selectedSort = 'nuevo';
   selectedType = 'allType';
   allVideos: video[]; //allVideos;
-  yearSelected: any = 'any';
+  yearSelected: any = 'Todos';
   selectedVideos; //allVideos;
   watchedSortStatus: 'All' | boolean = 'All';
 
   watchedSortSelectOptions = [
-    { value: 'All', displayName: 'All' },
+    { value: 'All', displayName: 'Todos' },
     { value: true, displayName: 'Mirado' },
     { value: false, displayName: 'No Mirado' },
   ];
 
   institutionSelectOptions = [
-    { value: 'allInstitute', displayName: 'All' },
+    { value: 'allInstitute', displayName: 'Todos' },
     { value: 'UFM', displayName: 'UFM' },
     { value: 'xoanDeLugo', displayName: 'Xoán de Lugo' },
     { value: 'juanDeMariana', displayName: 'J D Mariana' },
   ];
   typeSelectOptions = [
-    { value: 'allType', displayName: 'all' },
+    { value: 'allType', displayName: 'Todos' },
     { value: 'interview', displayName: 'Entrevista' },
-    { value: 'conference', displayName: 'Conference' },
+    { value: 'conference', displayName: 'Conferencia' },
   ];
   yearelectOptions = [
-    { value: 'anyYear', displayName: 'any' },
+    { value: 'anyYear', displayName: 'Todos' },
     { value: 2012, displayName: '2012' },
     { value: 2013, displayName: '2013' },
     { value: 2014, displayName: '2014' },
@@ -46,8 +46,8 @@ export class AllVideosComponent implements OnInit {
     { value: 2020, displayName: '2020' },
   ];
   sortSelectOptions = [
-    { value: 'newest', displayName: 'Newest' },
-    { value: 'oldest', displayName: 'Oldest' },
+    { value: 'nuevo', displayName: 'nuevo' },
+    { value: 'viejo', displayName: 'viejo' },
   ];
 
   //
@@ -101,7 +101,7 @@ export class AllVideosComponent implements OnInit {
         video.categories.includes(this.selectedInstitue) &&
         video.categories.includes(this.selectedType) &&
         (String(video.year) === this.yearSelected ||
-          this.yearSelected === 'any') &&
+          this.yearSelected === 'Todos') &&
         (video.hasBeenWatchedByUser === this.watchedSortStatus ||
           this.watchedSortStatus === 'All')
     );
@@ -117,7 +117,7 @@ export class AllVideosComponent implements OnInit {
     this.selectedSort = softTypeValue;
     const currentVideos = [...this.selectedVideos];
     currentVideos.sort((a, b) => a.year - b.year);
-    if (softTypeValue === 'newest') {
+    if (softTypeValue === 'nuevo') {
       currentVideos.reverse();
     }
     this.selectedVideos = currentVideos;

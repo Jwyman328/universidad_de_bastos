@@ -49,7 +49,7 @@ describe('AllVideosComponent', () => {
 
     component.ngOnInit();
     expect(component.queryVideos).toHaveBeenCalled();
-    expect(component.sortVideos).toHaveBeenCalledWith('newest');
+    expect(component.sortVideos).toHaveBeenCalledWith('nuevo');
   });
 
   it('setInstitute should set selectedInstitue and call queryVideos', () => {
@@ -130,7 +130,7 @@ describe('AllVideosComponent', () => {
     let videoDataMockNew = {...videoDataMock}
     videoDataMockNew.year = 2020
     component.selectedVideos = [videoDataMock,videoDataMockNew]
-    component.sortVideos('newest');
+    component.sortVideos('nuevo');
 
     expect(component.selectedVideos[0]).toEqual(videoDataMockNew)
     expect(component.selectedVideos[1]).toEqual(videoDataMock)

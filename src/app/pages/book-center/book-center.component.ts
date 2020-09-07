@@ -17,21 +17,21 @@ export class BookCenterComponent implements OnInit {
   sortedAndFilteredBookData;
   selectedCategory = { value: 'all' };
   filterCategories = [
-    { displayName: 'all', value: 'all' },
-    { displayName: 'sociology', value: 'sociology' },
+    { displayName: 'Todos', value: 'all' },
+    { displayName: 'Sociología', value: 'sociology' },
     { displayName: 'Economía', value: 'Economía' },
     { displayName: 'Filosofía política', value: 'Filosofía política' },
-    { displayName: 'fiction', value: 'fiction' },
+    { displayName: 'Ficción', value: 'fiction' },
     { displayName: 'Derecho', value: 'Derecho' },
   ];
   readStatusOptions = [
-    { displayName: 'all', value: 'all' },
-    { displayName: 'read', value: 'read' },
-    { displayName: 'not read', value: 'not read' },
+    { displayName: 'Todos', value: 'all' },
+    { displayName: 'Leido', value: 'read' },
+    { displayName: 'No Leido', value: 'not read' },
   ];
   dateOptions = [
-    { displayName: 'newest', value: 'newest' },
-    { displayName: 'oldest', value: 'oldest' },
+    { displayName: 'Nuevo', value: 'newest' },
+    { displayName: 'Viejo', value: 'oldest' },
   ];
 
   constructor(private booksService: BooksService) {}
