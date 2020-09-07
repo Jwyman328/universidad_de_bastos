@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:12 # the primary container, where your job's commands are run
+        environment:
+          CHROME_BIN: "/usr/bin/google-chrome"
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command
