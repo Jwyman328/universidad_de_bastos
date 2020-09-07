@@ -1,5 +1,5 @@
 <div (click)="goToNoteCenter()" class="video" [ngClass]="{'video-watched':videoData.hasBeenWatchedByUser, 'video-not-watched':!videoData.hasBeenWatchedByUser}">
     <img class='video__image' [src]='videoData.image'/>
     <p class='video__title'>{{videoData.title}}</p>
-    <div class='video__note-count'>Notes Take: {{videoData.noteCount}}</div>
+    <div class='video__note-count'>Notas: {{quantityOfNotes}}</div>
 </div>
