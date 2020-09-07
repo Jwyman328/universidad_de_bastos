@@ -2,14 +2,11 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
-  NgZone,
   ViewChildren,
   QueryList,
   ElementRef,
 } from '@angular/core';
-import { interval } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { NotesService } from 'src/app/services/http-requests/notes.service';
 import { VideoDisplayService } from 'src/app/services/video/video-display.service';
 import { DisplayNoteComponent } from '../../components/display-note/display-note.component';
 import { NoteStateManagerService } from '../../services/notes/note-state-manager.service';
@@ -34,11 +31,9 @@ export class VideoCenterComponent implements OnInit {
   public areNotesReadyToBeDisplayed: boolean = false;
 
   constructor(
-    private ngZone: NgZone,
     private activatedRouter: ActivatedRoute,
-    private notesService: NotesService,
     private noteStateManagerService: NoteStateManagerService,
-    private noteStateService: NoteStateService,
+    public noteStateService: NoteStateService,
     public videoDisplayService: VideoDisplayService
   ) {
     this.videoDisplayService.setVideo(
@@ -49,25 +44,7 @@ export class VideoCenterComponent implements OnInit {
     );
   }
 
-  /* 2. Initialize method for YT IFrame API */
-  init() {
-    this.getAllNotes();
-    // Return if Player is already created
-    if (window['YT']) {
-      this.videoDisplayService.startVideo();
-      return;
-    }
 
-    var tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    /* 3. startVideo() will create an <iframe> (and YouTube player) after the API code downloads. */
-    window['onYouTubeIframeAPIReady'] = () => {
-      this.videoDisplayService.startVideo();
-    };
-  }
 
   ngOnInit() {
     this.init();
@@ -91,6 +68,26 @@ export class VideoCenterComponent implements OnInit {
       this.notes = newNotes;
     });
   }
+
+    /* 2. Initialize method for YT IFrame API */
+    init() {
+      this.getAllNotes();
+      // Return if Player is already created
+      if (window['YT']) {
+        this.videoDisplayService.startVideo();
+        return;
+      }
+  
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  
+      /* 3. startVideo() will create an <iframe> (and YouTube player) after the API code downloads. */
+      window['onYouTubeIframeAPIReady'] = () => {
+        this.videoDisplayService.startVideo();
+      };
+    }
 
   ngOnDestroy() {
     this.videoDisplayService.cleanupSubs();
