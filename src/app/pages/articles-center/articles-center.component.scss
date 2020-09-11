@@ -5,7 +5,6 @@
   top: 0px;
   left: 0px;
   min-height: 100vh;
-  padding: 0;
   width: 100%;
   background-image: url("../../styles/TexturePapers/Texture6.jpg");
   background-position: center top;
@@ -21,14 +20,18 @@
 }
 
 .articles-container {
-  height: 500px;
+  height: auto;
   width: 70vw;
   background-color: $bastos-blue;
   //opacity: .8;
   margin-top: 25vh;
+  padding-top: 10px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
+  opacity: .9;
+
 }
