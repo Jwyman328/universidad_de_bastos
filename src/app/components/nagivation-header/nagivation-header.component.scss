@@ -1,6 +1,8 @@
+@import '../../styles/colors.scss';
+
 .header-container {
     width: 100%;
-    background-color: rgba(9, 122, 171, 0.934);
+    background-color: $bastos-blue;
     height: 50px;
     display: flex;
     justify-content: space-evenly;

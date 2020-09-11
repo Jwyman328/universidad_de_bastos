@@ -1,25 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BookCenterHeaderComponent } from './book-center-header.component';
+import { LargeHeaderComponent } from './large-header.component';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('BookCenterHeaderComponent', () => {
-  let component: BookCenterHeaderComponent;
-  let fixture: ComponentFixture<BookCenterHeaderComponent>;
+describe('LargeHeaderComponent', () => {
+  let component: LargeHeaderComponent;
+  let fixture: ComponentFixture<LargeHeaderComponent>;
   let route:Router
   beforeEach(async(() => {
     TestBed.configureTestingModule({
      imports:[RouterTestingModule.withRoutes([]),],
 
-      declarations: [ BookCenterHeaderComponent ],
+      declarations: [ LargeHeaderComponent ],
 
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BookCenterHeaderComponent);
+    fixture = TestBed.createComponent(LargeHeaderComponent);
     route = TestBed.get(Router)
     component = fixture.componentInstance;
     fixture.detectChanges();

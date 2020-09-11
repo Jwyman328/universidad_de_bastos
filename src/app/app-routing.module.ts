@@ -7,12 +7,14 @@ import { LoginInPageComponent } from './pages/login-in-page/login-in-page.compon
 import { AuthGuard } from './services/auth-guards/AuthGuard.service';
 import { AllVideosComponent } from './pages/all-videos/all-videos.component';
 import { BookCenterComponent } from './pages/book-center/book-center.component';
+import { ArticlesCenterComponent } from './pages/articles-center/articles-center.component';
 
 const routes: Routes = [
   //{ path: '', component: HomepageComponent,canActivate: [AuthGuard] },
   { path: 'video-center/:videoUrl/:videoTitle', component: VideoCenterComponent,canActivate: [AuthGuard] },
   { path: '', component: AllVideosComponent,canActivate: [AuthGuard] },
   { path: 'book-center', component: BookCenterComponent,canActivate: [AuthGuard] },
+  { path: 'articles-center', component: ArticlesCenterComponent,canActivate: [AuthGuard] },
   { path: 'signup', component: SignUpPageComponent },
   { path: 'login', component: LoginInPageComponent},
 

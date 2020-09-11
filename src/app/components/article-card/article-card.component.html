@@ -1,0 +1,18 @@
+<div class = 'article-card'>
+        <img class='article-card__image' [src]="articleData.imageUrl"/>
+        <div class='article-card__title'>
+            {{articleData.title}}
+        </div>
+        <div class="article-card__date">
+            {{articleData.author}} -- {{articleData.date.toLocaleDateString()}} 
+        </div>
+
+        <div class='article-card__categories'>
+            Categorías: {{articleCategoriesString}}
+        </div>
+
+        <div class="article-card__read-button" (click)='openArticle()'>
+            Leer
+        </div>
+
+</div>
