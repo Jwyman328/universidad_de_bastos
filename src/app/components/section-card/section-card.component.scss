@@ -1,0 +1,69 @@
+@import '../../styles/colors.scss';
+
+.section-card{
+    height: 500px;
+    width: 25vw;
+    background-color: white;
+    position: relative;
+    margin-bottom: 50px;
+    border-color: gold;
+    border-width: 2px;
+    border-style: solid;
+
+    
+}
+
+.image {
+    height: 92%;
+    width: 100%;
+    //background-image: url('../../styles/images/video_center_cover_2.png');
+    background-size: 100% 100%;
+    position: absolute;
+    top: 40px;
+}
+
+.title {
+    color: black;
+    font-size: 25px;
+    padding-top: 5px;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    background-color: gold;;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: $bastos-blue;
+    z-index: 100;
+
+    &__details{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 32px;
+        color: gold;
+        font-weight: 800;
+
+    }
+  }
+
+  .section-card:hover .overlay {
+    opacity: .9;
+  }
+  
+  .image-t {
+      width: 300px;
+      height: 300px;
+  }

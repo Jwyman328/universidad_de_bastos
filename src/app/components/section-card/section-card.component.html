@@ -1,0 +1,17 @@
+<div class='section-card' (click)='goToPage()'>
+    <div class='overlay'>
+        <div class='overlay__details'>
+            <ng-container *ngFor='let detail of pageDetails'>
+                <p>{{detail}}</p>
+            </ng-container>
+
+        </div>
+        
+    </div>
+    <div class='title'>
+        {{title}}
+    </div>
+
+
+    <img class='image' [src]='imageLocation'/>
+</div>

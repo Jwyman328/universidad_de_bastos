@@ -1,29 +1,9 @@
 <div class="home-page-container">
   <div class="home-page-content">
     <app-header></app-header>
-    <div class="instructions-card">
-      <h1>
-        escuchar a las lecturas
-      </h1>
-      <h1>
-        Tomar Notas adjuntado a un punto en el video
-      </h1>
-      <h1>
-          Ver Todas los libros mencionados con 
-          <ul>
-              <li>
-                foto
-              </li>
-              <li>
-                  Titulo
-              </li>
-              <li>
-                  Enlance a conseguirlo
-              </li>
-              
-          </ul>
+    <app-section-card [urlLocation]="'videos-center'" [imageLocation]='"/assets/images/video_center_cover_2.png"' [title]="'Centro De Videos'" [pageDetails]="['Buscar videos', 'Mirar videos','Tomar notas']"></app-section-card>
+    <app-section-card [urlLocation]="'articles-center'" [imageLocation]='"/assets/images/articles_center_cover_3.png"' [title]="'Centro De Articulos'" [pageDetails]="['Buscar articulos', 'Leer articulos']"></app-section-card>
+    <app-section-card [urlLocation]="'book-center'" [imageLocation]='"/assets/images/book_center_cover.png"' [title]="'Centro De Libros'" [pageDetails]="['Buscar Libros', 'Leer Libros']"></app-section-card>
 
-      </h1>
-    </div>
   </div>
 </div>

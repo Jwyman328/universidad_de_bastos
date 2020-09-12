@@ -12,7 +12,8 @@ import { ArticlesCenterComponent } from './pages/articles-center/articles-center
 const routes: Routes = [
   //{ path: '', component: HomepageComponent,canActivate: [AuthGuard] },
   { path: 'video-center/:videoUrl/:videoTitle', component: VideoCenterComponent,canActivate: [AuthGuard] },
-  { path: '', component: AllVideosComponent,canActivate: [AuthGuard] },
+  { path: '', component: HomepageComponent,canActivate: [AuthGuard] },
+  { path: 'videos-center', component: AllVideosComponent,canActivate: [AuthGuard] },
   { path: 'book-center', component: BookCenterComponent,canActivate: [AuthGuard] },
   { path: 'articles-center', component: ArticlesCenterComponent,canActivate: [AuthGuard] },
   { path: 'signup', component: SignUpPageComponent },

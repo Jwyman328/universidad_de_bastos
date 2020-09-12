@@ -31,6 +31,7 @@ import { BookCardComponent } from './components/book-card/book-card.component';
 import { NagivationHeaderComponent } from './components/nagivation-header/nagivation-header.component';
 import { ArticlesCenterComponent } from './pages/articles-center/articles-center.component';
 import { ArticleCardComponent } from './components/article-card/article-card.component';
+import { SectionCardComponent } from './components/section-card/section-card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { ArticleCardComponent } from './components/article-card/article-card.com
     NagivationHeaderComponent,
     ArticlesCenterComponent,
     ArticleCardComponent,
+    SectionCardComponent,
     //AuthCardComponent,
     //SignupFormComponent2
     //FormButtonComponent,
