@@ -20,6 +20,8 @@ export class ArticlesCenterComponent implements OnInit {
   };
 
   sortedAndFilteredArticleData;
+  isVideosLoading=true;
+
 
   constructor(private articlesService:ArticlesService) { }
 
@@ -27,6 +29,7 @@ export class ArticlesCenterComponent implements OnInit {
     this.articlesService.getArticles().subscribe((articles)=>{
       this.convertDateToJsDate(articles)
       this.sortByDate(this.selectedDateSort)
+      this.isVideosLoading = false
     })
   }
 

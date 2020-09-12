@@ -15,5 +15,6 @@
             <app-article-card [articleData]='article'></app-article-card>
         </ng-container>
     </div>
+    <app-spinner [isSpinning]='isVideosLoading' class='spinner' *ngIf='isVideosLoading'></app-spinner>
 
 </div>
