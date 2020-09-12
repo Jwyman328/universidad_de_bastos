@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { articleData } from '../../data/articleData';
+import { ArticlesService } from 'src/app/services/http-requests/articles.service';
 
 @Component({
   selector: 'app-articles-center',
@@ -8,9 +9,56 @@ import { articleData } from '../../data/articleData';
 })
 export class ArticlesCenterComponent implements OnInit {
   articles = articleData;
-  constructor() { }
+
+  dateOptions = [
+    { displayName: 'Nuevo', value: 'newest' },
+    { displayName: 'Viejo', value: 'oldest' },
+  ];
+
+  selectedDateSort: { value: 'newest' } | { value: 'oldest' } = {
+    value: 'newest',
+  };
+
+  sortedAndFilteredArticleData;
+
+  constructor(private articlesService:ArticlesService) { }
 
   ngOnInit(): void {
+    this.articlesService.getArticles().subscribe((articles)=>{
+      this.convertDateToJsDate(articles)
+      this.sortByDate(this.selectedDateSort)
+    })
+  }
+
+  convertDateToJsDate(articles){
+    const articlesWithJsDate = articles.map((article) => {
+      article.date = new Date(article.date)
+      return article
+    })
+    this.articles = articlesWithJsDate
+    this.sortedAndFilteredArticleData = articlesWithJsDate
+  }
+
+  setDateSort(dateSort) {
+    this.selectedDateSort = dateSort;
+
+    this.sortByDate(this.selectedDateSort);
+  }
+
+  sortByDate(sortType) {
+    let softTypeValue = sortType;
+    if (sortType.value) {
+      softTypeValue = sortType.value;
+    }
+    console.log('sortType hit',softTypeValue,this.sortedAndFilteredArticleData)
+
+    this.selectedDateSort = softTypeValue;
+    const booksSortedByDate = [...this.sortedAndFilteredArticleData];
+    booksSortedByDate.sort((a, b) => a.date - b.date);
+    if (softTypeValue === 'newest') {
+      booksSortedByDate.reverse();
+    }
+    this.sortedAndFilteredArticleData = booksSortedByDate;
   }
 
 }

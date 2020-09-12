@@ -1,8 +1,17 @@
 <div class="articles-center-page-container">
     <large-header [headerTitle]='"Artículos"'></large-header>
 
+    <div class="select-box-bar">
+        <app-select-box
+        [selectLabel]="'Date'"
+        (changeSelectEvent)="setDateSort($event)"
+        [defaultSelected]="dateOptions[0]"
+        [selectOptions]="dateOptions"
+      ></app-select-box>
+    </div>
+
     <div class='articles-container'>
-        <ng-container *ngFor='let article of articles'>
+        <ng-container *ngFor='let article of sortedAndFilteredArticleData'>
             <app-article-card [articleData]='article'></app-article-card>
         </ng-container>
     </div>
