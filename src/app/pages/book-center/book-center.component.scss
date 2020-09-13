@@ -7,7 +7,7 @@
    width: 100%;
    background-image: url('../../styles/TexturePapers/Texture6.jpg');
    background-position: center top;
-   background-size:  100%;
+   background-size:  150%;
 
    color: white;
    display: flex;
@@ -50,4 +50,33 @@
     transform: translate(-50%, -50%);
   }
   
-  
+  @media (max-width: 650px){
+    .select-box-bar {
+      margin-top: 0px;
+      width: 90%;
+      height: 550px;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+    }
+
+    .all-videos-container {
+      position: relative;
+      min-width: 95%;
+      min-height: 90%;
+      margin: 50px;
+      margin-top: 20px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .filter-icon {
+      width: 50px;
+      margin-top: 40px;
+    }
+    
+  }

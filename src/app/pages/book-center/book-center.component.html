@@ -1,25 +1,30 @@
 <div class="book-center-page-container">
   <large-header [headerTitle]='"Libros Para Salid de Matrix"'></large-header>
-  <div class="all-videos-container">
-    <div class="select-box-bar">
+  <img 
+  *ngIf=' isMobileView'
+
+  (click)='openFilters()'
+  class='filter-icon' src="https://img.icons8.com/ios/50/000000/settings.png"/>
+  <div  class="all-videos-container">
+    <div *ngIf='isFilterOpen || !isMobileView' class="select-box-bar">
       <app-select-box
-        [selectLabel]="'Read Status'"
+        [selectLabel]="'Leido'"
         class="select-box"
         (changeSelectEvent)="setReadStatus($event)"
-        [defaultSelected]="readStatusOptions[0]"
+        [defaultSelected]="selectedReadSort"
         [selectOptions]="readStatusOptions"
       ></app-select-box>
       <app-select-box
-        [selectLabel]="'Category'"
+        [selectLabel]="'Categoría'"
         (changeSelectEvent)="setCategoryFilter($event)"
-        [defaultSelected]="filterCategories[0]"
+        [defaultSelected]="selectedCategory"
         [selectOptions]="filterCategories"
       ></app-select-box>
 
       <app-select-box
-        [selectLabel]="'Date'"
+        [selectLabel]="'Fecha'"
         (changeSelectEvent)="setDateSort($event)"
-        [defaultSelected]="dateOptions[0]"
+        [defaultSelected]="selectedDateSort"
         [selectOptions]="dateOptions"
       ></app-select-box>
     </div>
@@ -27,6 +32,7 @@
     <ng-container *ngIf='!isBooksLoading'>
       <ng-container *ngFor="let individualBookData of sortedAndFilteredBookData">
         <app-book-card
+        *ngIf='!isFilterOpen || !isMobileView'
           (handleBookReadButton)="handleBookReadButton()"
           [bookData]="individualBookData"
         ></app-book-card>

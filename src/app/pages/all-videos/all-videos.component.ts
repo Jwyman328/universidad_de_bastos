@@ -76,7 +76,7 @@ export class AllVideosComponent implements OnInit {
 
   onResize(event) {
     this.innerWidth = window.innerWidth;
-    if (this.innerWidth <= 1165) {
+    if (this.innerWidth <= 900) {
       this.isMobileView = true;
     } else {
       this.isMobileView = false;

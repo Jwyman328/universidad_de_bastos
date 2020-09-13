@@ -29,4 +29,33 @@
     width: 100%;
    
 }
+@media (max-width: 655px){
+    .header-container {
+        position: relative;
+        left:0px;
+        top:0px;
+        width: 100vw;
+        height: 255px;
+        background-color: rgba(255, 217, 0, 0.749); // rgba(255, 255, 0, 0.618)
+        display: flex;
+        flex-direction: column ;
+        align-items: center;
+        justify-content: space-evenly;
+    }
 
+
+.header__title {
+    font-family: cursive;
+    font-size: 25px;
+    padding: 0px;
+    margin: 5px;
+}
+
+
+.secondary-header {
+    position:absolute;
+    margin-top: 205px;
+    width: 100%;
+   
+}
+}

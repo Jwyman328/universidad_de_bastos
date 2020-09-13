@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { bookData } from 'src/app/data/bookData';
 import { BooksService } from '../../services/http-requests/books.service';
 import { book } from 'src/app/models/book';
@@ -10,12 +10,10 @@ import { book } from 'src/app/models/book';
 })
 export class BookCenterComponent implements OnInit {
   bookData: book[] ;
-  selectedReadSort: 'read' | 'not read' | 'all' = 'all';
-  selectedDateSort: { value: 'newest' } | { value: 'oldest' } = {
-    value: 'newest',
-  };
+  selectedReadSort = { displayName: 'Todos', value: 'all' };
+  selectedDateSort = { displayName: 'Nuevo', value: 'newest' }
   sortedAndFilteredBookData;
-  selectedCategory = { value: 'all' };
+  selectedCategory =  { displayName: 'Todos', value: 'all' }
   filterCategories = [
     { displayName: 'Todos', value: 'all' },
     { displayName: 'Sociología', value: 'sociology' },
@@ -37,9 +35,29 @@ export class BookCenterComponent implements OnInit {
 
 
   constructor(private booksService: BooksService) {}
+  isFilterOpen = false;
+  isMobileView = false;
+  public innerWidth: any;
+  @HostListener('window:resize', ['$event'])
+
 
   ngOnInit(): void {
     this.fetchAndSetBooks();
+
+    this.onResize(true);
+  }
+
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth <= 650) {
+      this.isMobileView = true;
+    } else {
+      this.isMobileView = false;
+    }
+  }
+
+  openFilters(){
+    this.isFilterOpen = !this.isFilterOpen
   }
 
   fetchAndSetBooks() {
@@ -55,7 +73,7 @@ export class BookCenterComponent implements OnInit {
   }
   
   setReadStatus(event) {
-    this.selectedReadSort = event.value;
+    this.selectedReadSort = event;
     this.applyFilters();
   }
 
@@ -76,7 +94,6 @@ export class BookCenterComponent implements OnInit {
     if (sortType.value) {
       softTypeValue = sortType.value;
     }
-    this.selectedDateSort = softTypeValue;
     const booksSortedByDate = [...this.sortedAndFilteredBookData];
     booksSortedByDate.sort((a, b) => a.year - b.year);
     if (softTypeValue === 'newest') {
@@ -106,13 +123,13 @@ export class BookCenterComponent implements OnInit {
     let filteredVideosByReadStatus = [];
 
     let hasBeenReadByUser;
-    if (this.selectedReadSort === 'read') {
+    if (this.selectedReadSort.value === 'read') {
       hasBeenReadByUser = true;
 
       bookDataSorted = filteredVideosByCategory.filter(
         (bookData) => bookData.hasBeenReadByUser === hasBeenReadByUser
       );
-    } else if (this.selectedReadSort === 'not read') {
+    } else if (this.selectedReadSort.value === 'not read') {
       hasBeenReadByUser = false;
 
       bookDataSorted = filteredVideosByCategory.filter(

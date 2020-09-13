@@ -6,7 +6,7 @@
     <div [ngClass]="{'select-box-bar-open':isFilterOpen, 'select-box-bar-closed':!isFilterOpen}">
 
       <app-select-box
-        *ngIf='isFilterOpen'
+        *ngIf='isFilterOpen || !isMobileView'
           [selectLabel]="'Institución'"
           class="select-box"
           (changeSelectEvent)="setInstitution($event)"
@@ -14,7 +14,7 @@
           [selectOptions]="institutionSelectOptions"
         ></app-select-box>
         <app-select-box
-        *ngIf='isFilterOpen'
+        *ngIf='isFilterOpen || !isMobileView'
 
           [selectLabel]="'Tipo'"
           (changeSelectEvent)="setType($event)"
@@ -23,7 +23,7 @@
         ></app-select-box>
 
       <app-select-box
-      *ngIf='isFilterOpen'
+      *ngIf='isFilterOpen || !isMobileView'
 
       [selectLabel]="'Mirado'"
       (changeSelectEvent)="setWatchedSortStatus($event)"
@@ -32,7 +32,7 @@
     ></app-select-box>
 
     <app-select-box
-    *ngIf='isFilterOpen'
+    *ngIf='isFilterOpen || !isMobileView'
 
     [selectLabel]="'Fecha'"
     (changeSelectEvent)="sortVideos($event)"
@@ -40,7 +40,7 @@
     [selectOptions]="sortSelectOptions"
   ></app-select-box>
   <app-select-box
-  *ngIf='isFilterOpen'
+  *ngIf='isFilterOpen || !isMobileView'
 
     [selectLabel]="'Año'"
     (changeSelectEvent)="setYear($event)"
@@ -48,6 +48,8 @@
     [selectOptions]="yearelectOptions"
   ></app-select-box>
   <img 
+  *ngIf=' isMobileView'
+
   (click)='openFilters()'
   class='filter-icon' src="https://img.icons8.com/ios/50/000000/settings.png"/>
     
