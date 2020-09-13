@@ -1,4 +1,4 @@
-<div class='header-container'>
+<div *ngIf='!isMobileHeader' class='header-container'>
     <div (click)='navigateTo("videos-center")' class='navigate-word'>
         Centro-De-Videos
     </div>
@@ -9,3 +9,42 @@
         Centro-De-Libros
     </div>
 </div>
+
+<!-- <ng-container *ngIf='isMobileHeader'>
+    <div  class='mobile-header'>
+
+        <div *ngIf='isMobileHeaderOpen' class='mobile-header__links'>
+            <div (click)='navigateTo("videos-center")' class='navigate-word'>
+                Centro-De-Videos
+            </div>
+            <div (click)='navigateTo("articles-center")' class='navigate-word'>
+                Centro-De-Articulos
+            </div>
+            <div (click)='navigateTo("book-center")' class='navigate-word'>xw
+                Centro-De-Libros
+            </div>
+        </div>
+
+        <div>
+            <img src="https://img.icons8.com/metro/26/000000/menu.png"/>
+        </div>
+        
+
+    </div>
+</ng-container> -->
+<div *ngIf='isMobileHeader' class='header-container'>
+    <div (click)='navigateTo("videos-center")' class='navigate-word'>
+        <img class='video-icon' src="https://img.icons8.com/fluent-systems-regular/24/000000/video.png"/>
+    </div>
+    <div (click)='navigateTo("articles-center")' class='navigate-word'>
+        <img class='article-icon' src="https://img.icons8.com/ios/50/000000/paper.png"/>
+    </div>
+    <div (click)='navigateTo("book-center")' class='navigate-word'>
+        <img class='book-icon' src="https://img.icons8.com/windows/32/000000/book--v1.png"/>
+    </div>
+</div>
+
+
+
+
+
