@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { VideoWatchedService } from 'src/app/services/http-requests/video-watched.service';
 import { video } from 'src/app/models/video';
 
@@ -8,13 +8,13 @@ import { video } from 'src/app/models/video';
   styleUrls: ['./all-videos.component.scss'],
 })
 export class AllVideosComponent implements OnInit {
-  selectedInstitue = 'allInstitute';
-  selectedSort = 'nuevo';
-  selectedType = 'allType';
-  allVideos: video[]; //allVideos;
+  selectedInstitue = { value: 'allInstitute', displayName: 'Todos' };
+  selectedSort = { value: 'nuevo', displayName: 'nuevo' };
+  selectedType = { value: 'allType', displayName: 'Todos' };
+  allVideos: video[]; 
   yearSelected: any = 'Todos';
-  selectedVideos; //allVideos;
-  watchedSortStatus: 'All' | boolean = 'All';
+  selectedVideos; 
+  watchedSortStatus: any = { value: 'All', displayName: 'Todos' };
 
   watchedSortSelectOptions = [
     { value: 'All', displayName: 'Todos' },
@@ -50,31 +50,50 @@ export class AllVideosComponent implements OnInit {
     { value: 'viejo', displayName: 'viejo' },
   ];
 
-  //
+
   selectedItem = 'Select an item';
   selectOpen = false;
-  isVideosLoading=true;
+  isVideosLoading = true;
 
   constructor(private videoWatchedService: VideoWatchedService) {}
 
+  isMobileView = false;
+  isFilterOpen = false;
+  public innerWidth: any;
+
+  @HostListener('window:resize', ['$event'])
   ngOnInit(): void {
     this.videoWatchedService.getAllVideos().subscribe((res) => {
       this.allVideos = res;
       this.queryVideos();
       this.sortVideos(this.selectedSort);
-      if(res.length > 0){
-        this.isVideosLoading=false
+      if (res.length > 0) {
+        this.isVideosLoading = false;
       }
     });
+    this.onResize(true);
+  }
+
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth <= 1165) {
+      this.isMobileView = true;
+    } else {
+      this.isMobileView = false;
+    }
+  }
+
+  openFilters() {
+    this.isFilterOpen = !this.isFilterOpen;
   }
 
   setInstitution(institution) {
-    this.selectedInstitue = institution.value;
+    this.selectedInstitue = institution;
     this.queryVideos();
   }
 
   setType(type) {
-    this.selectedType = type.value;
+    this.selectedType = type; 
     this.queryVideos();
   }
 
@@ -84,7 +103,7 @@ export class AllVideosComponent implements OnInit {
   }
 
   setWatchedSortStatus(watchedSortStatus) {
-    this.watchedSortStatus = watchedSortStatus.value;
+    this.watchedSortStatus = watchedSortStatus;
     this.queryVideos();
   }
 
@@ -100,26 +119,23 @@ export class AllVideosComponent implements OnInit {
   queryVideos() {
     let theseVideos = this.allVideos.filter(
       (video) =>
-        video.categories.includes(this.selectedInstitue) &&
-        video.categories.includes(this.selectedType) &&
+        video.categories.includes(this.selectedInstitue.value) &&
+        video.categories.includes(this.selectedType.value) &&
         (String(video.year) === this.yearSelected ||
           this.yearSelected === 'Todos') &&
-        (video.hasBeenWatchedByUser === this.watchedSortStatus ||
-          this.watchedSortStatus === 'All')
+        (video.hasBeenWatchedByUser === this.watchedSortStatus.value ||
+          this.watchedSortStatus.value === 'All')
     );
     this.selectedVideos = theseVideos;
     this.sortVideos(this.selectedSort);
   }
 
   sortVideos(sortType) {
-    let softTypeValue = sortType;
-    if (sortType.value) {
-      softTypeValue = sortType.value;
-    }
-    this.selectedSort = softTypeValue;
+
+    this.selectedSort = sortType;
     const currentVideos = [...this.selectedVideos];
     currentVideos.sort((a, b) => a.year - b.year);
-    if (softTypeValue === 'nuevo') {
+    if (sortType.value === 'nuevo') {
       currentVideos.reverse();
     }
     this.selectedVideos = currentVideos;

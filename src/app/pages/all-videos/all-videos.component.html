@@ -3,44 +3,60 @@
 
 
   <div class="all-videos-container">
-    <div class="select-box-bar">
-        <app-select-box
+    <div [ngClass]="{'select-box-bar-open':isFilterOpen, 'select-box-bar-closed':!isFilterOpen}">
+
+      <app-select-box
+        *ngIf='isFilterOpen'
           [selectLabel]="'Institución'"
           class="select-box"
           (changeSelectEvent)="setInstitution($event)"
-          [defaultSelected]="institutionSelectOptions[0]"
+          [defaultSelected]="selectedInstitue"
           [selectOptions]="institutionSelectOptions"
         ></app-select-box>
         <app-select-box
+        *ngIf='isFilterOpen'
+
           [selectLabel]="'Tipo'"
           (changeSelectEvent)="setType($event)"
-          [defaultSelected]="typeSelectOptions[0]"
+          [defaultSelected]="selectedType"
           [selectOptions]="typeSelectOptions"
         ></app-select-box>
-        <app-select-box
-          [selectLabel]="'Año'"
-          (changeSelectEvent)="setYear($event)"
-          [defaultSelected]="yearelectOptions[0]"
-          [selectOptions]="yearelectOptions"
-        ></app-select-box>
-        <app-select-box
-        [selectLabel]="'Fecha'"
-        (changeSelectEvent)="sortVideos($event)"
-        [defaultSelected]="sortSelectOptions[0]"
-        [selectOptions]="sortSelectOptions"
-      ></app-select-box>
+
       <app-select-box
+      *ngIf='isFilterOpen'
+
       [selectLabel]="'Mirado'"
       (changeSelectEvent)="setWatchedSortStatus($event)"
-      [defaultSelected]="watchedSortSelectOptions[0]"
+      [defaultSelected]="watchedSortStatus"
       [selectOptions]="watchedSortSelectOptions"
     ></app-select-box>
+
+    <app-select-box
+    *ngIf='isFilterOpen'
+
+    [selectLabel]="'Fecha'"
+    (changeSelectEvent)="sortVideos($event)"
+    [defaultSelected]="selectedSort"
+    [selectOptions]="sortSelectOptions"
+  ></app-select-box>
+  <app-select-box
+  *ngIf='isFilterOpen'
+
+    [selectLabel]="'Año'"
+    (changeSelectEvent)="setYear($event)"
+    [defaultSelected]="yearelectOptions[0]"
+    [selectOptions]="yearelectOptions"
+  ></app-select-box>
+  <img 
+  (click)='openFilters()'
+  class='filter-icon' src="https://img.icons8.com/ios/50/000000/settings.png"/>
+    
       </div>
-    <ng-container *ngIf='!isVideosLoading'>
+    <div  class='all-video-cards' *ngIf='!isVideosLoading'>
       <ng-container *ngFor="let videoData of selectedVideos">
-        <app-video-card [videoData]="videoData"></app-video-card>
+        <app-video-card *ngIf='!isFilterOpen' [videoData]="videoData"></app-video-card>
       </ng-container>
-    </ng-container>
+    </div>
 
     <app-spinner [isSpinning]='isVideosLoading' class='spinner' *ngIf='isVideosLoading'></app-spinner>
 

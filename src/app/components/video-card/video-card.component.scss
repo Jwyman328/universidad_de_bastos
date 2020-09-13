@@ -52,3 +52,24 @@
     border-color: grey;
     border-radius: 30px;
 }
+
+@media (max-width: 430px) {
+    .video {
+        margin-bottom: 20px;
+        width: 80vw;
+        height: 300px;
+    
+        &__image {
+            width: 80vw;
+    
+        }
+    }
+
+    .video-watched{
+        margin-bottom: 10px;
+    }
+    
+    .video-not-watched{
+        margin-bottom: 10px;
+    }
+}
