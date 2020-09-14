@@ -53,7 +53,6 @@ export class ArticlesCenterComponent implements OnInit {
     if (sortType.value) {
       softTypeValue = sortType.value;
     }
-    console.log('sortType hit',softTypeValue,this.sortedAndFilteredArticleData)
 
     this.selectedDateSort = softTypeValue;
     const booksSortedByDate = [...this.sortedAndFilteredArticleData];
