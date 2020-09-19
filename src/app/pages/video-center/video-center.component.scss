@@ -159,6 +159,8 @@
   display: grid;
   grid-template-rows: 0.2fr 1fr 0.2fr;
   grid-template-columns: 1fr 10fr;
+  
+
 
   &__currentTime-bubble {
     grid-column: 1/2;
@@ -240,17 +242,19 @@
     grid-template-rows: 0.2fr 1fr auto auto;
 
     &__note-title {
-      width: 50vw;
+      width: 100%;
       min-height: 20px;
     }
 
     &__buttons {
+
       grid-row: 3/5;
       flex-direction: column;
+      justify-self: center;
     }
 
     &__note-textbox {
-      width: 50vw;
+      width: 100%;
       min-height: 100px;
     }
   }

@@ -47,6 +47,7 @@ export class VideoCenterComponent implements OnInit {
 
 
   ngOnInit() {
+    this.clearNotePad();
     this.videoBarWidth  = window.innerWidth * .8;
 
      this.videoDisplayService.setVideoPlayerHeightWidth(390, this.videoBarWidth)
@@ -128,6 +129,8 @@ export class VideoCenterComponent implements OnInit {
   clearNotePad() {
     this.currentNote = '';
     this.noteTitle = '';
+    this.noteStateService.currentNote.next('')
+    this.noteStateService.noteTitle.next('')
   }
 
   toggleNoteCenter() {
