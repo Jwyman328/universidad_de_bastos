@@ -1,3 +1,4 @@
+@import '../../styles/colors.scss';
 .home-page-container {
     position: absolute;
     top: 0px;
@@ -6,11 +7,12 @@
 
     height:auto;
     width: 100vw;
-    background-image: url('../../styles/TexturePapers/Texture6.jpg');
+    background: linear-gradient($primary-gradient, $secondary-gradient  ) ;
     //background-position: center top;
 
     background-repeat: round;
     color: white;
+    z-index: -10;
 }
 .home-page-content {
     margin-top: 25vh;

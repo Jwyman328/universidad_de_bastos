@@ -1,8 +1,10 @@
+@import '../../styles/colors.scss';
+
 .video {
   margin: 20px;
   width: 200px;
   height: 300px;
-  //background-color: rgba(255, 217, 0, 0.797);
+  //background-color: rgba(255, 217, 0, 0.697);
   border-color: black;
   border-width: 0px;
   border-style: solid;
@@ -42,7 +44,7 @@
 .book-read {
     border-style: solid;
     border-width: 7px;
-    border-color:gold ;
+    border-color:$has-read-yellow ;
     //background-color: rgba(32, 159, 110, 0.673);
 }
 
@@ -98,7 +100,7 @@
   }
 
   &-back {
-      color: gold;
+      color: $has-read-yellow;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -122,7 +124,7 @@
         transition: all .3s;
     
         &--read-color {
-            background-color: grey;
+            background-color:$has-read-yellow;
         }
 
         &--not-read-color {

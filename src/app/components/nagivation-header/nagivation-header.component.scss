@@ -2,7 +2,7 @@
 
 .header-container {
     width: 100%;
-    background-color: $bastos-blue;
+    background-color: $teal;
     height: 50px;
     display: flex;
     justify-content: space-evenly;
@@ -11,7 +11,7 @@
 
 .navigate-word {
     font-size: x-large;
-    color: gold;
+    color: rgb(193, 193, 193);
     transition: all .2s;
     z-index: 10000;
     cursor: pointer;

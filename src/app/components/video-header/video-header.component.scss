@@ -1,9 +1,11 @@
+@import '../../styles/colors.scss';
+
 .video-header {
   position: relative;
   width: 100vw;
   height: 15vh;
-  background-color: rgba(255, 255, 0, 0.516);
-  color: black;
+  background-color: $primary-blue;
+  color: white;
   margin-top: 0px;
 
   h1 {
@@ -15,10 +17,10 @@
 
 .video-title {
   position: absolute;
-  top: 3%;
+  top: 9%;
   left: 43%;
   transform: translateX(-30%);
-  font-size: 30px;
+  font-size: 24px;
   text-align: center;
   width: 45%;
   max-height: 30%;
@@ -55,7 +57,7 @@
   // top:0px;
   width: 300px;
   height: 15vh;
-  //background-color: rgba(255, 217, 0, 0.749); // rgba(255, 255, 0, 0.618)
+  //background-color: rgba(255, 217, 0, -2.749); // rgba(255, 255, 0, 0.618)
   display: flex;
   align-items: center;
   justify-content: flex-start;

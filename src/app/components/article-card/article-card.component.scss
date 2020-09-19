@@ -7,8 +7,8 @@
   background-color: white;
   border-style: solid;
   border-radius: 10px;
-  border-width: 2px;
-  border-color: gold;
+  border-width: 3px;
+  border-color: $has-read-yellow;
   color: black;
 
   display: grid;
@@ -18,7 +18,7 @@
   row-gap: 5px;
 
   margin-bottom: 30px;
-  //opacity: .8;
+  //opacity: .9;
 
   &__image {
     grid-row: 1/6;
@@ -79,7 +79,7 @@
 
     width: 100px;
     height: 40px;
-    background-color: gold;
+    background-color: $has-read-yellow;
     border-radius: 20px;
     border-width: 1px;
     border-style: solid;

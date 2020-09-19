@@ -6,8 +6,7 @@
   left: 0px;
   min-height: 100vh;
   width: 100%;
-  background-image: url("../../styles/TexturePapers/Texture6.jpg");
-  background-position: center top;
+  background: linear-gradient($primary-gradient, $secondary-gradient , ) ;  background-position: center top;
   background-size: 100%;
 
   color: white;
@@ -23,7 +22,7 @@
   height: auto;
   width: 70vw;
   background-color: $bastos-blue;
-  //opacity: .8;
+  //opacity: .9;
   padding-top: 50px;
 
   display: flex;

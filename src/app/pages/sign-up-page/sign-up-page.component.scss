@@ -1,3 +1,4 @@
+@import '../../styles/colors.scss';
 .page-container{
     min-height: 100vh;
     height: 100%;
@@ -9,6 +10,5 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('../../styles/TexturePapers/Texture7.jpg');
-    background-position: center;
+    background: linear-gradient($primary-gradient, $secondary-gradient  ) ;    background-position: center;
 }

@@ -1,8 +1,10 @@
+@import '../../styles/colors.scss';
+
 .video {
     margin: 20px;
     width: 300px;
     height: 300px;
-    background-color: rgba(255, 217, 0, 0.797);
+    background-color: rgba(249, 248, 246, 0.892);
     border-color: black;
     border-width: 1px;
     border-style: solid;
@@ -42,7 +44,7 @@
 .video-watched{
     border-style: solid;
     border-width: 7px;
-    border-color:gold ;
+    border-color:$has-read-yellow ;
     border-radius: 25px;
 }
 

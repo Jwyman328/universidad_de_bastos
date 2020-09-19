@@ -1,3 +1,5 @@
+@import '../../styles/colors.scss';
+
 .book-center-page-container {
     position: absolute;
    top: 0px;
@@ -5,8 +7,8 @@
    min-height:100vh;
    padding:0;
    width: 100%;
-   background-image: url('../../styles/TexturePapers/Texture6.jpg');
-   background-position: center top;
+   background: linear-gradient($primary-gradient, $secondary-gradient , ) ;
+    background-position: center top;
    background-size:  150%;
 
    color: white;
