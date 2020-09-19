@@ -14,21 +14,30 @@ export class VideoDisplayService {
   public pausedAt: number = 0;
   public isPaused: boolean = false;
   public totalDuration: number;
-  public pixelPerSecond = 105;
   public notes = [];
   public currentNote: string = '';
   public noteTitle: any;
   public isNoteCenterOpen: boolean = true;
   public videoTitle = new BehaviorSubject('');
+  public videoHeight = 390;
+  public videoWidth// = 640;
+  public pixelPerSecond; //(this.videoWidth / 8) //105; 
+
+
 
   subscription: any = null;
   source: any = interval(1000);
   intervalId: any;
   public videoProg: any = new BehaviorSubject(0);
 
-  isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  //isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   constructor(private ngZone: NgZone,private videoWatchedService:VideoWatchedService) {}
+  
+  setVideoPlayerHeightWidth(height,width){
+    this.videoHeight = height;
+    this.videoWidth = width
+  }
 
   setVideoPlayer(player) {
     this.player = player;
@@ -37,8 +46,8 @@ export class VideoDisplayService {
   async startVideo() {
     this.reframed = false;
     this.player = new window['YT'].Player('player', {
-      height: '390',
-      width: '840',
+      height: this.videoHeight,
+      width: this.videoWidth,
       videoId: this.video.value,
       playerVars: {
         autoplay: 0,
@@ -66,16 +75,16 @@ export class VideoDisplayService {
     this.myplayer = event.target;
     this.totalDuration = this.player.getDuration();
     this.calculatePixelPerSecond();
-    if (this.isRestricted) {
-      event.target.mute();
-    } else {
-      this.player.mute();
-    }
+    // if (this.isRestricted) {
+    //   event.target.mute();
+    // } else {
+    //   this.player.mute();
+    // }
     this.isReady.next(true);
   }
 
   calculatePixelPerSecond() {
-    const pixelPerSecond = 840 / this.totalDuration;
+    const pixelPerSecond = this.videoWidth / this.totalDuration;
     this.pixelPerSecond = pixelPerSecond;
   }
 

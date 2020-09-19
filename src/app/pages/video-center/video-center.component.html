@@ -2,8 +2,8 @@
   <app-video-header [videoTitle]='videoDisplayService.videoTitle.value'></app-video-header>
   <div class="video-player">
     <div class="embed-responsive" id="player"></div>
-    <div class="video-player__time-bar">
-        <div class="video-player__time-line">
+    <div class="video-player__time-bar" [ngStyle]="{'width': videoBarWidth}">
+        <div class="video-player__time-line" >
 
         </div>
         <ng-container *ngIf='areNotesReadyToBeDisplayed'>
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="video-player__note-bar">
+  <div class="video-player__note-bar" [ngStyle]="{'width': videoBarWidth}">
     <button class='note-center-button' (click)="toggleNoteCenter()">Note Center</button>
   </div>
   <div *ngIf="isNoteCenterOpen" class="note-center">

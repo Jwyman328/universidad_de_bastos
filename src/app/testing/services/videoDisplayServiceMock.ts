@@ -26,7 +26,7 @@ export class VideoDisplayServiceMock {
   intervalId: any;
   public videoProg: any = new BehaviorSubject(0);
 
-  isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  //isRestricted = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   constructor(private ngZone: any,private videoWatchedService:any) {}
 

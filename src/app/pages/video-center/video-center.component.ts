@@ -29,6 +29,7 @@ export class VideoCenterComponent implements OnInit {
   public noteTitle: string = '';
   public isNoteCenterOpen: boolean = true;
   public areNotesReadyToBeDisplayed: boolean = false;
+  public videoBarWidth;
 
   constructor(
     private activatedRouter: ActivatedRoute,
@@ -45,8 +46,11 @@ export class VideoCenterComponent implements OnInit {
   }
 
 
-
   ngOnInit() {
+    this.videoBarWidth  = window.innerWidth * .8;
+
+     this.videoDisplayService.setVideoPlayerHeightWidth(390, this.videoBarWidth)
+
     this.init();
     this.setNotesReadyToBeDisplayed();
 
