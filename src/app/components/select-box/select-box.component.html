@@ -1,7 +1,7 @@
 <div class='select-box__label'>
     {{selectLabel}}
 </div>
-<div class="real-custom-select" (mouseenter)="openSelect()" (mouseleave)="openSelect()">
+<div class="real-custom-select" (click)='openSelect()' (mouseenter)="openSelect()" (mouseleave)="openSelect()">
   <div  class="real-custom-select__title">
     <span class="real-custom-select__title-text">{{ selectedItem.displayName |titlecase}}</span>
     <span class='arrow-down'>

@@ -51,7 +51,7 @@
 .book-not-read {
     border-style: solid;
     border-width: 7px;
-    border-color: grey;
+    border-color: $card-background;
 }
 
 .photoCard {
@@ -128,7 +128,7 @@
         }
 
         &--not-read-color {
-            background-color: grey;
+            background-color: $card-background
         }
 
         &:hover{

@@ -6,7 +6,7 @@
         <!-- <a  class='xoanDeLugoLogo' add target="_blank" href="https://xoandelugo.org/"></a> -->
         <div class='header-options' (mouseenter)='showOptions()'   >
             <img width="40px" src="https://img.icons8.com/material/24/000000/admin-settings-male.png"/>
-            <div (mouseenter)='showOptions()' (mouseleave)='hideOptions()' class='options-drop-down' *ngIf='isShowOptions'>
+            <div (click)='showOptions()' (mouseenter)='showOptions()' (mouseleave)='hideOptions()' class='options-drop-down' *ngIf='isShowOptions'>
                 <div class='options-drop-down__main-item'><p>{{user}}</p></div>
                 <div (click)='logOut()' class='options-drop-down__item'>
                     <svg xmlns='http://www.w3.org/2000/svg' paddingTop='30' width='30' height='30' viewBox='0 0 512 512'><title>ionicons-v5-i</title><path d='M320,176V136a40,40,0,0,0-40-40H88a40,40,0,0,0-40,40V376a40,40,0,0,0,40,40H280a40,40,0,0,0,40-40V336' style='fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><polyline points='384 176 464 256 384 336' style='fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/><line x1='191' y1='256' x2='464' y2='256' style='fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/></svg>
