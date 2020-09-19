@@ -27,6 +27,7 @@
     font-family: cursive;
     font-size: 45px;
     padding: 20px;
+    color: $bastos-blue;
 }
 
 .header-options {
@@ -90,8 +91,9 @@
 
 @media (max-width: 955px){
     .header-container {
-
         height: 22vh;
+        min-height: 200px;
+        max-height: 200px;
         display: grid;
         grid-template-rows: 1fr .4fr;
         grid-template-columns: 1fr 1fr;
