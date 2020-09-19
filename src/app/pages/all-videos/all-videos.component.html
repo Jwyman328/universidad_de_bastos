@@ -4,7 +4,11 @@
 
   <div class="all-videos-container">
     <div [ngClass]="{'select-box-bar-open':isFilterOpen, 'select-box-bar-closed':!isFilterOpen}">
-
+      <img 
+      *ngIf=' isMobileView'
+    
+      (click)='openFilters()'
+      class='filter-icon' src="https://img.icons8.com/ios/50/000000/settings.png"/>
       <app-select-box
         *ngIf='isFilterOpen || !isMobileView'
           [selectLabel]="'Institución'"
@@ -41,17 +45,12 @@
   ></app-select-box>
   <app-select-box
   *ngIf='isFilterOpen || !isMobileView'
-
     [selectLabel]="'Año'"
     (changeSelectEvent)="setYear($event)"
     [defaultSelected]="yearelectOptions[0]"
     [selectOptions]="yearelectOptions"
   ></app-select-box>
-  <img 
-  *ngIf=' isMobileView'
-
-  (click)='openFilters()'
-  class='filter-icon' src="https://img.icons8.com/ios/50/000000/settings.png"/>
+      <div  *ngIf='isFilterOpen && isMobileView' class='extra-space'></div>
     
       </div>
     <div  class='all-video-cards' *ngIf='!isVideosLoading'>
