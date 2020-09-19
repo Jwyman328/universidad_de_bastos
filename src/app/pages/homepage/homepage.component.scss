@@ -15,7 +15,7 @@
     z-index: -10;
 }
 .home-page-content {
-    margin-top: 25vh;
+    margin-top: 200px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -28,7 +28,8 @@
 
 @media (max-width: 955px){
     .home-page-content {
-        margin-top: 28vh;
+        margin-top: 250px;
+
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;;

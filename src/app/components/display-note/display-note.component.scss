@@ -154,9 +154,9 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(97, 97, 97);
-  border-color: gold;
-  color: white;
+  background-color: $card-background;
+  border-color: $teal;
+  color: black;
   border-style: solid;
   border-width: 3px;
   border-radius: 10px;
@@ -201,10 +201,10 @@
   &__button-cancel {
     width: 75px;
     height: 30px;
-    border-color: gold;
+    border-color: $has-read-yellow;
     border-width: 2px;
     border-style: solid;
-    background-color: white;
+    background-color: $has-read-yellow;
     text-align: center;
     padding-top: 10px;
   }
@@ -212,10 +212,10 @@
   &__button-ok {
     width: 75px;
     height: 30px;
-    border-color: gold;
+    border-color: $has-read-yellow;
     border-width: 2px;
     border-style: solid;
-    background-color: green;
+    background-color: $primary-gradient;
     text-align: center;
     padding-top: 10px;
   }

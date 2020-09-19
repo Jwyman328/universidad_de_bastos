@@ -51,15 +51,15 @@
 
 <div *ngIf='showDeleteNoteModal' class='delete-note-modal-container'>
    <div class='delete-note-card'>
-        <h2 class='delete-note-card__header'>Please Confirm</h2>
+        <h2 class='delete-note-card__header'>Confirma</h2>
         <div class='seperator'></div>
-        <p class='delete-note-card__text'>Are you sure you want to delete your note "{{noteTitle}}"?</p>
+        <p class='delete-note-card__text'>Quires borrar tu nota "{{noteTitle}}"?</p>
         <div class='delete-note-card__buttons'>
             <div (click)='cancelDeleteNote()' class='delete-note-card__button delete-note-card__button-cancel'>
-                Cancel
+                No
             </div>
             <div (click)='deleteNote()' class=' delete-note-card__button delete-note-card__button-ok'>
-                OK
+                Si
             </div>
         </div>
    </div>
