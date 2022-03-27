@@ -22,4 +22,3 @@ export class SignupUserService extends RequestSentStatus {
   }
 }
 
-//http://localhost:5000/auth/sign_up

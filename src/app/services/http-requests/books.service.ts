@@ -7,10 +7,9 @@ import { book } from 'src/app/models/book';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BooksService extends RequestSentStatus {
-
   token: string;
   constructor(
     private http: HttpClient,
@@ -26,16 +25,15 @@ export class BooksService extends RequestSentStatus {
         Authorization: `JWT ${this.token}`,
         'Content-Type': 'application/json',
       }),
-    });  }
-
-
+    });
+  }
 
   addBookRead(bookId) {
     this.handleRequestSent();
     return this.http.post(
       `${environment.backendAPIBaseUrl}/books/read/`,
       {
-        bookId:bookId
+        bookId: bookId,
       },
       {
         headers: new HttpHeaders({
@@ -48,14 +46,12 @@ export class BooksService extends RequestSentStatus {
 
   removeBookRead(bookId) {
     this.handleRequestSent();
-    return this.http.delete(
-      `${environment.backendAPIBaseUrl}/books/read/${bookId}`,
-      {
-        headers: new HttpHeaders({
-          Authorization: `JWT ${this.token}`,
-          'Content-Type': 'application/json',
-        }),
-      }
-    );
+    return this.http.delete(`${environment.backendAPIBaseUrl}/books/read/`, {
+      params: { id: bookId },
+      headers: new HttpHeaders({
+        Authorization: `JWT ${this.token}`,
+        'Content-Type': 'application/json',
+      }),
+    });
   }
 }
