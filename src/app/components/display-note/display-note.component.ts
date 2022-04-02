@@ -32,7 +32,9 @@ export class DisplayNoteComponent implements OnInit {
   }
 
   deleteNote() {
-    this.notesService.deleteNote(this.note._id).subscribe((res) => {
+    const noteId = this.note._id ? this.note._id : this.note.id;
+
+    this.notesService.deleteNote(noteId).subscribe((res) => {
       this.isNoteDeleted = true;
     });
     this.showDeleteNoteModal = false;
@@ -57,12 +59,10 @@ export class DisplayNoteComponent implements OnInit {
     //set local state
     this.note.noteText = this.currentNote;
     this.note.noteTitle = this.noteTitle;
-
-    this.notesService
-      .updateNote(this.note._id, updateNoted)
-      .subscribe((res) => {
-        this.leaveEditMode();
-      });
+    const noteId = this.note._id ? this.note._id : this.note.id;
+    this.notesService.updateNote(noteId, updateNoted).subscribe((res) => {
+      this.leaveEditMode();
+    });
   }
 
   cancelNote() {

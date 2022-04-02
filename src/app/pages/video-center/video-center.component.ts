@@ -45,12 +45,11 @@ export class VideoCenterComponent implements OnInit {
     );
   }
 
-
   ngOnInit() {
     this.clearNotePad();
-    this.videoBarWidth  = window.innerWidth * .8;
+    this.videoBarWidth = window.innerWidth * 0.8;
 
-     this.videoDisplayService.setVideoPlayerHeightWidth(390, this.videoBarWidth)
+    this.videoDisplayService.setVideoPlayerHeightWidth(390, this.videoBarWidth);
 
     this.init();
     this.setNotesReadyToBeDisplayed();
@@ -74,25 +73,25 @@ export class VideoCenterComponent implements OnInit {
     });
   }
 
-    /* 2. Initialize method for YT IFrame API */
-    init() {
-      this.getAllNotes();
-      // Return if Player is already created
-      if (window['YT']) {
-        this.videoDisplayService.startVideo();
-        return;
-      }
-  
-      var tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  
-      /* 3. startVideo() will create an <iframe> (and YouTube player) after the API code downloads. */
-      window['onYouTubeIframeAPIReady'] = () => {
-        this.videoDisplayService.startVideo();
-      };
+  /* 2. Initialize method for YT IFrame API */
+  init() {
+    this.getAllNotes();
+    // Return if Player is already created
+    if (window['YT']) {
+      this.videoDisplayService.startVideo();
+      return;
     }
+
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    /* 3. startVideo() will create an <iframe> (and YouTube player) after the API code downloads. */
+    window['onYouTubeIframeAPIReady'] = () => {
+      this.videoDisplayService.startVideo();
+    };
+  }
 
   ngOnDestroy() {
     this.videoDisplayService.cleanupSubs();
@@ -129,8 +128,8 @@ export class VideoCenterComponent implements OnInit {
   clearNotePad() {
     this.currentNote = '';
     this.noteTitle = '';
-    this.noteStateService.currentNote.next('')
-    this.noteStateService.noteTitle.next('')
+    this.noteStateService.currentNote.next('');
+    this.noteStateService.noteTitle.next('');
   }
 
   toggleNoteCenter() {

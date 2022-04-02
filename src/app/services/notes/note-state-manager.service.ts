@@ -15,7 +15,6 @@ export class NoteStateManagerService {
   ) {}
 
   async createNote() {
-
     const currentTimeOfNote = this.videoDisplayService.player.getCurrentTime();
 
     const timeSp =
@@ -26,8 +25,9 @@ export class NoteStateManagerService {
       this.noteStateService.noteTitle.value,
       this.noteStateService.currentNote.value
     );
-
-    await this.getAllNotes();
+    setTimeout(async () => {
+      await this.getAllNotes();
+    }, 2000);
   }
 
   createNoteInBackend(
@@ -51,33 +51,33 @@ export class NoteStateManagerService {
     this.notesService
       .getAllNotesForVideo(this.videoDisplayService.video.value)
       .subscribe((res: note[]) => {
-        const sanitizedNotes = this.sanitizeBackendNotes(res)
+        const sanitizedNotes = this.sanitizeBackendNotes(res);
         this.noteStateService.setCurrentVideoNotes(sanitizedNotes);
         this.noteStateService.orderNotesBasedOffOfTime();
       });
   }
 
-  sanitizeBackendNotes(backendNotes):sanitizedNote[]{
+  sanitizeBackendNotes(backendNotes): sanitizedNote[] {
     const allCurrentNotes = backendNotes;
-        const sanitizedNotes  = [];
-        allCurrentNotes.map((note) => {
-          const timeSp =
-            note.videoTimeNoteTakenInSeconds *
-              this.videoDisplayService.pixelPerSecond +
-            'px';
-
-            sanitizedNotes.push({
-            _id: note._id,
-            timeSpot: timeSp,
-            timeOfNote: note.videoTimeNoteTakenInSeconds,
-            noteText: note.noteText,
-            noteTitle: note.noteTitle,
-            timeNoteCreated: this.displayMinuteBasedTime(
-              note.videoTimeNoteTakenInSeconds
-            ),
-          });
-        });
-        return sanitizedNotes
+    const sanitizedNotes = [];
+    allCurrentNotes.map((note) => {
+      const timeSp =
+        note.videoTimeNoteTakenInSeconds *
+          this.videoDisplayService.pixelPerSecond +
+        'px';
+      const noteId = note._id ? note._id : note.id;
+      sanitizedNotes.push({
+        _id: noteId,
+        timeSpot: timeSp,
+        timeOfNote: note.videoTimeNoteTakenInSeconds,
+        noteText: note.noteText,
+        noteTitle: note.noteTitle,
+        timeNoteCreated: this.displayMinuteBasedTime(
+          note.videoTimeNoteTakenInSeconds
+        ),
+      });
+    });
+    return sanitizedNotes;
   }
 
   displayMinuteBasedTime(seconds) {
